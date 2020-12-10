@@ -168,3 +168,29 @@ INSERT INTO equipo(id,gentilicio,nombre_pais) VALUES (32,'Colombiano/a','Colombi
 INSERT INTO equipo(id,gentilicio,nombre_pais) VALUES (33,'Polaco/a','Polonia');
 INSERT INTO equipo(id,gentilicio,nombre_pais) VALUES (34,'Hindu','India');
 INSERT INTO equipo(id,gentilicio,nombre_pais) VALUES (35,'Tailandes/a','Tailandia');
+
+--Organizacion
+INSERT INTO organizacion(id,nombre) VALUES (1,'Automobile Club de l`Ouest');
+
+--Pistas
+INSERT INTO pista(id, nombre, kilometraje) VALUES (1,'Circuito de la Sarthe',13.626);
+
+--Sectores
+INSERT INTO sectores(id,nombre,id_pista) VALUES (1,'Chicanas Ford',1);
+INSERT INTO sectores(id,nombre,id_pista) VALUES (2,'Curvas Porsche',1);
+INSERT INTO sectores(id,nombre,id_pista) VALUES (3,'Arnage',1);
+INSERT INTO sectores(id,nombre,id_pista) VALUES (4,'Indianapolis',1);
+INSERT INTO sectores(id,nombre,id_pista) VALUES (5,'Mulsanne',1);
+INSERT INTO sectores(id,nombre,id_pista) VALUES (6,'Recta Mulsanne',1);
+INSERT INTO sectores(id,nombre,id_pista) VALUES (7,'Chicana Michelin',1);
+INSERT INTO sectores(id,nombre,id_pista) VALUES (8,'Chicana Playstation',1);
+INSERT INTO sectores(id,nombre,id_pista) VALUES (9,'Tertre Rouge',1);
+INSERT INTO sectores(id,nombre,id_pista) VALUES (10,'Eses',1);
+INSERT INTO sectores(id,nombre,id_pista) VALUES (11,'Chicana Dunlop',1);
+INSERT INTO sectores(id,nombre,id_pista) VALUES (12,'Curva Dunlop',1);
+
+--Eventos
+INSERT INTO mytable(id,ano,tipo) VALUES (1,2019,'Ensayo');
+INSERT INTO mytable(id,ano,tipo) VALUES (2,2019,'Carrera');
+INSERT INTO mytable(id,ano,tipo) VALUES (3,2020,'Ensayo');
+INSERT INTO mytable(id,ano,tipo) VALUES (4,2020,'Carrera');
