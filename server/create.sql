@@ -207,7 +207,7 @@ CREATE TABLE public.suceso
     id numeric NOT NULL,
     descripcion varchar,
     tipo varchar(20) NOT NULL,
-    bandera varchar2(7),
+    bandera varchar(7),
     momento Tiempo NOT NULL,
     retraso date NOT NULL,
     id_vuelta numeric NOT NULL,
