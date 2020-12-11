@@ -17,12 +17,11 @@ create type Tiempo as
     fecha_final date
 );
 
-create type Tiempo as
+create type Marcas as
 (
     vuelta_mas_rapida date,
     vuelta_promedio date,
     kilometraje_promedio_vuelta float,
-    velocidad_media_promedio float,
     velocidad_media float
 );
 
@@ -139,4 +138,37 @@ create table public.contrato
     CONSTRAINT pk_contrato PRIMARY KEY (id,id_equipo,id_piloto),
     CONSTRAINT fk_piloto FOREIGN KEY (id_piloto) REFERENCES piloto(id),
     CONSTRAINT fk_equipo FOREIGN KEY (id_equipo) REFERENCES equipo(id)
+);
+
+create table public.ranking
+(
+    id numeric NOT NULL,
+    posicion numeric,
+    kilometraje float NOT NULL,
+    tiempo_total Tiempo,
+    vueltas Marcas,
+    fecha date,
+    id_equipo numeric NOT NULL,
+    id_vehiculo numeric NOT NULL,
+    id_evento numeric NOT NULL,
+    CONSTRAINT pk_ranking PRIMARY KEY (id),
+    CONSTRAINT fk_equipo FOREIGN KEY (id_equipo) REFERENCES equipo(id),
+    CONSTRAINT fk_evento FOREIGN KEY (id_evento) REFERENCES evento(id),
+    CONSTRAINT fk_vehiculo FOREIGN KEY (id_vehiculo) REFERENCES vehiculo(id)
+);
+
+create table public.vuelta
+(
+    id numeric NOT NULL,
+    distancia float NOT NULL,           --Aqui va la distancia, sacada con distancia promedio del año anterior
+    tiempo date NOT NULL,               --Aqui va el tiempo de las vueltas
+    velocidad_media float NOT NULL,     --Aqui va la velocidad media, calculada con la velocidad_media del año anterior
+    temperatura_cockpit float NOT NULL,
+    id_equipo numeric NOT NULL,
+    id_evento numeric NOT NULL,
+    id_ranking numeric NOT NULL,
+    CONSTRAINT pk_vuelta PRIMARY KEY (id),
+    CONSTRAINT fk_equipo FOREIGN KEY (id_equipo) REFERENCES equipo(id),
+    CONSTRAINT fk_evento FOREIGN KEY (id_evento) REFERENCES evento(id),
+    CONSTRAINT fk_ranking FOREIGN KEY (id_ranking) REFERENCES ranking(id)
 );
