@@ -188,6 +188,7 @@ INSERT INTO sector(id,nombre,id_pista) VALUES (9,'Tertre Rouge',1);
 INSERT INTO sector(id,nombre,id_pista) VALUES (10,'Eses',1);
 INSERT INTO sector(id,nombre,id_pista) VALUES (11,'Chicana Dunlop',1);
 INSERT INTO sector(id,nombre,id_pista) VALUES (12,'Curva Dunlop',1);
+INSERT INTO sector(id,nombre,id_pista) VALUES (13,'General',1);
 
 --Eventos
 INSERT INTO evento(id,ano,tipo,id_organizacion,id_pista) VALUES (1,2019,'Ensayo',1,1);

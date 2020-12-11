@@ -172,3 +172,32 @@ create table public.vuelta
     CONSTRAINT fk_evento FOREIGN KEY (id_evento) REFERENCES evento(id),
     CONSTRAINT fk_ranking FOREIGN KEY (id_ranking) REFERENCES ranking(id)
 );
+
+create table public.patrocinador
+(
+    id numeric NOT NULL,
+    nombre varchar NOT NULL,
+    logo BYTEA,
+    CONSTRAINT pk_patrocinador PRIMARY KEY (id)
+);
+
+create table public.patrocinio
+(
+    id numeric NOT NULL,
+    duracion Tiempo NOT NULL,
+    id_patrocinador numeric NOT NULL,
+    id_evento numeric,
+    id_equipo numeric,
+    CONSTRAINT pk_patrocinio PRIMARY KEY (id,id_patrocinador),
+    CONSTRAINT fk_evento FOREIGN KEY (id_evento) REFERENCES evento(id),
+    CONSTRAINT fk_equipo FOREIGN KEY (id_equipo) REFERENCES equipo(id)
+);
+
+create table public.equipo_evento
+(
+    id_equipo numeric NOT NULL,
+    id_evento numeric NOT NULL,
+    CONSTRAINT pk_equipo_evento PRIMARY KEY (id_equipo,id_evento),
+    CONSTRAINT fk_equipo FOREIGN KEY (id_equipo) REFERENCES equipo(id),
+    CONSTRAINT fk_evento FOREIGN KEY (id_evento) REFERENCES evento(id)
+);
