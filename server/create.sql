@@ -1,4 +1,4 @@
-create type Persona as
+CREATE TYPE Persona as
 (
     nombre varchar(15),
     nombre2 varchar(15),
@@ -11,13 +11,13 @@ create type Persona as
     genero varchar(1)
 );
 
-create type Tiempo as
+CREATE TYPE Tiempo as
 (
     fecha_inicial date,
     fecha_final date
 );
 
-create type Marcas as
+CREATE TYPE Marcas as
 (
     vuelta_mas_rapida date,
     vuelta_promedio date,
@@ -27,7 +27,7 @@ create type Marcas as
 
 --------------------------------------------------------------------------------
 
-create table public.fabricante
+CREATE TABLE public.fabricante
 (
     id numeric(3) NOT NULL,
     nombre varchar NOT NULL,
@@ -35,7 +35,7 @@ create table public.fabricante
     CONSTRAINT pk_fabricante PRIMARY KEY (id)
 );
 
-create table public.modelo
+CREATE TABLE public.modelo
 (
     id numeric(10) NOT NULL,
     nombre varchar NOT NULL,
@@ -44,7 +44,7 @@ create table public.modelo
     CONSTRAINT fk_modelo FOREIGN KEY (id_fabricante) REFERENCES fabricante(id)
 );
 
-create table public.equipo
+CREATE TABLE public.equipo
 (
     id numeric(4) NOT NULL,
     nombre varchar NOT NULL,
@@ -55,7 +55,7 @@ create table public.equipo
     CONSTRAINT fk_fabricante FOREIGN KEY (id_fabricante) REFERENCES fabricante(id)
 );
 
-create table public.nacionalidad
+CREATE TABLE public.nacionalidad
 (
     id numeric(3) NOT NULL,
     gentilicio varchar(15) NOT NULL,
@@ -64,14 +64,14 @@ create table public.nacionalidad
     CONSTRAINT pk_nacionalidad PRIMARY KEY (id)
 );
 
-create table public.organizacion
+CREATE TABLE public.organizacion
 (
     id numeric(2) NOT NULL,
     nombre varchar NOT NULL,
     CONSTRAINT pk_organizacion PRIMARY KEY (id)
 );
 
-create table public.pista 
+CREATE TABLE public.pista 
 (
     id numeric NOT NULL,
     nombre varchar NOT NULL,
@@ -79,7 +79,7 @@ create table public.pista
     CONSTRAINT pk_pista PRIMARY KEY (id)
 );
 
-create table public.sector
+CREATE TABLE public.sector
 (
     id numeric(2) NOT NULL,
     nombre varchar NOT NULL,
@@ -89,7 +89,7 @@ create table public.sector
     CONSTRAINT fk_pista FOREIGN KEY (id_pista) REFERENCES pista(id)
 );
 
-create table public.evento
+CREATE TABLE public.evento
 (
     id numeric(2) NOT NULL,
     ano numeric NOT NULL,
@@ -102,7 +102,7 @@ create table public.evento
     CONSTRAINT fk_pista FOREIGN KEY (id_pista) REFERENCES pista(id)
 );
 
-create table public.piloto
+CREATE TABLE public.piloto
 (
     id numeric(5) NOT NULL,
     informacion Persona NOT NULL,
@@ -113,7 +113,7 @@ create table public.piloto
     CONSTRAINT fk_nacionalidad FOREIGN KEY (id_nacionalidad) REFERENCES nacionalidad(id)
 );
 
-create table public.vehiculo
+CREATE TABLE public.vehiculo
 (
     id numeric(10) NOT NULL,
     numero numeric(3) NOT NULL,
@@ -129,7 +129,7 @@ create table public.vehiculo
     CONSTRAINT fk_modelo FOREIGN KEY (id_modelo) REFERENCES modelo(id)
 );
 
-create table public.contrato
+CREATE TABLE public.contrato
 (
     id numeric NOT NULL,
     duracion Tiempo,
@@ -140,7 +140,7 @@ create table public.contrato
     CONSTRAINT fk_equipo FOREIGN KEY (id_equipo) REFERENCES equipo(id)
 );
 
-create table public.ranking
+CREATE TABLE public.ranking
 (
     id numeric NOT NULL,
     posicion numeric,
@@ -157,7 +157,7 @@ create table public.ranking
     CONSTRAINT fk_vehiculo FOREIGN KEY (id_vehiculo) REFERENCES vehiculo(id)
 );
 
-create table public.vuelta
+CREATE TABLE public.vuelta
 (
     id numeric NOT NULL,
     distancia float NOT NULL,           --Aqui va la distancia, sacada con distancia promedio del año anterior
@@ -173,7 +173,7 @@ create table public.vuelta
     CONSTRAINT fk_ranking FOREIGN KEY (id_ranking) REFERENCES ranking(id)
 );
 
-create table public.patrocinador
+CREATE TABLE public.patrocinador
 (
     id numeric NOT NULL,
     nombre varchar NOT NULL,
@@ -181,7 +181,7 @@ create table public.patrocinador
     CONSTRAINT pk_patrocinador PRIMARY KEY (id)
 );
 
-create table public.patrocinio
+CREATE TABLE public.patrocinio
 (
     id numeric NOT NULL,
     duracion Tiempo NOT NULL,
@@ -193,11 +193,75 @@ create table public.patrocinio
     CONSTRAINT fk_equipo FOREIGN KEY (id_equipo) REFERENCES equipo(id)
 );
 
-create table public.equipo_evento
+CREATE TABLE public.equipo_evento
 (
     id_equipo numeric NOT NULL,
     id_evento numeric NOT NULL,
     CONSTRAINT pk_equipo_evento PRIMARY KEY (id_equipo,id_evento),
     CONSTRAINT fk_equipo FOREIGN KEY (id_equipo) REFERENCES equipo(id),
     CONSTRAINT fk_evento FOREIGN KEY (id_evento) REFERENCES evento(id)
+);
+
+CREATE TABLE public.suceso
+(
+    id numeric NOT NULL,
+    descripcion varchar,
+    tipo varchar(20) NOT NULL,
+    bandera varchar2(7),
+    momento Tiempo NOT NULL,
+    retraso date NOT NULL,
+    id_vuelta numeric NOT NULL,
+    id_sector numeric,
+    CONSTRAINT pk_suceso PRIMARY KEY (id),
+    CONSTRAINT fk_vuelta FOREIGN KEY (id_vuelta) REFERENCES vuelta(id),
+    CONSTRAINT fk_sector FOREIGN KEY (id_sector) REFERENCES sector(id)
+);
+
+CREATE TABLE public.suceso_vehiculo
+(
+    id_suceso numeric NOT NULL,
+    id_vehiculo numeric NOT NULL,
+    directo varchar NOT NULL,       --pensar si de verdad se necesita
+    CONSTRAINT pk_suceso_vehiculo PRIMARY KEY (id_suceso,id_vehiculo),
+    CONSTRAINT fk_vehiculo FOREIGN KEY (id_vehiculo) REFERENCES vehiculo(id),
+    CONSTRAINT fk_suceso FOREIGN KEY (id_suceso) REFERENCES suceso(id)
+);
+
+CREATE TABLE public.parada
+(
+    id numeric NOT NULL,
+    duracion Tiempo NOT NULL,
+    tipo varchar[10] NOT NULL,      --Cambios que se hicieron en la parada ej: cambio de piloto, cambio de cauchos, cambio de piezas, revisar si es necesario hacerle check
+    id_vuelta numeric NOT NULL,
+    CONSTRAINT pk_parada PRIMARY KEY (id),
+    CONSTRAINT fk_vuelta FOREIGN KEY (id_vuelta) REFERENCES vuelta(id)
+);
+
+CREATE TABLE public.alerta
+(
+    id numeric NOT NULL,
+--    fallas [][],  REVISAR
+    tiempo date NOT NULL,
+    pendiente boolean NOT NULL,
+    id_suceso numeric,
+    id_parada numeric,
+    CONSTRAINT pk_alerta PRIMARY KEY (id),
+    CONSTRAINT pk_suceso FOREIGN KEY (id_suceso) REFERENCES suceso(id),
+    CONSTRAINT pk_parada FOREIGN KEY (id_parada) REFERENCES parada(id)
+);
+
+CREATE TABLE public.inventario_repuesto
+(
+    id numeric NOT NULL,
+    nombre_pieza varchar(15) NOT NULL,
+    cantidad numeric(2) NOT NULL,
+    marca varchar,
+    fecha_actualizacion date NOT NULL,
+    operacion varchar NOT NULL,
+    id_parada numeric NOT NULL,
+    id_vehiculo numeric NOT NULL,
+    CONSTRAINT pk_inventario_repuesto PRIMARY KEY (id,id_vehiculo,id_parada),
+    CONSTRAINT fk_vehiculo FOREIGN KEY (id_vehiculo) REFERENCES vehiculo(id),
+    CONSTRAINT fk_parada FOREIGN KEY (id_parada) REFERENCES parada(id),
+    CONSTRAINT chk_operacion CHECK (operacion in ('Inicial','Salida','Final'))
 );
