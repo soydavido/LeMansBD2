@@ -1,3 +1,33 @@
+create type Persona as
+(
+    nombre varchar(15),
+    nombre2 varchar(15),
+    apellido varchar(15),
+    apellido2 varchar(15),
+    fecha_nacimiento date,
+    estatura float, 
+    peso float,
+    fecha_fallecimiento date, 
+    genero varchar(1)
+);
+
+create type Tiempo as
+(
+    fecha_inicial date,
+    fecha_final date
+);
+
+create type Tiempo as
+(
+    vuelta_mas_rapida date,
+    vuelta_promedio date,
+    kilometraje_promedio_vuelta float,
+    velocidad_media_promedio float,
+    velocidad_media float
+);
+
+--------------------------------------------------------------------------------
+
 create table public.fabricante
 (
     id numeric(3) NOT NULL,
@@ -76,7 +106,7 @@ create table public.evento
 create table public.piloto
 (
     id numeric(5) NOT NULL,
---    informacion Persona NOT NULL,
+    informacion Persona NOT NULL,
     idiomas varchar[5] NOT NULL,
     foto BYTEA,
     id_nacionalidad numeric NOT NULL,
@@ -103,7 +133,7 @@ create table public.vehiculo
 create table public.contrato
 (
     id numeric NOT NULL,
---    duracion Tiempo,
+    duracion Tiempo,
     id_piloto numeric NOT NULL,
     id_equipo numeric NOT NULL,
     CONSTRAINT pk_contrato PRIMARY KEY (id,id_equipo,id_piloto),

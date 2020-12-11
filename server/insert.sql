@@ -190,7 +190,7 @@ INSERT INTO sector(id,nombre,id_pista) VALUES (11,'Chicana Dunlop',1);
 INSERT INTO sector(id,nombre,id_pista) VALUES (12,'Curva Dunlop',1);
 
 --Eventos
-INSERT INTO mytable(id,ano,tipo) VALUES (1,2019,'Ensayo');
-INSERT INTO mytable(id,ano,tipo) VALUES (2,2019,'Carrera');
-INSERT INTO mytable(id,ano,tipo) VALUES (3,2020,'Ensayo');
-INSERT INTO mytable(id,ano,tipo) VALUES (4,2020,'Carrera');
+INSERT INTO evento(id,ano,tipo,id_organizacion,id_pista) VALUES (1,2019,'Ensayo',1,1);
+INSERT INTO evento(id,ano,tipo,id_organizacion,id_pista) VALUES (2,2019,'Carrera',1,1);
+INSERT INTO evento(id,ano,tipo,id_organizacion,id_pista) VALUES (3,2020,'Ensayo',1,1);
+INSERT INTO evento(id,ano,tipo,id_organizacion,id_pista) VALUES (4,2020,'Carrera',1,1);
