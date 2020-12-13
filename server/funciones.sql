@@ -26,3 +26,20 @@ END;
 $$LANGUAGE plpgsql
 
 
+------------------------------------------------------------------------------
+
+--Esta funcion genera los tiempos de la vuelta
+CREATE OR REPLACE FUNCTION tiempo_vueltas(tiempo_rapido float, tiempo_promedio float)
+RETURNS float as $$
+BEGIN
+	RETURN random()*(tiempo_promedio-tiempo_rapido)+tiempo_rapido;
+END;
+$$LANGUAGE plpgsql;
+
+--Esta funcion genera el kilometraje por vuelta
+CREATE OR REPLACE FUNCTION kilometraj_vuelta(promedio_anterior float, maximo float)
+RETURNS float as $$
+BEGIN
+	RETURN random()*(maximo-promedio_anterior)+promedio_anterior;
+END;
+$$LANGUAGE plpgsql;
