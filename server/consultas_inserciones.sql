@@ -12,3 +12,6 @@ SELECT p.id
 FROM piloto p, contrato c, equipo e
 WHERE p.id = c.id_piloto AND c.id_equipo = e.id AND e.id in (select id from equipo where activo='T');
 
+--Con esto convertiremos los minutos:segundos.milesimas a numeros decimales para los calculos
+SELECT ((cast(SUBSTRING('3:12.718',1,1) as float))/60)+(cast(SUBSTRING('3:12.718',1,1) as float)) as tiempo
+--Se sustituira el 3:12.718 con el string que tengamos del tiempo en cuestion
