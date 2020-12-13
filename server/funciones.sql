@@ -37,9 +37,10 @@ END;
 $$LANGUAGE plpgsql;
 
 --Esta funcion genera el kilometraje por vuelta
-CREATE OR REPLACE FUNCTION kilometraj_vuelta(promedio_anterior float, maximo float)
+CREATE OR REPLACE FUNCTION kilometraje_vuelta(promedio_anterior float, maximo float)
 RETURNS float as $$
 BEGIN
 	RETURN random()*(maximo-promedio_anterior)+promedio_anterior;
 END;
 $$LANGUAGE plpgsql;
+
