@@ -157,6 +157,15 @@ CREATE TABLE public.ranking
     CONSTRAINT fk_vehiculo FOREIGN KEY (id_vehiculo) REFERENCES vehiculo(id)
 );
 
+CREATE TABLE public.ranking_por_hora
+(
+    id_evento numeric NOT NULL,
+    hora numeric NOT NULL,
+    posicion numeric NOT NULL,
+    CONSTRAINT pk_rkg_hora PRIMARY KEY (id_evento,hora),
+    CONSTRAINT fk_evento FOREIGN KEY (id_evento) REFERENCES evento(id)
+);
+
 CREATE TABLE public.vuelta
 (
     id numeric NOT NULL,

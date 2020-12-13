@@ -1,3 +1,13 @@
+-------------------------------COMENTARIOS------------------------------------
+--	1.- Como haremos para ordenar por hora? se sumaran los minutos hasta obtener 1 hora por competidor o los guardamos en algun lado?
+--
+--
+--
+--
+--
+--
+--
+--
 -------------------------- CALCULOS DE MARCAS --------------------------------
 
 --Esta funcion servira para los calculos que se realizaran en el TDA MARCAS
