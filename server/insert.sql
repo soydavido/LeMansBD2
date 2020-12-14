@@ -132,6 +132,33 @@ INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (94,'SPI
 INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (95,'EUROINTERNATIONAL',11,6,'T');
 INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (96,'JACKIE CHAN DC RACING',37,5,'T');
 
+--Organizacion
+INSERT INTO organizacion(id,nombre) VALUES (1,'Automobile Club de l`Ouest');
+
+--Pistas
+INSERT INTO pista(id, nombre, kilometraje) VALUES (1,'Circuito de la Sarthe',13.626);
+
+--Sectores
+INSERT INTO sector(id,nombre,id_pista) VALUES (1,'Chicanas Ford',1);
+INSERT INTO sector(id,nombre,id_pista) VALUES (2,'Curvas Porsche',1);
+INSERT INTO sector(id,nombre,id_pista) VALUES (3,'Arnage',1);
+INSERT INTO sector(id,nombre,id_pista) VALUES (4,'Indianapolis',1);
+INSERT INTO sector(id,nombre,id_pista) VALUES (5,'Mulsanne',1);
+INSERT INTO sector(id,nombre,id_pista) VALUES (6,'Recta Mulsanne',1);
+INSERT INTO sector(id,nombre,id_pista) VALUES (7,'Chicana Michelin',1);
+INSERT INTO sector(id,nombre,id_pista) VALUES (8,'Chicana Playstation',1);
+INSERT INTO sector(id,nombre,id_pista) VALUES (9,'Tertre Rouge',1);
+INSERT INTO sector(id,nombre,id_pista) VALUES (10,'Eses',1);
+INSERT INTO sector(id,nombre,id_pista) VALUES (11,'Chicana Dunlop',1);
+INSERT INTO sector(id,nombre,id_pista) VALUES (12,'Curva Dunlop',1);
+INSERT INTO sector(id,nombre,id_pista) VALUES (13,'General',1);
+
+--Eventos
+INSERT INTO evento(id,ano,tipo,id_organizacion,id_pista) VALUES (1,2019,'Ensayo',1,1);
+INSERT INTO evento(id,ano,tipo,id_organizacion,id_pista) VALUES (2,2019,'Carrera',1,1);
+INSERT INTO evento(id,ano,tipo,id_organizacion,id_pista) VALUES (3,2020,'Ensayo',1,1);
+INSERT INTO evento(id,ano,tipo,id_organizacion,id_pista) VALUES (4,2020,'Carrera',1,1);
+
 --Equipo-Evento
 INSERT INTO equipo_evento(id_equipo,id_evento) VALUES (1,1);
 INSERT INTO equipo_evento(id_equipo,id_evento) VALUES (2,1);
@@ -413,32 +440,12 @@ INSERT INTO nacionalidad(id,gentilicio,nombre_pais) VALUES (33,'Polaco/a','Polon
 INSERT INTO nacionalidad(id,gentilicio,nombre_pais) VALUES (34,'Hindu','India');
 INSERT INTO nacionalidad(id,gentilicio,nombre_pais) VALUES (35,'Tailandes/a','Tailandia');
 
---Organizacion
-INSERT INTO organizacion(id,nombre) VALUES (1,'Automobile Club de l`Ouest');
 
---Pistas
-INSERT INTO pista(id, nombre, kilometraje) VALUES (1,'Circuito de la Sarthe',13.626);
+--------------------------------------------------------------------------------------------------------------------------------------------
+--                  HASTA AQUI CORRE BIEN
+--------------------------------------------------------------------------------------------------------------------------------------------
+--Ranking General
 
---Sectores
-INSERT INTO sector(id,nombre,id_pista) VALUES (1,'Chicanas Ford',1);
-INSERT INTO sector(id,nombre,id_pista) VALUES (2,'Curvas Porsche',1);
-INSERT INTO sector(id,nombre,id_pista) VALUES (3,'Arnage',1);
-INSERT INTO sector(id,nombre,id_pista) VALUES (4,'Indianapolis',1);
-INSERT INTO sector(id,nombre,id_pista) VALUES (5,'Mulsanne',1);
-INSERT INTO sector(id,nombre,id_pista) VALUES (6,'Recta Mulsanne',1);
-INSERT INTO sector(id,nombre,id_pista) VALUES (7,'Chicana Michelin',1);
-INSERT INTO sector(id,nombre,id_pista) VALUES (8,'Chicana Playstation',1);
-INSERT INTO sector(id,nombre,id_pista) VALUES (9,'Tertre Rouge',1);
-INSERT INTO sector(id,nombre,id_pista) VALUES (10,'Eses',1);
-INSERT INTO sector(id,nombre,id_pista) VALUES (11,'Chicana Dunlop',1);
-INSERT INTO sector(id,nombre,id_pista) VALUES (12,'Curva Dunlop',1);
-INSERT INTO sector(id,nombre,id_pista) VALUES (13,'General',1);
-
---Eventos
-INSERT INTO evento(id,ano,tipo,id_organizacion,id_pista) VALUES (1,2019,'Ensayo',1,1);
-INSERT INTO evento(id,ano,tipo,id_organizacion,id_pista) VALUES (2,2019,'Carrera',1,1);
-INSERT INTO evento(id,ano,tipo,id_organizacion,id_pista) VALUES (3,2020,'Ensayo',1,1);
-INSERT INTO evento(id,ano,tipo,id_organizacion,id_pista) VALUES (4,2020,'Carrera',1,1);
 
 --Ranking por hora
 INSERT INTO ranking_por_hora(id_evento,posicion,hora) VALUES (64,1,1);
