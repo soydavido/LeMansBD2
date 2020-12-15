@@ -105,9 +105,33 @@ $$LANGUAJE plpgsql;
 --												Procedimiento Reportes
 ---------------------------------------------------------------------------------------------------------------------------
 
+--Reporte 2
+
+CREATE OR REPLACE FUNCTION ranking_anho_categoria (an numeric, cat varchar, tip varchar)
+RETURNS TABLE (ranking ranking.posicion%TYPE, vueltas ranking.vueltas%TYPE, kilometraje ranking.kilometraje%TYPE, numero_equipo equipo.numero_equipo%TYPE, nombre equipo.nombre%TYPE, fabricante fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, categoria vehiculo.categoria%TYPE) AS $$
+BEGIN
+RETURN QUERY
+	SELECT 
+	--RANKING
+	r.posicion, r.vueltas, r.kilometraje, 
+	--INFORMACION EQUIPO
+	e.numero_equipo, e.nombre as nombreequipo, 
+	--INFORMACION VEHICULO
+	f.nombre, m.nombre,v.categoria
+	FROM ranking r, evento ev, vehiculo v, modelo m, equipo e, fabricante f
+	WHERE r.id_evento = ev.id
+	AND ev.tipo = tip			    
+	AND ev.ano= an						
+	AND v.categoria = cat				
+	AND v.id = r.id_vehiculo
+	AND m.id = v.id_modelo
+	AND r.id_equipo = e.id
+	AND f.id = m.id_fabricante;
+END;
+$$LANGUAGE plpgsql;
+
 
 --Reporte 3
--- Falta parametrizar
 
 CREATE OR REPLACE FUNCTION ganadores_categoria(cat varchar, an numeric)
 RETURNS TABLE (posicion ranking.posicion%TYPE, vueltas ranking.vueltas%TYPE, kilometraje ranking.kilometraje%TYPE, numero_equipo equipo.numero_equipo%TYPE, nombre_equipo equipo.nombre%TYPE, nombre_fabricante fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, categoria_vehiculo vehiculo.categoria%TYPE) AS $$
@@ -123,7 +147,7 @@ BEGIN
 		FROM ranking r, evento ev, vehiculo v, modelo m, equipo e, fabricante f
 		WHERE r.id_evento = ev.id
 		AND ev.tipo = 'Carrera'
-		AND ev.ano= an
+		AND ev.ano= an					--REVISAR USO DE IN CUANDO NO SE INSERTAN
 		AND v.categoria = cat
 		AND v.id = r.id_vehiculo
 		AND m.id = v.id_modelo
