@@ -1,7 +1,7 @@
 -------------------------------COMENTARIOS------------------------------------
 --	1.- Como haremos para ordenar por hora? se sumaran los minutos hasta obtener 1 hora por competidor o los guardamos en algun lado?
 --	2.- Crear funcion que compare diferencia entre dos lugares, vueltas, y si son la misma cantidad, tiempo
---
+--	3.- Se necesitara crear una funcion, supongo que con cursores, para contar las posiciones relativas en cuanto a categorias
 --
 --
 --
@@ -48,7 +48,7 @@ RETURNS float as $$
 BEGIN
 	RETURN random()*(tiempo_promedio-tiempo_rapido)+tiempo_rapido;
 END;
-$$LANGUAGE plpgsql;
+$$LA-GUAGE plpgsql;
 
 --Esta funcion genera el kilometraje por vuelta
 CREATE OR REPLACE FUNCTION kilometraje_vuelta(promedio_anterior float, maximo float)
@@ -105,7 +105,7 @@ $$LANGUAJE plpgsql;
 --												Procedimiento Reportes
 ---------------------------------------------------------------------------------------------------------------------------
 
---Reporte 2
+--Reporte 1
 
 CREATE OR REPLACE FUNCTION ranking_anho_categoria (an numeric, cat varchar, tip varchar)
 RETURNS TABLE (ranking ranking.posicion%TYPE, vueltas ranking.vueltas%TYPE, kilometraje ranking.kilometraje%TYPE, numero_equipo equipo.numero_equipo%TYPE, nombre equipo.nombre%TYPE, fabricante fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, categoria vehiculo.categoria%TYPE) AS $$
@@ -130,6 +130,32 @@ RETURN QUERY
 END;
 $$LANGUAGE plpgsql;
 
+--Reporte 2
+
+CREATE OR REPLACE FUNCTION ranking_hora_categoria (an numeric, cat varchar, hor numeric)
+RETURNS TABLE (ranking ranking.posicion%TYPE, vueltas ranking.vueltas%TYPE, kilometraje ranking.kilometraje%TYPE, numero_equipo equipo.numero_equipo%TYPE, nombre equipo.nombre%TYPE, fabricante fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, categoria vehiculo.categoria%TYPE) AS $$
+BEGIN
+RETURN QUERY
+	SELECT 
+	--RANKING
+	r.posicion, r.vueltas, r.kilometraje, 
+	--INFORMACION EQUIPO
+	e.numero_equipo, e.nombre as nombreequipo, 
+	--INFORMACION VEHICULO
+	f.nombre, m.nombre,v.categoria
+	FROM ranking r, evento ev, vehiculo v, modelo m, equipo e, fabricante f, ranking_por_hora rh
+	WHERE r.id_evento = ev.id
+	AND ev.tipo = 'Carrera'
+	AND ev.ano= an					   --Se sustituira por el insertado por el usuario
+	AND v.categoria = cat			--Se sustituira por el insertado por el usuario
+	AND v.id = r.id_vehiculo
+	AND m.id = v.id_modelo
+	AND r.id_equipo = e.id
+	AND f.id = m.id_fabricante
+	AND rh.id_ranking = r.id
+	AND rh.hora = hor;					--Se sustituira por el insertado por el usuario
+END;
+$$LANGUAGE plpgsql;
 
 --Reporte 3
 
