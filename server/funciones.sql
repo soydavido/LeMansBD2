@@ -109,7 +109,7 @@ $$LANGUAJE plpgsql;
 --Reporte 3
 -- Falta parametrizar
 
-CREATE OR REPLACE FUNCTION ganadores_categoria()
+CREATE OR REPLACE FUNCTION ganadores_categoria(cat varchar, an numeric)
 RETURNS TABLE (posicion ranking.posicion%TYPE, vueltas ranking.vueltas%TYPE, kilometraje ranking.kilometraje%TYPE, numero_equipo equipo.numero_equipo%TYPE, nombre_equipo equipo.nombre%TYPE, nombre_fabricante fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, categoria_vehiculo vehiculo.categoria%TYPE) AS $$
 BEGIN
 	RETURN QUERY
@@ -123,8 +123,8 @@ BEGIN
 		FROM ranking r, evento ev, vehiculo v, modelo m, equipo e, fabricante f
 		WHERE r.id_evento = ev.id
 		AND ev.tipo = 'Carrera'
-		AND ev.ano=2019							--Parametro 1, chequear el uso de IN
-		AND v.categoria = 'LM-P2'				--Parametro 2
+		AND ev.ano= an
+		AND v.categoria = cat
 		AND v.id = r.id_vehiculo
 		AND m.id = v.id_modelo
 		AND r.id_equipo = e.id
