@@ -2,21 +2,21 @@
 
 --Si es carrera
 
-SELECT
---Datos Equipo
-e.nombre as NombreEquipo, e.numero_equipo as NumeroEquipo, 
---Datos Vehiculo
-m.nombre as NombreVehiculo, v.categoria as CategoriaVehiculo,
---v.caracteristicas as MotorVehiculo,
---Datos Ranking Carrera Falta velocidad media y vuelta mas rapida
-r.posicion PosicionCarrera, r.kilometraje KilometrajeCarrera, r.vueltas VueltasCarrera
-FROM equipo e, vehiculo v, modelo m, ranking r, evento ev
-WHERE m.id = v.id_modelo
-AND e.id = v.id_equipo
-AND ev.id = r.id_evento
-AND ev.tipo = 'Carrera'    --Se sustituira esto por el tipo de Evento que se pida
-AND ev.ano = 2019	       --Se sustituira esto por el año que se inserte
-AND v.categoria = 'LM-P1'  --Se sustituira esto por la categoria que se inserte
+SELECT 
+--RANKING
+r.posicion, r.vueltas, r.kilometraje, 
+--INFORMACION EQUIPO
+e.numero_equipo, e.nombre as nombreequipo, 
+--INFORMACION VEHICULO
+f.nombre, m.nombre,v.categoria
+FROM ranking r, evento ev, vehiculo v, modelo m, equipo e, fabricante f
+WHERE r.id_evento = ev.id
+AND ev.tipo = 'Carrera'
+AND ev.ano=2019
+AND v.id = r.id_vehiculo
+AND m.id = v.id_modelo
+AND r.id_equipo = e.id
+AND f.id = m.id_fabricante
 
 --Si es ensayo
 
@@ -59,19 +59,19 @@ AND ev.ano = 2020		   --Se sustituira esto por el año que se inserte
 
 --Reporte 3
 
-SELECT
---Datos Equipo
-e.nombre as NombreEquipo, e.numero_equipo as NumeroEquipo, 
---Datos Vehiculo
-m.nombre as NombreVehiculo, v.categoria as CategoriaVehiculo,
---v.caracteristicas as MotorVehiculo,
---Datos Ranking Carrera Falta velocidad media y vuelta mas rapida
-r.posicion PosicionCarrera, r.kilometraje KilometrajeCarrera, r.vueltas VueltasCarrera
-FROM equipo e, vehiculo v, modelo m, ranking r, evento ev
-WHERE m.id = v.id_modelo
-AND r.posicion = 1
-AND e.id = v.id_equipo
-AND ev.id = r.id_evento
-AND ev.tipo = 'Carrera'    --Se sustituira esto por el tipo de Evento que se pida
-AND ev.ano = 2019	       --Se sustituira esto por el año que se inserte
-AND v.categoria = 'LM-P1'  --Se sustituira esto por la categoria que se inserte
+SELECT 
+--RANKING
+r.posicion, r.vueltas, r.kilometraje, 
+--INFORMACION EQUIPO
+e.numero_equipo, e.nombre as nombreequipo, 
+--INFORMACION VEHICULO
+f.nombre, m.nombre,v.categoria
+FROM ranking r, evento ev, vehiculo v, modelo m, equipo e, fabricante f
+WHERE r.id_evento = ev.id
+AND ev.tipo = 'Carrera'
+AND ev.ano=2019
+AND v.id = r.id_vehiculo
+AND m.id = v.id_modelo
+AND r.id_equipo = e.id
+AND f.id = m.id_fabricante
+AND r.posicion =1
