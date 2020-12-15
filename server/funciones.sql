@@ -1,6 +1,6 @@
 -------------------------------COMENTARIOS------------------------------------
 --	1.- Como haremos para ordenar por hora? se sumaran los minutos hasta obtener 1 hora por competidor o los guardamos en algun lado?
---
+--	2.- Crear funcion que compare diferencia entre dos lugares, vueltas, y si son la misma cantidad, tiempo
 --
 --
 --

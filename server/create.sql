@@ -106,7 +106,7 @@ CREATE TABLE public.piloto
 (
     id numeric(5) NOT NULL,
     informacion Persona NOT NULL,
-    idiomas varchar[5] NOT NULL,
+    idiomas varchar[5], --Esto debe ser obligatorio
     foto BYTEA,
     id_nacionalidad numeric NOT NULL,
     CONSTRAINT pk_piloto PRIMARY KEY (id),
@@ -119,7 +119,7 @@ CREATE TABLE public.vehiculo
     numero numeric(3) NOT NULL,
     categoria varchar NOT NULL,
     tipo varchar NOT NULL,
-    caracteristicas varchar[5] NOT NULL,
+    --caracteristicas varchar[5] NOT NULL,
     --piezas [][],
     foto BYTEA,
     id_equipo numeric NOT NULL,
@@ -160,11 +160,11 @@ CREATE TABLE public.ranking
 
 CREATE TABLE public.ranking_por_hora
 (
-    id_evento numeric NOT NULL,
+    id_ranking numeric NOT NULL,
     hora numeric NOT NULL,
     posicion numeric NOT NULL,
-    CONSTRAINT pk_rkg_hora PRIMARY KEY (id_evento,hora),
-    CONSTRAINT fk_evento FOREIGN KEY (id_evento) REFERENCES evento(id)
+    CONSTRAINT pk_rkg_hora PRIMARY KEY (id_ranking,hora),
+    CONSTRAINT fk_ranking FOREIGN KEY (id_ranking) REFERENCES ranking(id)
 );
 
 CREATE TABLE public.vuelta

@@ -16,7 +16,7 @@ INSERT INTO fabricante(id,nombre) VALUES (14,'Aston Martin');
 INSERT INTO fabricante(id,nombre) VALUES (15,'Enso');
 
 --Modelos
-INSERT INTO modelo(id,nombre,id_fabricante) VALUES (1,'Toyota TS050 Hybrid',1);
+INSERT INTO modelo(id,nombre,id_fabricante) VALUES (1,'TS050 Hybrid',1);
 INSERT INTO modelo(id,nombre,id_fabricante) VALUES (2,'BR1',2);
 INSERT INTO modelo(id,nombre,id_fabricante) VALUES (3,'R13',3);
 INSERT INTO modelo(id,nombre,id_fabricante) VALUES (4,'A470',4);
