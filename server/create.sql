@@ -4,10 +4,10 @@ CREATE TYPE Persona as
     nombre2 varchar(15),
     apellido varchar(15),
     apellido2 varchar(15),
-    fecha_nacimiento date,
-    estatura float, 
-    peso float,
-    fecha_fallecimiento date, 
+    fecha_nacimiento varchar,
+    estatura varchar, 
+    peso varchar,
+    fecha_fallecimiento varchar, 
     genero varchar(1)
 );
 
@@ -105,7 +105,7 @@ CREATE TABLE public.evento
 CREATE TABLE public.piloto
 (
     id numeric(5) NOT NULL,
-    informacion Persona NOT NULL,
+    informacion Persona,  --Esto debe ser obligatorio
     idiomas varchar[5], --Esto debe ser obligatorio
     foto BYTEA,
     id_nacionalidad numeric NOT NULL,
