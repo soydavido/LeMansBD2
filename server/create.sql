@@ -121,6 +121,7 @@ CREATE TABLE public.vehiculo
     tipo varchar NOT NULL,
     --caracteristicas varchar[5] NOT NULL,
     --piezas [][],
+    --serial varchar(40),
     foto BYTEA,
     id_equipo numeric NOT NULL,
     id_modelo numeric NOT NULL,
