@@ -1,9 +1,9 @@
 CREATE TYPE Persona as
 (
-    nombre varchar(15),
-    nombre2 varchar(15),
-    apellido varchar(15),
-    apellido2 varchar(15),
+    nombre varchar(20),
+    nombre2 varchar(20),
+    apellido varchar(20),
+    apellido2 varchar(20),
     fecha_nacimiento varchar,
     estatura varchar, 
     peso varchar,
