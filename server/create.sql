@@ -145,7 +145,7 @@ CREATE TABLE public.ranking
 (
     id numeric NOT NULL,
     posicion numeric,
-    kilometraje float NOT NULL,
+    kilometraje float,
     vueltas numeric NOT NULL,
     tiempo_total Tiempo,
     desempeno Marcas,
