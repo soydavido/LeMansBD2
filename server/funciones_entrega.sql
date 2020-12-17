@@ -34,6 +34,18 @@ BEGIN
 END;
 $$LANGUAGE plpgsql;
 
+--Registra los equipos activos a un evento
+CREATE OR REPLACE FUNCTION registrar_equipos_a_evento(id_eve numeric)
+RETURNS void as $$
+DECLARE
+	team record;
+BEGIN
+	FOR team in (SELECT id FROM equipo WHERE activo = 'T' ) LOOP
+		INSERT INTO equipo_evento (id_equipo,id_evento) VALUES (team.id,id_eve);
+	END LOOP;
+END;
+$$LANGUAGE plpgsql
+
 ---------------------------------------------------------------------------------------------------------------------------
 --												Posiciones Relativas
 ---------------------------------------------------------------------------------------------------------------------------
