@@ -1,6 +1,6 @@
 -------------------------------COMENTARIOS------------------------------------
 --	1.- Como haremos para ordenar por hora? se sumaran los minutos hasta obtener 1 hora por competidor o los guardamos en algun lado?
---	2.- Crear funcion que compare diferencia entre dos lugares, vueltas, y si son la misma cantidad, tiempo
+--	2.- Evaluar si se colocan ambas posiciones, por categoria y global
 --	
 --	
 --
@@ -11,7 +11,7 @@
 --												Calculo Marcas
 ---------------------------------------------------------------------------------------------------------------------------
 
-
+ 
 --Esta funcion servira para los calculos que se realizaran en el TDA MARCAS
 CREATE OR REPLACE FUNCTION minutos_a_decimales(a varchar, b float)
 RETURNS float as $$
@@ -102,6 +102,29 @@ BEGIN
 END;
 $$LANGUAJE plpgsql;
 
+--Compara si una fecha esta en el rango de un contrato
+CREATE OR REPLACE FUNCTION fecha_en_periodo_contrato (fecha varchar, numero_equipo numeric, numero_piloto numeric)
+RETURNS boolean as $$
+DECLARE
+	fecha_trans date;
+BEGIN
+	fecha_trans := to_date(fecha,'DD-MM-YYYY');
+	IF (SELECT id_piloto FROM contrato WHERE id_equipo = numero_equipo AND id_piloto = numero_piloto AND fecha_trans BETWEEN (duracion).fecha_inicial and (duracion).fecha_final ) != 0 THEN
+		RETURN true;
+	ELSE
+		RETURN false;
+	 END IF;
+END;
+$$LANGUAGE plpgsql
+
+--Te da el nombre y apellido del piloto
+CREATE OR REPLACE FUNCTION nombre_apellido_piloto (num_piloto numeric)
+RETURNS varchar as $$
+BEGIN
+	RETURN (SELECT CONCAT((informacion).nombre,' ',(informacion).apellido) FROM piloto where id = num_piloto );
+END;
+$$LANGUAGE plpgsql
+
 ---------------------------------------------------------------------------------------------------------------------------
 --												Posiciones Relativas
 ---------------------------------------------------------------------------------------------------------------------------
@@ -121,17 +144,28 @@ create sequence secuenciaposicion
 
 --Reporte 1
 CREATE OR REPLACE FUNCTION ranking_anho_categoria (an numeric, cat varchar, tip varchar)
-RETURNS TABLE (ranking ranking.posicion%TYPE, vueltas ranking.vueltas%TYPE, kilometraje ranking.kilometraje%TYPE, numero_equipo equipo.numero_equipo%TYPE, nombre equipo.nombre%TYPE, fabricante fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, categoria vehiculo.categoria%TYPE) AS $$
+RETURNS TABLE (respuesta vehiculo.categoria%TYPE, ranking bigint, vueltas ranking.vueltas%TYPE, kilometraje ranking.kilometraje%TYPE, fecha ranking.fecha%TYPE, mejor_vuelta varchar, velocidad_promedio float, numero_equipo equipo.numero_equipo%TYPE, nombre equipo.nombre%TYPE, fabricante fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, categoria vehiculo.categoria%TYPE, caracteristicas vehiculo.caracteristicas%TYPE, tipo evento.tipo%TYPE, diferencia float) AS $$
 BEGIN
+	drop sequence secuenciaposicion;
+	create sequence secuenciaposicion
+ 	 start with 1
+ 	 increment by 1
+ 	 maxvalue 100
+ 	 minvalue 1
+ 	 cycle;
+
 	IF(cat='Todos')THEN
 		RETURN QUERY
 			SELECT 
 			--RANKING
-			r.posicion, r.vueltas, r.kilometraje, 
+			'General'::varchar,nextval('secuenciaposicion'), r.vueltas, r.kilometraje, r.fecha, (r.desempeno).vuelta_mas_rapida,(r.desempeno).velocidad_media,
 			--INFORMACION EQUIPO
 			e.numero_equipo, e.nombre as nombreequipo, 
 			--INFORMACION VEHICULO
-			f.nombre, m.nombre,v.categoria
+			f.nombre, m.nombre,v.categoria,v.caracteristicas,
+			--Evento
+			ev.tipo,
+			(select ra.kilometraje from ranking ra where ra.posicion = r.posicion-1 and ra.id_evento= r.id_evento) - r.kilometraje as diferencia
 			FROM ranking r, evento ev, vehiculo v, modelo m, equipo e, fabricante f
 			WHERE r.id_evento = ev.id
 			AND ev.tipo = tip			    
@@ -139,16 +173,20 @@ BEGIN
 			AND v.id = r.id_vehiculo
 			AND m.id = v.id_modelo
 			AND r.id_equipo = e.id
-			AND f.id = m.id_fabricante;
+			AND f.id = m.id_fabricante
+			ORDER BY posicion;
 	ELSE
 		RETURN QUERY
 			SELECT 
 			--RANKING
-			r.posicion, r.vueltas, r.kilometraje, 
+			v.categoria,nextval('secuenciaposicion'), r.vueltas, r.kilometraje, r.fecha,(r.desempeno).vuelta_mas_rapida,(r.desempeno).velocidad_media,
 			--INFORMACION EQUIPO
 			e.numero_equipo, e.nombre as nombreequipo, 
 			--INFORMACION VEHICULO
-			f.nombre, m.nombre,v.categoria
+			f.nombre, m.nombre,v.categoria,v.caracteristicas,
+			--Evento
+			ev.tipo,
+			(select ra.kilometraje from ranking ra where ra.posicion = r.posicion-1 and ra.id_evento= r.id_evento) - r.kilometraje as diferencia
 			FROM ranking r, evento ev, vehiculo v, modelo m, equipo e, fabricante f
 			WHERE r.id_evento = ev.id
 			AND ev.tipo = tip			    
@@ -157,7 +195,8 @@ BEGIN
 			AND v.id = r.id_vehiculo
 			AND m.id = v.id_modelo
 			AND r.id_equipo = e.id
-			AND f.id = m.id_fabricante;
+			AND f.id = m.id_fabricante
+			ORDER BY posicion;
 	END IF;
 END;
 $$LANGUAGE plpgsql;
