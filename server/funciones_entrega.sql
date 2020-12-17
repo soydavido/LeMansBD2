@@ -44,7 +44,7 @@ BEGIN
 		INSERT INTO equipo_evento (id_equipo,id_evento) VALUES (team.id,id_eve);
 	END LOOP;
 END;
-$$LANGUAGE plpgsql
+$$LANGUAGE plpgsql;
 
 --Devuelve el id del ultimo evento
 CREATE OR REPLACE FUNCTION id_ultimo_evento()
@@ -52,7 +52,7 @@ RETURNS integer AS $$
 BEGIN
 	RETURN (SELECT id FROM evento ORDER BY id DESC LIMIT 1);
 END;
-$$LANGUAGE plpgsq
+$$LANGUAGE plpgsql;
 
 --Registra un evento 
 CREATE OR REPLACE FUNCTION registrar_evento()
@@ -70,6 +70,48 @@ BEGIN
 	END IF;
 	ultimo_evento_id := id_ultimo_evento();
 	RETURN ultimo_evento_id;
+END;
+$$LANGUAGE plpgsql;
+
+--Devuelve el ultimo vehiculo registrado de un equipo
+CREATE OR REPLACE function ultimo_vehiculo (eq_id numeric)
+RETURNS integer as $$
+BEGIN
+	RETURN (SELECT id from vehiculo WHERE id_equipo = eq_id ORDER BY id DESC LIMIT 1);
+END;
+$$LANGUAGE plpgsql;
+
+--Devuelve el id del ultimo ranking registrado
+CREATE OR REPLACE FUNCTION id_ultimo_ranking()
+RETURNS integer AS $$
+BEGIN
+	RETURN (SELECT id FROM ranking ORDER BY id DESC LIMIT 1);
+END;
+$$LANGUAGE plpgsql;
+
+--Devuelve el id del ultimo ranking registrado
+CREATE OR REPLACE FUNCTION id_ultimo_ranking()
+RETURNS integer AS $$
+BEGIN
+	RETURN (SELECT id FROM ranking ORDER BY id DESC LIMIT 1);
+END;
+$$LANGUAGE plpgsql;
+
+
+
+--REVISAR
+CREATE OR REPLACE FUNCTION carrera()
+RETURNS void AS $$
+DECLARE
+	evento_id evento.id%TYPE;
+	func integer;
+	team record;
+BEGIN
+	evento_id = (SELECT public.registrar_evento());
+	func := (SELECT "registrar_equipos_a_evento"(evento_id));
+	FOR team in (SELECT id FROM equipo_evento WHERE id_evento=evento_id) LOOP
+		INSERT INTO ranking (id,vueltas,id_equipo,id_vehiculo,id_evento) values ((SELECT "id_ultimo_ranking"())+1,0,team.id,ultimo_vehiculo(team.id),evento_id);
+	END LOOP;
 END;
 $$LANGUAGE plpgsql
 
