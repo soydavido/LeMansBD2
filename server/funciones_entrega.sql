@@ -98,8 +98,7 @@ END;
 $$LANGUAGE plpgsql;
 
 
-
---REVISAR
+--Elaborando esto
 CREATE OR REPLACE FUNCTION carrera()
 RETURNS void AS $$
 DECLARE
@@ -107,11 +106,17 @@ DECLARE
 	func integer;
 	team record;
 BEGIN
-	evento_id = (SELECT public.registrar_evento());
-	func := (SELECT "registrar_equipos_a_evento"(evento_id));
-	FOR team in (SELECT id FROM equipo_evento WHERE id_evento=evento_id) LOOP
-		INSERT INTO ranking (id,vueltas,id_equipo,id_vehiculo,id_evento) values ((SELECT "id_ultimo_ranking"())+1,0,team.id,ultimo_vehiculo(team.id),evento_id);
+	evento_id = registrar_evento();
+	evento_tipo = (SELECT tipo FROM evento WHERE id=evento_id);
+	PERFORM registrar_equipos_a_evento(evento_id);
+	FOR team in (SELECT id_equipo FROM equipo_evento WHERE id_evento=evento_id) LOOP
+		INSERT INTO ranking (id,vueltas,id_equipo,id_vehiculo,id_evento) values (id_ultimo_ranking()+1,0,team.id_equipo,ultimo_vehiculo(team.id_equipo),evento_id);
 	END LOOP;
+	IF(evento_tipo='Carrera')THEN
+		
+	ELSE
+		FOR r-team in (SELECT id FROM ranking WHERE id_evento)
+	END IF;
 END;
 $$LANGUAGE plpgsql
 
