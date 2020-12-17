@@ -46,6 +46,33 @@ BEGIN
 END;
 $$LANGUAGE plpgsql
 
+--Devuelve el id del ultimo evento
+CREATE OR REPLACE FUNCTION id_ultimo_evento()
+RETURNS integer AS $$
+BEGIN
+	RETURN (SELECT id FROM evento ORDER BY id DESC LIMIT 1);
+END;
+$$LANGUAGE plpgsq
+
+--Registra un evento 
+CREATE OR REPLACE FUNCTION registrar_evento()
+RETURNS integer as $$
+DECLARE
+	ultimo_evento_id numeric;
+	ultimo_evento_tipo varchar;
+BEGIN
+	ultimo_evento_id := id_ultimo_evento();			--Esta funcion regresa el id del ultimo evento
+	ultimo_evento_tipo := (SELECT tipo FROM evento ORDER BY id DESC LIMIT 1);	--Con esto sabemos el tipo del ultimo evento
+	IF(ultimo_evento_tipo = 'Ensayo')THEN
+		INSERT INTO evento (id,ano,tipo,id_organizacion,id_pista) VALUES (ultimo_evento_id+1,2020,'Carrera',1,1);
+	ELSE
+		INSERT INTO evento (id,ano,tipo,id_organizacion,id_pista) VALUES (ultimo_evento_id+1,2020,'Ensayo',1,1);
+	END IF;
+	ultimo_evento_id := id_ultimo_evento();
+	RETURN ultimo_evento_id;
+END;
+$$LANGUAGE plpgsql
+
 ---------------------------------------------------------------------------------------------------------------------------
 --												Posiciones Relativas
 ---------------------------------------------------------------------------------------------------------------------------
