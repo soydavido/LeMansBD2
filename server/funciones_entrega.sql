@@ -40,7 +40,7 @@ RETURNS void as $$
 DECLARE
 	team record;
 BEGIN
-	FOR team in (SELECT id FROM equipo WHERE activo = 'T' ) LOOP
+	FOR team in (SELECT id FROM equipo WHERE activo = 'T' ) LOOP                    --Devolvera solo los equipos activos para asociarlos a la competicion
 		INSERT INTO equipo_evento (id_equipo,id_evento) VALUES (team.id,id_eve);
 	END LOOP;
 END;
