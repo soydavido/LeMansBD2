@@ -126,10 +126,14 @@ DECLARE
 	tf float;
 BEGIN
 	t:= (SELECT (desempeno).vuelta_mas_rapida FROM ranking WHERE id_equipo=eq_id AND (desempeno).vuelta_mas_rapida IS NOT NULL ORDER BY id DESC LIMIT 1);
-	t1=substring(t,1,1);
-	t2=substring(t,3,8);
-	tf:= t2::float /60 + t1::float;
-	RETURN tf;
+	IF( t IS NULL )THEN
+		RETURN '0.0'::float;
+	ELSE
+		t1=substring(t,1,1);
+		t2=substring(t,3,8);
+		tf:= t2::float /60 + t1::float;
+		RETURN tf::float;
+	END IF;
 END;
 $$LANGUAGE plpgsql;
 
@@ -147,7 +151,7 @@ RETURNS float as $$
 DECLARE
 	promedio float;
 BEGIN
-	promedio := (SELECT (desempeno).vuelta_promedio FROM ranking WHERE id_equipo = eq_id AND (desempeno).vuelta_promedio IS NOT NULL ORDER ORDER BY id DESC LIMIT 1);
+	promedio := (SELECT (desempeno).vuelta_promedio FROM ranking WHERE id_equipo = eq_id AND (desempeno).vuelta_promedio IS NOT NULL ORDER BY id DESC LIMIT 1);
 	RETURN tiempo_vueltas(tiempo_vuelta_equipo(eq_id),promedio);
 END;
 $$LANGUAGE plpgsql;
@@ -180,6 +184,8 @@ create sequence secuenciavuelta
   maxvalue 10000000
   minvalue 1
   cycle;
+
+
 
 --REVISAR
 CREATE OR REPLACE FUNCTION carrera()
