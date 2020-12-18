@@ -133,8 +133,24 @@ BEGIN
 END;
 $$LANGUAGE plpgsql;
 
+--Esta funcion genera el random con tiempo
+CREATE OR REPLACE FUNCTION tiempo_vueltas(tiempo_rapido float, tiempo_promedio float)
+RETURNS float as $$
+BEGIN
+	RETURN random()*(tiempo_promedio-tiempo_rapido)+tiempo_rapido;
+END;
+$$LANGUAGE plpgsql;
 
-
+--Esta es la que devuelve el tiempo random
+CREATE OR REPLACE FUNCTION tiempo_definitivo(eq_id numeric, ev_id numeric)
+RETURNS float as $$
+DECLARE
+	promedio float;
+BEGIN
+	promedio := (SELECT (desempeno).vuelta_promedio FROM ranking WHERE id_equipo = eq_id AND id_evento = ev_id);
+	RETURN tiempo_vueltas(tiempo_vuelta_equipo(eq_id),promedio);
+END;
+$$LANGUAGE plpgsql;
 
 --REVISAR
 CREATE OR REPLACE FUNCTION carrera()
