@@ -172,7 +172,7 @@ CREATE TABLE public.vuelta
 (
     id numeric NOT NULL,
     distancia float NOT NULL,           --Aqui va la distancia, sacada con distancia promedio del año anterior
-    tiempo varchar NOT NULL,            --Aqui va el tiempo de las vueltas, se manejara en varchar para una presentacion mas comoda y exacta
+    tiempo float,               --Aqui va el tiempo de las vueltas, se manejara en varchar para una presentacion mas comoda y exacta
     velocidad_media float NOT NULL,     --Aqui va la velocidad media, calculada con la velocidad_media del año anterior
     temperatura_cockpit float,
     id_equipo numeric NOT NULL,

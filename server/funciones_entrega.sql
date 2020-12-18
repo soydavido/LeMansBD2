@@ -96,7 +96,7 @@ $$LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION velocidad_media_equipo(eq_id numeric)
 RETURNS float as $$
 BEGIN
-	RETURN (SELECT (desempeno).velocidad_media FROM ranking WHERE id_equipo=eq_id ORDER BY id DESC LIMIT 1);
+	RETURN (SELECT (desempeno).velocidad_media FROM ranking WHERE id_equipo=eq_id AND (desempeno).velocidad_media IS NOT NULL ORDER BY id DESC LIMIT 1);
 END;
 $$LANGUAGE plpgsql;
 
@@ -116,7 +116,7 @@ $$LANGUAGE plpgsql;
 
 --TIEMPOS DE VUELTA
 
---Tiempo vuelta mas rapida anterior
+--Tiempo vuelta mas rapida anterior ---
 CREATE OR REPLACE FUNCTION tiempo_vuelta_equipo(eq_id numeric)
 RETURNS float as $$
 DECLARE
@@ -125,7 +125,7 @@ DECLARE
 	t2 varchar;
 	tf float;
 BEGIN
-	t:= (SELECT (desempeno).vuelta_mas_rapida FROM ranking WHERE id_equipo=eq_id ORDER BY id DESC LIMIT 1);
+	t:= (SELECT (desempeno).vuelta_mas_rapida FROM ranking WHERE id_equipo=eq_id AND (desempeno).vuelta_mas_rapida IS NOT NULL ORDER BY id DESC LIMIT 1);
 	t1=substring(t,1,1);
 	t2=substring(t,3,8);
 	tf:= t2::float /60 + t1::float;
@@ -133,7 +133,7 @@ BEGIN
 END;
 $$LANGUAGE plpgsql;
 
---Esta funcion genera el random con tiempo
+--Esta funcion genera el random con tiempo --
 CREATE OR REPLACE FUNCTION tiempo_vueltas(tiempo_rapido float, tiempo_promedio float)
 RETURNS float as $$
 BEGIN
@@ -147,10 +147,39 @@ RETURNS float as $$
 DECLARE
 	promedio float;
 BEGIN
-	promedio := (SELECT (desempeno).vuelta_promedio FROM ranking WHERE id_equipo = eq_id ORDER BY id DESC LIMIT 1);
+	promedio := (SELECT (desempeno).vuelta_promedio FROM ranking WHERE id_equipo = eq_id AND (desempeno).vuelta_promedio IS NOT NULL ORDER ORDER BY id DESC LIMIT 1);
 	RETURN tiempo_vueltas(tiempo_vuelta_equipo(eq_id),promedio);
 END;
 $$LANGUAGE plpgsql;
+
+
+--Kilometraje
+
+--Esta funcion genera un kilometraje_promedio
+CREATE OR REPLACE FUNCTION kilometraje_vuelta(promedio_anterior float)
+RETURNS float as $$
+BEGIN
+	RETURN random()*(13.626-promedio_anterior)+promedio_anterior;
+END;
+$$LANGUAGE plpgsql;
+
+--Kilometraje por vuelta
+CREATE OR REPLACE FUNCTION kilometraje_definitivo(eq_id float)
+RETURNS float AS $$
+BEGIN
+	RETURN (SELECT (desempeno).kilometraje_promedio_vuelta FROM ranking WHERE id_equipo = eq_id AND (desempeno).kilometraje_promedio_vuelta IS NOT NULL ORDER BY id DESC LIMIT 1);
+END;
+$$LANGUAGE plpgsql;
+
+
+
+--Para la tabla vueltas
+create sequence secuenciavuelta
+  start with 1
+  increment by 1
+  maxvalue 10000000
+  minvalue 1
+  cycle;
 
 --REVISAR
 CREATE OR REPLACE FUNCTION carrera()
