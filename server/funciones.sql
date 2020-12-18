@@ -49,7 +49,7 @@ RETURNS float as $$
 BEGIN
 	RETURN random()*(tiempo_promedio-tiempo_rapido)+tiempo_rapido;
 END;
-$$LA-GUAGE plpgsql;
+$$LANGUAGE plpgsql;
 
 --Esta funcion genera el kilometraje por vuelta
 CREATE OR REPLACE FUNCTION kilometraje_vuelta(promedio_anterior float, maximo float)

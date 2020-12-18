@@ -114,6 +114,27 @@ END;
 $$LANGUAGE plpgsql;
 
 
+--TIEMPOS DE VUELTA
+
+--Tiempo vuelta mas rapida anterior
+CREATE OR REPLACE FUNCTION tiempo_vuelta_equipo(eq_id numeric)
+RETURNS float as $$
+DECLARE
+	t varchar;
+	t1 varchar;
+	t2 varchar;
+	tf float;
+BEGIN
+	t:= (SELECT (desempeno).vuelta_mas_rapida FROM ranking WHERE id_equipo=eq_id ORDER BY id DESC LIMIT 1);
+	t1=substring(t,1,1);
+	t2=substring(t,3,8);
+	tf:= t2::float /60 + t1::float;
+	RETURN tf;
+END;
+$$LANGUAGE plpgsql;
+
+
+
 
 --REVISAR
 CREATE OR REPLACE FUNCTION carrera()
