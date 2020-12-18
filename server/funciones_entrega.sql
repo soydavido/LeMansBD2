@@ -142,12 +142,12 @@ END;
 $$LANGUAGE plpgsql;
 
 --Esta es la que devuelve el tiempo random
-CREATE OR REPLACE FUNCTION tiempo_definitivo(eq_id numeric, ev_id numeric)
+CREATE OR REPLACE FUNCTION tiempo_definitivo(eq_id numeric)
 RETURNS float as $$
 DECLARE
 	promedio float;
 BEGIN
-	promedio := (SELECT (desempeno).vuelta_promedio FROM ranking WHERE id_equipo = eq_id AND id_evento = ev_id);
+	promedio := (SELECT (desempeno).vuelta_promedio FROM ranking WHERE id_equipo = eq_id ORDER BY id DESC LIMIT 1);
 	RETURN tiempo_vueltas(tiempo_vuelta_equipo(eq_id),promedio);
 END;
 $$LANGUAGE plpgsql;
