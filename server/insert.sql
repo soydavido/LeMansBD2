@@ -1937,7 +1937,7 @@ UPDATE ranking set desempeno =('3:35.008',0,0,0) WHERE id= 241 ;
 UPDATE ranking set desempeno =('3:30.490',0,0,0) WHERE id= 242 ;
 
 
---Ranking por hora    --Arreglar
+--Ranking por hora    
 INSERT INTO ranking_por_hora(id_ranking,posicion,hora) VALUES (64,1,1);
 INSERT INTO ranking_por_hora(id_ranking,posicion,hora) VALUES (63,2,1);
 INSERT INTO ranking_por_hora(id_ranking,posicion,hora) VALUES (67,3,1);

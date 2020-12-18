@@ -61,14 +61,14 @@ DECLARE
 	ultimo_evento_id numeric;
 	ultimo_evento_tipo varchar;
 BEGIN
-	ultimo_evento_id := id_ultimo_evento();			--Esta funcion regresa el id del ultimo evento
-	ultimo_evento_tipo := (SELECT tipo FROM evento ORDER BY id DESC LIMIT 1);	--Con esto sabemos el tipo del ultimo evento
+	ultimo_evento_id := id_ultimo_evento();			                                        --Esta funcion regresa el id del ultimo evento
+	ultimo_evento_tipo := (SELECT tipo FROM evento ORDER BY id DESC LIMIT 1);	            --Con esto sabemos el tipo del ultimo evento
 	IF(ultimo_evento_tipo = 'Ensayo')THEN
 		INSERT INTO evento (id,ano,tipo,id_organizacion,id_pista) VALUES (ultimo_evento_id+1,2020,'Carrera',1,1);
 	ELSE
 		INSERT INTO evento (id,ano,tipo,id_organizacion,id_pista) VALUES (ultimo_evento_id+1,2020,'Ensayo',1,1);
 	END IF;
-	ultimo_evento_id := id_ultimo_evento();
+	ultimo_evento_id := id_ultimo_evento();                                                  --Usa la funcion para devolver el id del ultimo evento registrado
 	RETURN ultimo_evento_id;
 END;
 $$LANGUAGE plpgsql;
@@ -129,7 +129,7 @@ BEGIN
 	IF( t IS NULL )THEN
 		RETURN '0.0'::float;
 	ELSE
-		t1=substring(t,1,1);
+		t1=substring(t,1,1);                    --Transforma los varchar a float para los calculos
 		t2=substring(t,3,8);
 		tf:= t2::float /60 + t1::float;
 		RETURN tf::float;
@@ -198,19 +198,19 @@ DECLARE
 	eq_id integer;
 	en_vu record;
 BEGIN
-	evento_id = registrar_evento();
+	evento_id = registrar_evento();                                             --Aqui se crea el evento
 	evento_tipo = (SELECT tipo FROM evento WHERE id=evento_id);
-	PERFORM registrar_equipos_a_evento(evento_id);
-	FOR team in (SELECT * FROM equipo_evento WHERE id_evento=evento_id) LOOP
+	PERFORM registrar_equipos_a_evento(evento_id);                              --Aqui se asocian eventos a equipos
+	FOR team in (SELECT * FROM equipo_evento WHERE id_evento=evento_id) LOOP    --Seccion que inicializa ranking para el evento
 		INSERT INTO ranking (id,vueltas,id_equipo,id_vehiculo,id_evento,tiempo_total) values (id_ultimo_ranking()+1,0,team.id_equipo,ultimo_vehiculo(team.id_equipo),evento_id,(current_date::timestamp,null));
 	END LOOP;
 	
-	--Revisar de aqui a abajo
+	
 	IF(evento_tipo='Carrera')THEN
 		
 	ELSE
-		FOR en_vu in (SELECT id_equipo from ranking WHERE id_evento=evento_id) LOOP
-			FOR i in 1..50 LOOP
+		FOR en_vu in (SELECT id_equipo from ranking WHERE id_evento=evento_id) LOOP --Loop que recorrera piloto a piloto
+			FOR i in 1..50 LOOP                                                     --Loop que generara las 50 vueltas del piloto
 				INSERT INTO vuelta (id,distancia,tiempo,velocidad_media,id_equipo,id_evento,id_ranking) values (nextval('secuenciavuelta'),kilometraje_vuelta(kilometraje_definitivo(en_vu.equipo_id)),tiempo_definitivo(en_vu.id_equipo),velocidad_vuelta(velocidad_media_equipo(en_vu.id_equipo)),env_vu.id_equipo,en_vu.id_evento,en_vu.id_ranking);
 			END LOOP;
 		END LOOP;
