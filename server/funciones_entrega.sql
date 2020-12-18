@@ -189,17 +189,25 @@ DECLARE
 	func integer;
 	team record;
 	evento_tipo varchar;
+	eq_id integer;
+	en_vu record;
 BEGIN
 	evento_id = registrar_evento();
 	evento_tipo = (SELECT tipo FROM evento WHERE id=evento_id);
 	PERFORM registrar_equipos_a_evento(evento_id);
-	FOR team in (SELECT id_equipo FROM equipo_evento WHERE id_evento=evento_id) LOOP
-		INSERT INTO ranking (id,vueltas,id_equipo,id_vehiculo,id_evento,tiempo) values (id_ultimo_ranking()+1,0,team.id_equipo,ultimo_vehiculo(team.id_equipo),evento_id,(current_date::timestamp,null));
+	FOR team in (SELECT * FROM equipo_evento WHERE id_evento=evento_id) LOOP
+		INSERT INTO ranking (id,vueltas,id_equipo,id_vehiculo,id_evento,tiempo_total) values (id_ultimo_ranking()+1,0,team.id_equipo,ultimo_vehiculo(team.id_equipo),evento_id,(current_date::timestamp,null));
 	END LOOP;
+	
+	--Revisar de aqui a abajo
 	IF(evento_tipo='Carrera')THEN
 		
 	ELSE
-	
+		FOR en_vu in (SELECT id_equipo from ranking WHERE id_evento=evento_id) LOOP
+			FOR i in 1..50 LOOP
+				INSERT INTO vuelta (id,distancia,tiempo,velocidad_media,id_equipo,id_evento,id_ranking) values (nextval('secuenciavuelta'),kilometraje_vuelta(kilometraje_definitivo(en_vu.equipo_id)),tiempo_definitivo(en_vu.id_equipo),velocidad_vuelta(velocidad_media_equipo(en_vu.id_equipo)),env_vu.id_equipo,en_vu.id_evento,en_vu.id_ranking);
+			END LOOP;
+		END LOOP;
 	END IF;
 END;
 $$LANGUAGE plpgsql;
