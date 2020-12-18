@@ -19,8 +19,8 @@ CREATE TYPE Tiempo as
 
 CREATE TYPE Marcas as
 (
-    vuelta_mas_rapida date,
-    vuelta_promedio date,
+    vuelta_mas_rapida varchar,
+    vuelta_promedio float,
     kilometraje_promedio_vuelta float,
     velocidad_media float
 );
@@ -119,7 +119,7 @@ CREATE TABLE public.vehiculo
     numero numeric(3) NOT NULL,
     categoria varchar NOT NULL,
     tipo varchar NOT NULL,
-    --caracteristicas varchar[5] NOT NULL,
+    caracteristicas varchar[5],
     --piezas [][],
     --serial varchar(40),
     foto BYTEA,
