@@ -1630,7 +1630,7 @@ INSERT INTO ranking(id,posicion,vueltas,fecha,id_equipo,id_vehiculo,id_evento) V
 INSERT INTO ranking(id,posicion,vueltas,fecha,id_equipo,id_vehiculo,id_evento) VALUES (59,7,50,to_date('15-05-2019','DD-MM-YYYY'),59,59,1);
 INSERT INTO ranking(id,posicion,vueltas,fecha,id_equipo,id_vehiculo,id_evento) VALUES (60,34,50,to_date('15-05-2019','DD-MM-YYYY'),60,60,1);
 INSERT INTO ranking(id,posicion,vueltas,fecha,id_equipo,id_vehiculo,id_evento) VALUES (61,54,50,to_date('15-05-2019','DD-MM-YYYY'),61,61,1);
-INSERT INTO ranking(id,posicion,vueltas,fecha,id_equipo,id_vehiculo,id_evento) VALUES (62,0,50,to_date('15-05-2019','DD-MM-YYYY'),62,62,1);
+INSERT INTO ranking(id,posicion,vueltas,fecha,id_equipo,id_vehiculo,id_evento) VALUES (62,62,50,to_date('15-05-2019','DD-MM-YYYY'),62,62,1);
 INSERT INTO ranking(id,posicion,vueltas,fecha,id_equipo,id_vehiculo,id_evento) VALUES (125,3,50,to_date('19-07-2020','DD-MM-YYYY'),1,1,3);
 INSERT INTO ranking(id,posicion,vueltas,fecha,id_equipo,id_vehiculo,id_evento) VALUES (126,2,50,to_date('19-07-2020','DD-MM-YYYY'),4,4,3);
 INSERT INTO ranking(id,posicion,vueltas,fecha,id_equipo,id_vehiculo,id_evento) VALUES (127,1,50,to_date('19-07-2020','DD-MM-YYYY'),2,2,3);

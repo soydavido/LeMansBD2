@@ -89,36 +89,54 @@ BEGIN
 END;
 $$LANGUAGE plpgsql;
 
---Devuelve el id del ultimo ranking registrado
-CREATE OR REPLACE FUNCTION id_ultimo_ranking()
-RETURNS integer AS $$
+
+--VELOCIDAD MEDIA
+
+--Velocidad media del evento anterior
+CREATE OR REPLACE FUNCTION velocidad_media_equipo(eq_id numeric)
+RETURNS float as $$
 BEGIN
-	RETURN (SELECT id FROM ranking ORDER BY id DESC LIMIT 1);
+	RETURN (SELECT (desempeno).velocidad_media FROM ranking WHERE id_equipo=eq_id ORDER BY id DESC LIMIT 1);
+END;
+$$LANGUAGE plpgsql;
+
+--Esta funcion genera la velocidad promedio de una vuelta
+CREATE OR REPLACE FUNCTION velocidad_vuelta(promedio float)
+RETURNS float as $$
+DECLARE
+	maximo float;
+	minimo float;
+BEGIN
+	maximo := promedio + 20;
+	minimo := promedio - 20;
+	RETURN random()*(maximo-minimo)+minimo;
 END;
 $$LANGUAGE plpgsql;
 
 
---Elaborando esto
+
+--REVISAR
 CREATE OR REPLACE FUNCTION carrera()
 RETURNS void AS $$
 DECLARE
 	evento_id evento.id%TYPE;
 	func integer;
 	team record;
+	evento_tipo varchar;
 BEGIN
 	evento_id = registrar_evento();
 	evento_tipo = (SELECT tipo FROM evento WHERE id=evento_id);
 	PERFORM registrar_equipos_a_evento(evento_id);
 	FOR team in (SELECT id_equipo FROM equipo_evento WHERE id_evento=evento_id) LOOP
-		INSERT INTO ranking (id,vueltas,id_equipo,id_vehiculo,id_evento) values (id_ultimo_ranking()+1,0,team.id_equipo,ultimo_vehiculo(team.id_equipo),evento_id);
+		INSERT INTO ranking (id,vueltas,id_equipo,id_vehiculo,id_evento,tiempo) values (id_ultimo_ranking()+1,0,team.id_equipo,ultimo_vehiculo(team.id_equipo),evento_id,(current_date::timestamp,null));
 	END LOOP;
 	IF(evento_tipo='Carrera')THEN
 		
 	ELSE
-		FOR r-team in (SELECT id FROM ranking WHERE id_evento)
+	
 	END IF;
 END;
-$$LANGUAGE plpgsql
+$$LANGUAGE plpgsql;
 
 ---------------------------------------------------------------------------------------------------------------------------
 --												Posiciones Relativas
