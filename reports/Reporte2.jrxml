@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="GanadoresCategoria" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a6cc8cf8-6844-4a04-bdd8-af2bf0b00dce">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="LeMans"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * from public.ranking_hora_categoria(2019, 'LM-P2', 2)]]>
+	</queryString>
+	<field name="respuesta" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="respuesta"/>
+	</field>
+	<field name="hora" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="hora"/>
+	</field>
+	<field name="posicionhora" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="posicionhora"/>
+	</field>
+	<field name="posiciondef" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="posiciondef"/>
+	</field>
+	<field name="vueltas" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="vueltas"/>
+	</field>
+	<field name="kilometraje" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="kilometraje"/>
+	</field>
+	<field name="fecha" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
+	</field>
+	<field name="mejor_vuelta" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="mejor_vuelta"/>
+	</field>
+	<field name="velocidad_promedio" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="velocidad_promedio"/>
+	</field>
+	<field name="numero_equipo" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="numero_equipo"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+	</field>
+	<field name="fabricante" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fabricante"/>
+	</field>
+	<field name="modelo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="modelo"/>
+	</field>
+	<field name="categoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="categoria"/>
+	</field>
+	<field name="caracteristicas" class="java.sql.Array">
+		<property name="com.jaspersoft.studio.field.label" value="caracteristicas"/>
+	</field>
+	<field name="pilotos" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="pilotos"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="104" splitType="Stretch">
+			<image>
+				<reportElement x="-20" y="-10" width="220" height="112" uuid="d8d3f6da-7800-4830-b8ed-97f0fd7b4c0d"/>
+				<imageExpression><![CDATA["C:/Users/david/Desktop/Screenshots/logolemans.PNG"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="410" y="0" width="100" height="30" uuid="17c598b0-fb46-4865-9c81-bb396d2c87a0"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="20" width="160" height="39" uuid="67dbb6ce-5f30-474d-86ec-64f590eeab00"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{respuesta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="60" width="100" height="30" uuid="30b3f9e3-5ed4-441e-819e-666d84731ed3"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Categoria/s:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="454" y="60" width="100" height="30" uuid="44dffcc5-ca08-4f34-af7c-0e74a52653a8"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="31" width="38" height="30" uuid="52d0adae-537e-4f57-b100-012608881812"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="410" y="31" width="48" height="30" uuid="dad7599e-10b6-4228-b523-5da8cbeb0c2e"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="340" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="-25" y="0" width="600" height="330" forecolor="#FFFFFF" backcolor="rgba(9, 76, 136, 0.7529412)" uuid="d8c294c7-f3af-4273-90af-501cdabe236d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="19" width="40" height="31" forecolor="#FFFFFF" uuid="95cde3a6-dd76-4ca5-baf3-e873223d044a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="310" y="70" width="237" height="97" forecolor="#FFFFFF" uuid="81285380-bd80-467b-b0ec-d4de02629917"/>
+			</rectangle>
+			<textField>
+				<reportElement x="60" y="70" width="74" height="23" uuid="3f46ae68-9290-46e5-a766-17cd0d63dc91">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="80746378-4e50-4e9c-99dd-34a409d6627c"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vueltas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="70" width="60" height="23" uuid="584590d8-8246-4355-83ba-5ff65e250daf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="80746378-4e50-4e9c-99dd-34a409d6627c"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Vueltas:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="19" width="280" height="30" uuid="695f528e-c8b1-4534-b72f-d553c460d3d0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="90b4e87f-e0e0-42e8-a57c-a9600f97053a"/>
+				</reportElement>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="100" width="90" height="20" uuid="edc26ae8-08e4-4816-963d-fe192369aa2d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8b65c42-32a7-4757-821b-ad56ae5e9b8a"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kilometraje}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="80" height="20" uuid="32967a2f-541b-44ee-9c9f-10441d20da76">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8b65c42-32a7-4757-821b-ad56ae5e9b8a"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Kilometraje:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="220" width="100" height="30" uuid="600aa171-c528-4ea9-a230-e8101496854c"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Datos Vehiculo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="250" width="180" height="30" uuid="be491619-6c02-461e-ae34-4de1b5bd4e35">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43ac6ca6-8d0d-4ecf-b85e-cb7392af4b49"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fabricante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="290" width="160" height="30" uuid="9aea49e4-0904-4e74-9f69-55ad5098d0c3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c8bb6f5e-54be-4297-a9d8-543c2c355e1b"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="250" width="80" height="30" uuid="d5b66c6d-57a7-4181-ade9-0ece11fbe402">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="80746378-4e50-4e9c-99dd-34a409d6627c"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Fabricante:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="290" width="50" height="30" uuid="ba5eb795-56d3-4c02-b99c-d430a91e57df">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="80746378-4e50-4e9c-99dd-34a409d6627c"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Modelo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="280" y="270" width="280" height="30" uuid="501fbf03-7167-4054-b04f-5690d6d207b0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3f3220b8-d9eb-4d64-839c-c08f4864f9ed"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{caracteristicas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="20" width="140" height="30" uuid="3aa2ca17-3c66-4156-bfbc-5a2bd94b46d2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="908767cf-8f2b-49f5-900a-76eb8843fc57"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="22"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-20" y="0" width="595" height="1" uuid="0b4a7608-95f3-4f35-aa07-2c6fe104ebac"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="20" width="40" height="29" uuid="57625cac-bf54-4f4e-9e16-764c196d059a"/>
+				<textElement textAlignment="Center">
+					<font size="19"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_equipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="130" width="100" height="20" uuid="7b740e7f-b5ef-4410-8532-5e96a1281109"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mejor_vuelta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="130" width="90" height="20" uuid="468cd22b-53fe-4d59-9e9b-28975470b094"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Mejor Vuelta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="134" y="160" width="100" height="20" uuid="db664faf-770d-4200-bbd5-5f6e89a3924f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{velocidad_promedio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="160" width="134" height="20" uuid="e764ee84-8874-4491-8796-a21944616650"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Velocidad promedio:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="310" y="70" width="12" height="97" forecolor="#E8221E" backcolor="#E8221E" uuid="8dbd5b58-fed5-4a5c-89de-8486b30b1f9b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="536" y="70" width="12" height="97" forecolor="#E8221E" backcolor="#E8221E" uuid="ffaf3272-3587-49fe-9afb-daa6419f7d05"/>
+			</rectangle>
+			<line>
+				<reportElement x="-32" y="330" width="625" height="1" uuid="7a9223eb-bbe6-4c65-9aed-b686dc7b5691"/>
+			</line>
+			<staticText>
+				<reportElement x="370" y="130" width="60" height="38" uuid="b47bcfd6-c86b-49de-b2a3-794923e38776"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Posicion final:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="430" y="130" width="58" height="38" uuid="45cfe6a2-fe63-48b1-be77-46dde218b033"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{posiciondef}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="84" width="38" height="30" uuid="74ecea3b-bab2-499e-be84-1ad96f7158cb"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="488" y="80" width="44" height="42" uuid="7c61058e-75c5-4512-8293-fe3158a105c5"/>
+				<textElement>
+					<font size="33" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{posicionhora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="330" y="84" width="128" height="30" uuid="0a4605f6-26f5-4463-9600-0e3ef492f229"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Posicion en la hora
+ ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="53" y="190" width="405" height="20" uuid="5d65faa1-1085-42cc-b100-0bc09a044e1f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pilotos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="190" width="53" height="20" uuid="4b655024-c548-41da-a75f-cbc1e72620f3"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Pilotos:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
