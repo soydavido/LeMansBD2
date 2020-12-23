@@ -1,61 +1,102 @@
--------------------------------COMENTARIOS------------------------------------
---	1.- Como haremos para ordenar por hora? se sumaran los minutos hasta obtener 1 hora por competidor o los guardamos en algun lado?
---	2.- Evaluar si se colocan ambas posiciones, por categoria y global
---	
---	
---
---
---
---
----------------------------------------------------------------------------------------------------------------------------
---												Calculo Marcas
----------------------------------------------------------------------------------------------------------------------------
-
- 
---Esta funcion servira para los calculos que se realizaran en el TDA MARCAS
-CREATE OR REPLACE FUNCTION minutos_a_decimales(a varchar, b float)
-RETURNS float as $$
+--Compara si una fecha esta en el rango de un contrato
+CREATE OR REPLACE FUNCTION fecha_en_periodo_contrato (fecha date, numero_equipo numeric, numero_piloto numeric)
+RETURNS boolean as $$
+DECLARE
+	fecha_trans date;
 BEGIN
-	b := ((cast(SUBSTRING(a,1,1) as float))/60)+(cast(SUBSTRING(a,1,1) as float));
-	RETURN b;
-END;
-$$LANGUAGE plpgsql
-
---Esta funcion sirve para calcular la velocidad_promedio en base al tiempo
-CREATE OR REPLACE FUNCTION velocidad_promedio(km float, tiempo float)
-RETURNS float as $$
-BEGIN
-	RETURN km * tiempo;
-END;
-$$LANGUAGE plpgsql
-
---Esta funcion sirve para calcular un aproximado de kilometraje por vuelta
-CREATE OR REPLACE FUNCTION kilometraje_promedio(km float, vueltas integer)
-RETURNS float as $$
-BEGIN
-	RETURN km / vueltas;
-END;
-$$LANGUAGE plpgsql
-
-
----------------------------------------------------------------------------------------------------------------------------
---												Carreras
----------------------------------------------------------------------------------------------------------------------------
-
-
---Esta funcion genera los tiempos de la vuelta
-CREATE OR REPLACE FUNCTION tiempo_vueltas(tiempo_rapido float, tiempo_promedio float)
-RETURNS float as $$
-BEGIN
-	RETURN random()*(tiempo_promedio-tiempo_rapido)+tiempo_rapido;
+	IF (SELECT id_piloto FROM contrato WHERE id_equipo = numero_equipo AND id_piloto = numero_piloto AND fecha BETWEEN (duracion).fecha_inicial and (duracion).fecha_final ) != 0 THEN
+		RETURN true;
+	ELSE
+		RETURN false;
+	 END IF;
 END;
 $$LANGUAGE plpgsql;
 
---Esta funcion genera el kilometraje por vuelta
-CREATE OR REPLACE FUNCTION kilometraje_vuelta(promedio_anterior float, maximo float)
+--Te da el nombre y apellido del piloto
+CREATE OR REPLACE FUNCTION nombre_apellido_piloto (num_piloto numeric)
+RETURNS varchar as $$
+BEGIN
+	RETURN (SELECT CONCAT((informacion).nombre,' ',(informacion).apellido) FROM piloto where id = num_piloto );
+END;
+$$LANGUAGE plpgsql;
+
+--Te da los nombres de los pilotos de un equipo en una fecha
+CREATE OR REPLACE FUNCTION nombre_pilotos(eq_id numeric, fecha_actual date)
+RETURNS varchar as $$
+BEGIN
+	RETURN (SELECT CONCAT((p1.informacion).nombre,' ',(p1.informacion).apellido,' - ',(p2.informacion).nombre,' ',(p2.informacion).apellido,' - ',(p3.informacion).nombre,' ',(p3.informacion).apellido)
+		FROM piloto p1, contrato c1, piloto p2, contrato c2, piloto p3, contrato c3
+		WHERE c1.id_equipo = eq_id AND c1.id_piloto = p1.id AND fecha_en_periodo_contrato(fecha_actual,c1.id_equipo,c1.id_piloto) = true
+		AND c2.id_equipo = c1.id_equipo AND c2.id_piloto = p2.id AND fecha_en_periodo_contrato(fecha_actual,c2.id_equipo,c2.id_piloto) = true
+		AND c3.id_equipo = c2.id_equipo AND c3.id_piloto = p3.id AND fecha_en_periodo_contrato(fecha_actual,c3.id_equipo,c3.id_piloto) = true
+		AND p1.id != p2.id AND p2.id != p3.id AND p1.id != p3.id
+		FETCH FIRST 1 ROW ONLY);
+END;
+$$LANGUAGE plpgsql;
+
+--Registra los equipos activos a un evento
+CREATE OR REPLACE FUNCTION registrar_equipos_a_evento(id_eve numeric)
+RETURNS void as $$
+DECLARE
+	team record;
+BEGIN
+	FOR team in (SELECT id FROM equipo WHERE activo = 'T' ) LOOP                    --Devolvera solo los equipos activos para asociarlos a la competicion
+		INSERT INTO equipo_evento (id_equipo,id_evento) VALUES (team.id,id_eve);
+	END LOOP;
+END;
+$$LANGUAGE plpgsql;
+
+--Devuelve el id del ultimo evento
+CREATE OR REPLACE FUNCTION id_ultimo_evento()
+RETURNS integer AS $$
+BEGIN
+	RETURN (SELECT id FROM evento ORDER BY id DESC LIMIT 1);
+END;
+$$LANGUAGE plpgsql;
+
+--Registra un evento 
+CREATE OR REPLACE FUNCTION registrar_evento()
+RETURNS integer as $$
+DECLARE
+	ultimo_evento_id numeric;
+	ultimo_evento_tipo varchar;
+BEGIN
+	ultimo_evento_id := id_ultimo_evento();			                                        --Esta funcion regresa el id del ultimo evento
+	ultimo_evento_tipo := (SELECT tipo FROM evento ORDER BY id DESC LIMIT 1);	            --Con esto sabemos el tipo del ultimo evento
+	IF(ultimo_evento_tipo = 'Ensayo')THEN
+		INSERT INTO evento (id,ano,tipo,id_organizacion,id_pista) VALUES (ultimo_evento_id+1,2020,'Carrera',1,1);
+	ELSE
+		INSERT INTO evento (id,ano,tipo,id_organizacion,id_pista) VALUES (ultimo_evento_id+1,2020,'Ensayo',1,1);
+	END IF;
+	ultimo_evento_id := id_ultimo_evento();                                                  --Usa la funcion para devolver el id del ultimo evento registrado
+	RETURN ultimo_evento_id;
+END;
+$$LANGUAGE plpgsql;
+
+--Devuelve el ultimo vehiculo registrado de un equipo
+CREATE OR REPLACE function ultimo_vehiculo (eq_id numeric)
+RETURNS integer as $$
+BEGIN
+	RETURN (SELECT id from vehiculo WHERE id_equipo = eq_id ORDER BY id DESC LIMIT 1);
+END;
+$$LANGUAGE plpgsql;
+
+--Devuelve el id del ultimo ranking registrado
+CREATE OR REPLACE FUNCTION id_ultimo_ranking()
+RETURNS integer AS $$
+BEGIN
+	RETURN (SELECT id FROM ranking ORDER BY id DESC LIMIT 1);
+END;
+$$LANGUAGE plpgsql;
+
+
+--VELOCIDAD MEDIA
+
+--Velocidad media del evento anterior
+CREATE OR REPLACE FUNCTION velocidad_media_equipo(eq_id numeric)
 RETURNS float as $$
 BEGIN
-	RETURN random()*(maximo-promedio_anterior)+promedio_anterior;
+	RETURN (SELECT (desempeno).velocidad_media FROM ranking WHERE id_equipo=eq_id AND (desempeno).velocidad_media IS NOT NULL ORDER BY id DESC LIMIT 1);
 END;
 $$LANGUAGE plpgsql;
 
@@ -72,79 +113,117 @@ BEGIN
 END;
 $$LANGUAGE plpgsql;
 
---Esta funcion genera el kilometraje de una vuelta
-CREATE OR REPLACE FUNCTION kilometraje_vuelta(promedio float)
+
+--TIEMPOS DE VUELTA
+
+--Tiempo vuelta mas rapida anterior ---
+CREATE OR REPLACE FUNCTION tiempo_vuelta_equipo(eq_id numeric)
 RETURNS float as $$
 DECLARE
-	maximo float;
-	minimo float;
+	t varchar;
+	t1 varchar;
+	t2 varchar;
+	tf float;
 BEGIN
-	maximo := 13.626;
-	minimo := promedio;
-	RETURN random()*(maximo-minimo)+minimo+0.02;
-END;
-$$LANGUAGE plpgsql;
-
---Esta funcion va a registrar las vueltas
-CREATE OR REPLACE FUNCTION insertar_vuelta(id_eq numeric,id_eve numeric, id_rank numeric, id numeric, km_prom float, t_prom varchar, vel_med float, mas_rapida float)
-RETURNS TABLE as $$
-DECLARE 
-	km_vuelta float;
-	vel_vuelta float;
-	tiempo_vuelta float;
-BEGIN
-	km_vuelta := kilometraje_vuelta(km_prom);
-	vel_vuelta := velocidad_vuelta(vel_med);
-	t_prom := tiempo_vueltas(mas_rapida,t_prom);
-	RETURN QUERY
-	INSERT INTO public.vuelta (id,distancia,tiempo,velocidad_media,id_equipo,id_evento,id_ranking)
-	VALUES (id,km_vuelta,t_prom,vel_vuelta,id_eq,id_eve,id_rank);
-END;
-$$LANGUAJE plpgsql;
-
---Compara si una fecha esta en el rango de un contrato
-CREATE OR REPLACE FUNCTION fecha_en_periodo_contrato (fecha date, numero_equipo numeric, numero_piloto numeric)
-RETURNS boolean as $$
-DECLARE
-	fecha_trans date;
-BEGIN
-	IF (SELECT id_piloto FROM contrato WHERE id_equipo = numero_equipo AND id_piloto = numero_piloto AND fecha BETWEEN (duracion).fecha_inicial and (duracion).fecha_final ) != 0 THEN
-		RETURN true;
+	t:= (SELECT (desempeno).vuelta_mas_rapida FROM ranking WHERE id_equipo=eq_id AND (desempeno).vuelta_mas_rapida IS NOT NULL ORDER BY id DESC LIMIT 1);
+	IF( t IS NULL )THEN
+		RETURN '0.0'::float;
 	ELSE
-		RETURN false;
-	 END IF;
-END;
-$$LANGUAGE plpgsql
-
---Te da el nombre y apellido del piloto
-CREATE OR REPLACE FUNCTION nombre_apellido_piloto (num_piloto numeric)
-RETURNS varchar as $$
-BEGIN
-	RETURN (SELECT CONCAT((informacion).nombre,' ',(informacion).apellido) FROM piloto where id = num_piloto );
-END;
-$$LANGUAGE plpgsql
-
---Te da los nombres de los pilotos de un equipo en una fecha
-CREATE OR REPLACE FUNCTION nombre_pilotos(eq_id numeric, fecha_actual date)
-RETURNS varchar as $$
-BEGIN
-	RETURN (SELECT CONCAT((p1.informacion).nombre,' ',(p1.informacion).apellido,' - ',(p2.informacion).nombre,' ',(p2.informacion).apellido,' - ',(p3.informacion).nombre,' ',(p3.informacion).apellido)
-		FROM piloto p1, contrato c1, piloto p2, contrato c2, piloto p3, contrato c3
-		WHERE c1.id_equipo = eq_id AND c1.id_piloto = p1.id AND fecha_en_periodo_contrato(fecha_actual,c1.id_equipo,c1.id_piloto) = true
-		AND c2.id_equipo = c1.id_equipo AND c2.id_piloto = p2.id AND fecha_en_periodo_contrato(fecha_actual,c2.id_equipo,c2.id_piloto) = true
-		AND c3.id_equipo = c2.id_equipo AND c3.id_piloto = p3.id AND fecha_en_periodo_contrato(fecha_actual,c3.id_equipo,c3.id_piloto) = true
-		AND p1.id != p2.id AND p2.id != p3.id AND p1.id != p3.id
-		FETCH FIRST 1 ROW ONLY);
+		t1=substring(t,1,1);                    --Transforma los varchar a float para los calculos
+		t2=substring(t,3,8);
+		tf:= t2::float /60 + t1::float;
+		RETURN tf::float;
+	END IF;
 END;
 $$LANGUAGE plpgsql;
 
+--Esta funcion genera el random con tiempo --
+CREATE OR REPLACE FUNCTION tiempo_vueltas(tiempo_rapido float, tiempo_promedio float)
+RETURNS float as $$
+BEGIN
+	RETURN random()*(tiempo_promedio-tiempo_rapido)+tiempo_rapido;
+END;
+$$LANGUAGE plpgsql;
+
+--Esta es la que devuelve el tiempo random
+CREATE OR REPLACE FUNCTION tiempo_definitivo(eq_id numeric)
+RETURNS float as $$
+DECLARE
+	promedio float;
+BEGIN
+	promedio := (SELECT (desempeno).vuelta_promedio FROM ranking WHERE id_equipo = eq_id AND (desempeno).vuelta_promedio IS NOT NULL ORDER BY id DESC LIMIT 1);
+	RETURN tiempo_vueltas(tiempo_vuelta_equipo(eq_id),promedio);
+END;
+$$LANGUAGE plpgsql;
+
+
+--Kilometraje
+
+--Esta funcion genera un kilometraje_promedio
+CREATE OR REPLACE FUNCTION kilometraje_vuelta(promedio_anterior float)
+RETURNS float as $$
+BEGIN
+	RETURN random()*(13.626-promedio_anterior)+promedio_anterior;
+END;
+$$LANGUAGE plpgsql;
+
+--Kilometraje por vuelta
+CREATE OR REPLACE FUNCTION kilometraje_definitivo(eq_id float)
+RETURNS float AS $$
+BEGIN
+	RETURN (SELECT (desempeno).kilometraje_promedio_vuelta FROM ranking WHERE id_equipo = eq_id AND (desempeno).kilometraje_promedio_vuelta IS NOT NULL ORDER BY id DESC LIMIT 1);
+END;
+$$LANGUAGE plpgsql;
+
+
+
+--Para la tabla vueltas
+create sequence secuenciavuelta
+  start with 1
+  increment by 1
+  maxvalue 10000000
+  minvalue 1
+  cycle;
+
+
+
+--REVISAR
+CREATE OR REPLACE FUNCTION carrera()
+RETURNS void AS $$
+DECLARE
+	evento_id evento.id%TYPE;
+	func integer;
+	team record;
+	evento_tipo varchar;
+	eq_id integer;
+	en_vu record;
+BEGIN
+	evento_id = registrar_evento();                                             --Aqui se crea el evento
+	evento_tipo = (SELECT tipo FROM evento WHERE id=evento_id);
+	PERFORM registrar_equipos_a_evento(evento_id);                              --Aqui se asocian eventos a equipos
+	FOR team in (SELECT * FROM equipo_evento WHERE id_evento=evento_id) LOOP    --Seccion que inicializa ranking para el evento
+		INSERT INTO ranking (id,vueltas,id_equipo,id_vehiculo,id_evento,tiempo_total) values (id_ultimo_ranking()+1,0,team.id_equipo,ultimo_vehiculo(team.id_equipo),evento_id,(current_date::timestamp,null));
+	END LOOP;
+	
+	
+	IF(evento_tipo='Carrera')THEN
+		
+	ELSE
+		FOR en_vu in (SELECT id_equipo from ranking WHERE id_evento=evento_id) LOOP --Loop que recorrera piloto a piloto
+			FOR i in 1..50 LOOP                                                     --Loop que generara las 50 vueltas del piloto
+				INSERT INTO vuelta (id,distancia,tiempo,velocidad_media,id_equipo,id_evento,id_ranking) values (nextval('secuenciavuelta'),kilometraje_vuelta(kilometraje_definitivo(en_vu.equipo_id)),tiempo_definitivo(en_vu.id_equipo),velocidad_vuelta(velocidad_media_equipo(en_vu.id_equipo)),env_vu.id_equipo,en_vu.id_evento,en_vu.id_ranking);
+			END LOOP;
+		END LOOP;
+	END IF;
+END;
+$$LANGUAGE plpgsql;
 
 ---------------------------------------------------------------------------------------------------------------------------
 --												Posiciones Relativas
 ---------------------------------------------------------------------------------------------------------------------------
 
 
-drop sequence secuenciaposicion;
+--drop sequence secuenciaposicion;
 create sequence secuenciaposicion
   start with 1
   increment by 1

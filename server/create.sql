@@ -19,8 +19,8 @@ CREATE TYPE Tiempo as
 
 CREATE TYPE Marcas as
 (
-    vuelta_mas_rapida date,
-    vuelta_promedio date,
+    vuelta_mas_rapida varchar,
+    vuelta_promedio float,
     kilometraje_promedio_vuelta float,
     velocidad_media float
 );
@@ -119,7 +119,7 @@ CREATE TABLE public.vehiculo
     numero numeric(3) NOT NULL,
     categoria varchar NOT NULL,
     tipo varchar NOT NULL,
-    --caracteristicas varchar[5] NOT NULL,
+    caracteristicas varchar[5],
     --piezas [][],
     --serial varchar(40),
     foto BYTEA,
@@ -172,7 +172,7 @@ CREATE TABLE public.vuelta
 (
     id numeric NOT NULL,
     distancia float NOT NULL,           --Aqui va la distancia, sacada con distancia promedio del año anterior
-    tiempo varchar NOT NULL,            --Aqui va el tiempo de las vueltas, se manejara en varchar para una presentacion mas comoda y exacta
+    tiempo float,               --Aqui va el tiempo de las vueltas, se manejara en varchar para una presentacion mas comoda y exacta
     velocidad_media float NOT NULL,     --Aqui va la velocidad media, calculada con la velocidad_media del año anterior
     temperatura_cockpit float,
     id_equipo numeric NOT NULL,
