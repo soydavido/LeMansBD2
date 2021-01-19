@@ -131,6 +131,42 @@ BEGIN
 END;
 $$LANGUAGE plpgsql;
 
+--REPORTE 10
+CREATE OR REPLACE FUNCTION reporte10 (anho_ins integer)
+RETURNS TABLE (anho float, nombre_piloto varchar, nombre2 varchar, apellido varchar, apellido2 varchar, nacionalidad varchar)
+AS $$
+BEGIN
+	IF (anho_ins is null) THEN
+		RETURN QUERY
+		(SELECT DISTINCT date_part('year',r1.fecha), (p1.informacion).nombre, (p1.informacion).nombre2, (p1.informacion).apellido, (p1.informacion).apellido2, nac1.gentilicio
+		FROM equipo e1, ranking r1, piloto p1, contrato c1, nacionalidad nac1
+		WHERE e1.id = r1.id_equipo
+		AND c1.id_piloto = p1.id AND c1.id_equipo = e1.id 
+		AND r1.posicion = 1
+		AND nac1.id = p1.id_nacionalidad
+		AND date_part('year',r1.fecha) = (SELECT date_part('year',(c2.duracion).fecha_inicial) 
+										  FROM contrato c2 
+										  WHERE c2.id_piloto = c1.id_piloto 
+										  ORDER BY 1 ASC 
+										  FETCH FIRST 1 ROW ONLY));
+	ELSE
+		RETURN QUERY
+		SELECT DISTINCT date_part('year',r1.fecha), (p1.informacion).nombre, (p1.informacion).nombre2, (p1.informacion).apellido, (p1.informacion).apellido2, nac1.gentilicio
+		FROM equipo e1, ranking r1, piloto p1, contrato c1, nacionalidad nac1
+		WHERE e1.id = r1.id_equipo
+		AND c1.id_piloto = p1.id AND c1.id_equipo = e1.id 
+		AND r1.posicion = 1
+		AND nac1.id = p1.id_nacionalidad
+		AND date_part('year',r1.fecha) = anho_ins
+		AND date_part('year',r1.fecha) = (SELECT date_part('year',(c2.duracion).fecha_inicial) 
+								   FROM contrato c2
+								   WHERE c2.id_piloto = c1.id_piloto
+								   ORDER BY 1 ASC
+								   FETCH FIRST 1 ROW ONLY);
+	END IF;
+END;
+$$LANGUAGE plpgsql;
+
 --REPORTE 11
 CREATE FUNCTION reporte11(fecha_usr integer, tipo_evento varchar)
 RETURNS TABLE (nombre_equipo equipo.nombre%TYPE, numero_equipo equipo.numero_equipo%TYPE, anho float, fabricante fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, velocidad float)
