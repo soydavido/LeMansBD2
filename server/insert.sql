@@ -4833,7 +4833,6 @@ INSERT INTO contrato(id,id_equipo,id_piloto) VALUES (285,56,209);
 INSERT INTO contrato(id,id_equipo,id_piloto) VALUES (286,62,288);
 INSERT INTO contrato(id,id_equipo,id_piloto) VALUES (287,62,289);
 INSERT INTO contrato(id,id_equipo,id_piloto) VALUES (288,62,222);
-INSERT INTO contrato(id,id_equipo,id_piloto) VALUES (289,79,110);
 INSERT INTO contrato(id,id_equipo,id_piloto) VALUES (290,36,92);
 INSERT INTO contrato(id,id_equipo,id_piloto) VALUES (291,36,290);
 INSERT INTO contrato(id,id_equipo,id_piloto) VALUES (292,36,291);
@@ -5152,8 +5151,7 @@ UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12
 UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  285 ; 
 UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  286 ; 
 UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  287 ; 
-UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  288 ; 
-UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  289 ; 
+UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  288 ;  
 UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  290 ; 
 UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  291 ; 
 UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  292 ; 
