@@ -130,3 +130,91 @@ BEGIN
 	END IF;
 END;
 $$LANGUAGE plpgsql;
+
+--REPORTE 11
+CREATE FUNCTION reporte11(fecha_usr integer, tipo_evento varchar)
+RETURNS TABLE (nombre_equipo equipo.nombre%TYPE, numero_equipo equipo.numero_equipo%TYPE, anho float, fabricante fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, velocidad float)
+AS $$
+BEGIN
+	IF (fecha_usr is NULL) THEN
+		RETURN QUERY 
+		SELECT
+		eq1.nombre, eq1.numero_equipo, date_part('year',r1.fecha),
+		--Vehiculo
+		f1.nombre, m1.nombre,
+		--Ranking
+		(r1.desempeno).velocidad_media
+		FROM ranking r1, evento ev1, equipo eq1, vehiculo v1, modelo m1, fabricante f1
+		WHERE ev1.id = r1.id_evento
+		AND ev1.tipo = tipo_evento
+		AND r1.id_equipo = eq1.id
+		AND r1.id_vehiculo = v1.id AND v1.id_modelo = m1.id AND f1.id = m1.id_fabricante
+		ORDER BY 6 DESC
+		FETCH FIRST 33 ROWS ONLY; --PARAMETRIZAR AQUI
+	ELSE
+		RETURN QUERY 
+		SELECT
+		eq1.nombre, eq1.numero_equipo, date_part('year',r1.fecha),
+		--Vehiculo
+		f1.nombre, m1.nombre,
+		--Ranking
+		(r1.desempeno).velocidad_media
+		FROM ranking r1, evento ev1, equipo eq1, vehiculo v1, modelo m1, fabricante f1
+		WHERE ev1.id = r1.id_evento
+		AND ev1.ano = fecha_usr
+		AND ev1.tipo = tipo_evento
+		AND r1.id_equipo = eq1.id
+		AND r1.id_vehiculo = v1.id AND v1.id_modelo = m1.id AND f1.id = m1.id_fabricante
+		ORDER BY 6 DESC
+		FETCH FIRST 33 ROWS ONLY; --PARAMETRIZAR AQUI
+	END IF;
+END;
+$$LANGUAGE plpgsql;
+
+--REPORTE 12
+CREATE FUNCTION reporte12(cantidad integer)
+RETURNS TABLE (nombre_equipo equipo.nombre%TYPE, numero_equipo equipo.numero_equipo%TYPE, anho float, marca fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, motor vehiculo.caracteristicas%TYPE, categoria vehiculo.categoria%TYPE, kilometraje ranking.kilometraje%TYPE, vueltas ranking.vueltas%TYPE, velocidad_media float, vuelta_rapida varchar, diferencia float,nombre_piloto varchar, nombre2 varchar, apellido varchar, apellido2 varchar, nacionalidad varchar )
+AS $$
+DECLARE
+	qty integer;
+BEGIN
+	qty := cantidad*3;
+	RETURN QUERY
+	SELECT
+	eq1.nombre, eq1.numero_equipo, date_part('year',r1.fecha),
+	--Vehiculo
+	f1.nombre, m1.nombre, v1.caracteristicas, v1.categoria,
+	--Ranking
+	r1.kilometraje, r1.vueltas, (r1.desempeno).velocidad_media, (r1.desempeno).vuelta_mas_rapida,
+	(SELECT ri.kilometraje - r1.kilometraje FROM ranking ri WHERE ri.posicion = r1.posicion-1 AND ri.id_evento = r1.id_evento) diferencia,
+	--Piloto
+	(p1.informacion).nombre, (p1.informacion).nombre2, (p1.informacion).apellido, (p1.informacion).apellido2, nac1.gentilicio  
+	FROM ranking r1, evento ev1, equipo eq1, vehiculo v1, modelo m1, fabricante f1,
+	piloto p1, contrato c1, nacionalidad nac1
+	WHERE ev1.id = r1.id_evento
+	AND ev1.tipo = 'Carrera'
+	AND r1.id_equipo = eq1.id
+	AND r1.id_vehiculo = v1.id AND v1.id_modelo = m1.id AND f1.id = m1.id_fabricante
+	AND c1.id_equipo = eq1.id AND c1.id_piloto = p1.id
+	AND date_part('year',r1.fecha) BETWEEN date_part('year',(c1.duracion).fecha_inicial) AND date_part('year',(c1.duracion).fecha_final)
+	AND nac1.id = p1.id_nacionalidad
+	ORDER BY 8 DESC
+	FETCH FIRST qty ROWS ONLY; --PARAMETRIZAR AQUI		
+END;
+$$LANGUAGE plpgsql;	
+
+--REPORTE 15
+CREATE FUNCTION reporte15()
+RETURNS TABLE (nombre_fabricante fabricante.nombre%TYPE, victorias bigint)
+AS $$
+BEGIN
+	 RETURN QUERY
+		SELECT DISTINCT f1.nombre, (SELECT count (m1.nombre)
+			FROM ranking r1, vehiculo v1,modelo m1, evento e1
+			WHERE r1.id_vehiculo = v1.id 
+			AND r1.posicion = 1 AND v1.id_modelo = m1.id AND m1.id_fabricante = f1.id 
+			AND e1.id = r1.id_evento AND e1.tipo = 'Carrera')
+		FROM fabricante f1, modelo m1, vehiculo v1
+		ORDER BY 2 DESC ,1;
+END;
+$$LANGUAGE plpgsql;	
