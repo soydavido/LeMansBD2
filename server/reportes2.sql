@@ -254,3 +254,55 @@ BEGIN
 		ORDER BY 2 DESC ,1;
 END;
 $$LANGUAGE plpgsql;	
+
+--REPORTE 16
+CREATE FUNCTION reporte16(anho_ins integer)
+RETURNS TABLE (posicion ranking.posicion%TYPE, anho_actual float, id_piloto piloto.id%TYPE,nombre_piloto varchar, nombre2 varchar, apellido varchar, apellido2 varchar, nacionalidad varchar, fecha_nacimiento varchar, fecha_fallecimiento varchar, nombre_pais varchar, edad interval, nombre_equipo equipo.nombre%TYPE, id_equipo equipo.id%TYPE, numero_equipo equipo.numero_equipo%TYPE, primera_participacion float, total_participaciones bigint, pos1 bigint, pos2 bigint, pos3 bigint, companheros text,fabricante fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, categoria vehiculo.categoria%TYPE)
+AS $$
+BEGIN
+	 IF (anho_ins is NULL) THEN
+	 	RETURN QUERY
+			SELECT r1.posicion, date_part('year',r1.fecha),
+			p1.id, (p1.informacion).nombre, (p1.informacion).nombre2, (p1.informacion).apellido, (p1.informacion).apellido2, nac1.gentilicio, (p1.informacion).fecha_nacimiento, (p1.informacion).fecha_fallecimiento, nac1.nombre_pais, AGE(to_date((p1.informacion).fecha_nacimiento,'DD-MM-YYYY')),
+			eq1.nombre, eq1.id, eq1.numero_equipo, (SELECT date_part ('year',(cip1.duracion).fecha_inicial) FROM contrato cip1 WHERE cip1.id_piloto = 140 ORDER BY date_part ASC FETCH FIRST 1 ROW ONLY) as primera_participacion,
+			(SELECT COUNT (rpp.posicion) FROM ranking rpp, contrato cpp, evento evpp WHERE cpp.id_equipo = rpp.id_equipo AND cpp.id_piloto = p1.id AND rpp.id_evento = evpp.id AND evpp.tipo = 'Carrera' AND date_part('year',rpp.fecha) BETWEEN date_part('year',(cpp.duracion).fecha_inicial) AND date_part('year',(cpp.duracion).fecha_final)) participaciones,
+			(SELECT COUNT (rp1.posicion) FROM ranking rp1, contrato cp1, evento evp1 WHERE rp1.posicion = 1 AND cp1.id_equipo = rp1.id_equipo AND cp1.id_piloto = p1.id AND rp1.id_evento = evp1.id AND evp1.tipo = 'Carrera' AND date_part('year',rp1.fecha) BETWEEN date_part('year',(cp1.duracion).fecha_inicial) AND date_part('year',(cp1.duracion).fecha_final)) posicion1,
+			(SELECT COUNT (rp2.posicion) FROM ranking rp2, contrato cp2, evento evp2 WHERE rp2.posicion = 2 AND cp2.id_equipo = rp2.id_equipo AND cp2.id_piloto = p1.id AND rp2.id_evento = evp2.id AND evp2.tipo = 'Carrera' AND date_part('year',rp2.fecha) BETWEEN date_part('year',(cp2.duracion).fecha_inicial) AND date_part('year',(cp2.duracion).fecha_final)) posicion2,
+			(SELECT COUNT (rp3.posicion) FROM ranking rp3, contrato cp3, evento evp3 WHERE rp3.posicion = 3 AND cp3.id_equipo = rp3.id_equipo AND cp3.id_piloto = p1.id AND rp3.id_evento = evp3.id AND evp3.tipo = 'Carrera' AND date_part('year',rp3.fecha) BETWEEN date_part('year',(cp3.duracion).fecha_inicial) AND date_part('year',(cp3.duracion).fecha_final)) posicion3,
+			((SELECT CONCAT((pa1.informacion).nombre,' ',(pa1.informacion).apellido,' - ',(pa2.informacion).nombre,' ',(pa2.informacion).apellido) FROM piloto pa1, contrato ca1, piloto pa2, contrato ca2 WHERE ca1.id_equipo = eq1.id AND ca1.id_piloto = pa1.id AND fecha_en_periodo_contrato( r1.fecha,eq1.id,ca1.id_piloto) = true AND ca2.id_equipo = eq1.id AND ca2.id_piloto = pa2.id AND fecha_en_periodo_contrato( r1.fecha,eq1.id,ca2.id_piloto) = true AND pa1.id != pa2.id AND p1.id != pa1.id AND p1.id != pa2.id FETCH FIRST 1 ROW ONLY)) corredores,
+			f1.nombre, m1.nombre, v1.categoria
+			FROM equipo eq1, piloto p1, ranking r1, contrato c1, evento e1, vehiculo v1, modelo m1, fabricante f1, nacionalidad nac1
+			WHERE r1.id_equipo = eq1.id 
+			AND eq1.id = c1.id_equipo AND p1.id = c1.id_piloto 
+			AND date_part('year',r1.fecha) BETWEEN date_part('year',(c1.duracion).fecha_inicial) AND date_part('year',(c1.duracion).fecha_final)
+			AND (p1.informacion).genero = 'F'
+			AND r1.id_evento = e1.id AND e1.tipo = 'Carrera'
+			AND r1.id_vehiculo = v1.id
+			AND nac1.id = p1.id_nacionalidad
+			AND v1.id_modelo = m1.id AND m1.id_fabricante = f1.id
+			GROUP BY 4,5,6,7,2,1,3,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24;
+	 ELSE
+	 	RETURN QUERY
+	 		SELECT r1.posicion, date_part('year',r1.fecha),
+			p1.id, (p1.informacion).nombre, (p1.informacion).nombre2, (p1.informacion).apellido, (p1.informacion).apellido2, nac1.gentilicio, (p1.informacion).fecha_nacimiento, (p1.informacion).fecha_fallecimiento, nac1.nombre_pais, AGE(to_date((p1.informacion).fecha_nacimiento,'DD-MM-YYYY')),
+			eq1.nombre, eq1.id, eq1.numero_equipo, (SELECT date_part ('year',(cip1.duracion).fecha_inicial) FROM contrato cip1 WHERE cip1.id_piloto = 140 ORDER BY date_part ASC FETCH FIRST 1 ROW ONLY) as primera_participacion,
+			(SELECT COUNT (rpp.posicion) FROM ranking rpp, contrato cpp, evento evpp WHERE cpp.id_equipo = rpp.id_equipo AND cpp.id_piloto = p1.id AND rpp.id_evento = evpp.id AND evpp.tipo = 'Carrera' AND date_part('year',rpp.fecha) BETWEEN date_part('year',(cpp.duracion).fecha_inicial) AND date_part('year',(cpp.duracion).fecha_final)) participaciones,
+			(SELECT COUNT (rp1.posicion) FROM ranking rp1, contrato cp1, evento evp1 WHERE rp1.posicion = 1 AND cp1.id_equipo = rp1.id_equipo AND cp1.id_piloto = p1.id AND rp1.id_evento = evp1.id AND evp1.tipo = 'Carrera' AND date_part('year',rp1.fecha) BETWEEN date_part('year',(cp1.duracion).fecha_inicial) AND date_part('year',(cp1.duracion).fecha_final)) posicion1,
+			(SELECT COUNT (rp2.posicion) FROM ranking rp2, contrato cp2, evento evp2 WHERE rp2.posicion = 2 AND cp2.id_equipo = rp2.id_equipo AND cp2.id_piloto = p1.id AND rp2.id_evento = evp2.id AND evp2.tipo = 'Carrera' AND date_part('year',rp2.fecha) BETWEEN date_part('year',(cp2.duracion).fecha_inicial) AND date_part('year',(cp2.duracion).fecha_final)) posicion2,
+			(SELECT COUNT (rp3.posicion) FROM ranking rp3, contrato cp3, evento evp3 WHERE rp3.posicion = 3 AND cp3.id_equipo = rp3.id_equipo AND cp3.id_piloto = p1.id AND rp3.id_evento = evp3.id AND evp3.tipo = 'Carrera' AND date_part('year',rp3.fecha) BETWEEN date_part('year',(cp3.duracion).fecha_inicial) AND date_part('year',(cp3.duracion).fecha_final)) posicion3,
+			((SELECT CONCAT((pa1.informacion).nombre,' ',(pa1.informacion).apellido,' - ',(pa2.informacion).nombre,' ',(pa2.informacion).apellido) FROM piloto pa1, contrato ca1, piloto pa2, contrato ca2 WHERE ca1.id_equipo = eq1.id AND ca1.id_piloto = pa1.id AND fecha_en_periodo_contrato( r1.fecha,eq1.id,ca1.id_piloto) = true AND ca2.id_equipo = eq1.id AND ca2.id_piloto = pa2.id AND fecha_en_periodo_contrato( r1.fecha,eq1.id,ca2.id_piloto) = true AND pa1.id != pa2.id AND p1.id != pa1.id AND p1.id != pa2.id FETCH FIRST 1 ROW ONLY)) corredores,
+			f1.nombre, m1.nombre, v1.categoria
+			FROM equipo eq1, piloto p1, ranking r1, contrato c1, evento e1, vehiculo v1, modelo m1, fabricante f1, nacionalidad nac1
+			WHERE r1.id_equipo = eq1.id 
+			AND eq1.id = c1.id_equipo AND p1.id = c1.id_piloto 
+			AND date_part('year',r1.fecha) BETWEEN date_part('year',(c1.duracion).fecha_inicial) AND date_part('year',(c1.duracion).fecha_final)
+			AND (p1.informacion).genero = 'F'
+			AND r1.id_evento = e1.id AND e1.tipo = 'Carrera'
+			AND r1.id_vehiculo = v1.id
+			AND nac1.id = p1.id_nacionalidad
+			AND v1.id_modelo = m1.id AND m1.id_fabricante = f1.id
+			AND date_part('year',r1.fecha) = anho_ins
+			GROUP BY 4,5,6,7,2,1,3,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24;
+	 END IF;
+END;
+$$LANGUAGE plpgsql;	
