@@ -1,13 +1,13 @@
 --REPORTE 4
 CREATE FUNCTION reporte4(anho integer, num_equipo integer)
-RETURNS TABLE (id_evento evento.id%TYPE, posicioncarrera ranking.posicion%TYPE, kmcarrera ranking.kilometraje%TYPE, vueltascarrera ranking.vueltas%TYPE, vuelta_rapida_carrera varchar, diferencia float, posicionensayo ranking.posicion%TYPE, vuelta_rapida_ensayo varchar, numero_equipo equipo.numero_equipo%TYPE, nombre_equipo equipo.nombre%TYPE, fabricante fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, caracteristicas_vehiculo vehiculo.caracteristicas%TYPE, categoria_vehiculo vehiculo.categoria%TYPE, nombre_piloto varchar, nombre2 varchar, apellido varchar, apellido2 varchar, nacionalidad varchar )
+RETURNS TABLE (id_evento evento.id%TYPE, posicioncarrera ranking.posicion%TYPE, kmcarrera ranking.kilometraje%TYPE, vueltascarrera ranking.vueltas%TYPE, vuelta_rapida_carrera varchar, velocidad_media float, diferencia float, posicionensayo ranking.posicion%TYPE, vuelta_rapida_ensayo varchar, numero_equipo equipo.numero_equipo%TYPE, nombre_equipo equipo.nombre%TYPE, fabricante fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, caracteristicas_vehiculo vehiculo.caracteristicas%TYPE, categoria_vehiculo vehiculo.categoria%TYPE, nombre_piloto varchar, nombre2 varchar, apellido varchar, apellido2 varchar, nacionalidad varchar )
 AS $$
 BEGIN
 	IF(anho is null) THEN
 		RETURN QUERY SELECT 
 		DISTINCT rc.id_evento, 
 		--Carrera
-		rc.posicion poscarrera, rc.kilometraje kmcarrera, rc.vueltas vueltascarrera, (rc.desempeno).vuelta_mas_rapida vueltacarrera,
+		rc.posicion poscarrera, rc.kilometraje kmcarrera, rc.vueltas vueltascarrera, (rc.desempeno).vuelta_mas_rapida vueltacarrera, (rc.desempeno).velocidad_media,
 		(SELECT ri.kilometraje - rc.kilometraje FROM ranking ri WHERE ri.posicion = rc.posicion-1 AND ri.id_evento = rc.id_evento) diferencia,
 		--Ensayo
 		re.posicion posensayo, (re.desempeno).vuelta_mas_rapida vueltaensayo,
@@ -32,7 +32,7 @@ BEGIN
 		RETURN QUERY SELECT 
 		DISTINCT rc.id_evento, 
 		--Carrera
-		rc.posicion poscarrera, rc.kilometraje kmcarrera, rc.vueltas vueltascarrera, (rc.desempeno).vuelta_mas_rapida vueltacarrera,
+		rc.posicion poscarrera, rc.kilometraje kmcarrera, rc.vueltas vueltascarrera, (rc.desempeno).vuelta_mas_rapida vueltacarrera, (rc.desempeno).velocidad_media,
 		(SELECT ri.kilometraje - rc.kilometraje FROM ranking ri WHERE ri.posicion = rc.posicion-1 AND ri.id_evento = rc.id_evento) diferencia,
 		--Ensayo
 		re.posicion posensayo, (re.desempeno).vuelta_mas_rapida vueltaensayo,
