@@ -430,7 +430,7 @@
     <created_date>2021/01/26 10:41:10.179</created_date>
     <modified_user>-</modified_user>
     <modified_date>2021/01/26 10:41:10.179</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -487,11 +487,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>lemansinicial</name>
+    <name>lemans09</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>lemans20</database>
+    <database>lemans09</database>
     <port>5432</port>
     <username>postgres</username>
     <password>Encrypted 2be98afc86aa7f2e4cb79fe238ec7fe8c</password>
@@ -539,18 +539,123 @@
   </connection>
   <order>
     <hop>
-      <from>Table input</from>
-      <to>If field value is null</to>
+      <from>extraccion vehiculo</from>
+      <to>verificacion de null</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>If field value is null</from>
+      <from>verificacion de null</from>
       <to>Combination lookup/update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Table input</name>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dw_dim_vehiculo</table>
+    <connection>dw_lemans</connection>
+    <commit>100</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>nombre</name>
+        <lookup>fabricante</lookup>
+      </key>
+      <key>
+        <name>nombre_1</name>
+        <lookup>modelo</lookup>
+      </key>
+      <key>
+        <name>caracteristicas</name>
+        <lookup>motor_nombre</lookup>
+      </key>
+      <key>
+        <name>caracteristicas_1</name>
+        <lookup>motor_cilindrada</lookup>
+      </key>
+      <key>
+        <name>caracteristicas_2</name>
+        <lookup>motor_capacidad</lookup>
+      </key>
+      <key>
+        <name>categoria</name>
+        <lookup>categoria</lookup>
+      </key>
+      <key>
+        <name>tipo</name>
+        <lookup>tipo</lookup>
+      </key>
+      <return>
+        <name>id_vehiculo</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>verificacion de null</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <replaceAllByValue>N/A</replaceAllByValue>
+    <replaceAllMask/>
+    <selectFields>N</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>extraccion vehiculo</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -560,7 +665,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>lemansinicial</connection>
+    <connection>lemans09</connection>
     <sql>SELECT v1.id as id_vehiculo, f1.nombre, m1.nombre, v1.caracteristicas[1], v1.caracteristicas[2], v1.caracteristicas[3], v1.categoria, v1.tipo
 FROM vehiculo v1, fabricante f1, modelo m1
 WHERE v1.id_modelo = m1.id AND m1.id_fabricante = f1.id
@@ -768,111 +873,6 @@ ORDER BY 1</sql>
     <GUI>
       <xloc>208</xloc>
       <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>If field value is null</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <replaceAllByValue>N/A</replaceAllByValue>
-    <replaceAllMask/>
-    <selectFields>N</selectFields>
-    <selectValuesType>N</selectValuesType>
-    <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>208</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dw_dim_vehiculo</table>
-    <connection>dw_lemans</connection>
-    <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>nombre</name>
-        <lookup>fabricante</lookup>
-      </key>
-      <key>
-        <name>nombre_1</name>
-        <lookup>modelo</lookup>
-      </key>
-      <key>
-        <name>caracteristicas</name>
-        <lookup>motor_nombre</lookup>
-      </key>
-      <key>
-        <name>caracteristicas_1</name>
-        <lookup>motor_cilindrada</lookup>
-      </key>
-      <key>
-        <name>caracteristicas_2</name>
-        <lookup>motor_capacidad</lookup>
-      </key>
-      <key>
-        <name>categoria</name>
-        <lookup>categoria</lookup>
-      </key>
-      <key>
-        <name>tipo</name>
-        <lookup>tipo</lookup>
-      </key>
-      <return>
-        <name>id_vehiculo</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

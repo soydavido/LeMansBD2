@@ -430,7 +430,7 @@
     <created_date>2021/01/27 00:22:28.824</created_date>
     <modified_user>-</modified_user>
     <modified_date>2021/01/27 00:22:28.824</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -491,7 +491,7 @@
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>lemans00-10</database>
+    <database>lemans08</database>
     <port>5432</port>
     <username>postgres</username>
     <password>Encrypted 2be98afc86aa7f2e4cb79fe238ec7fe8c</password>
@@ -539,28 +539,140 @@
   </connection>
   <order>
     <hop>
-      <from>Table input</from>
-      <to>If field value is null</to>
+      <from>extraccion pilotos</from>
+      <to>verificacion de null</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>If field value is null</from>
-      <to>Value mapper</to>
+      <from>verificacion de null</from>
+      <to>cambio genero</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Value mapper</from>
+      <from>cambio genero</from>
       <to>Combination lookup/update</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Combination lookup/update</from>
-      <to>Synchronize after merge</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Table input</name>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dw_dim_pilotos</table>
+    <connection>dw_lemans</connection>
+    <commit>100</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>primer_nombre</name>
+        <lookup>nombre</lookup>
+      </key>
+      <key>
+        <name>segundo_nombre</name>
+        <lookup>nombre2</lookup>
+      </key>
+      <key>
+        <name>primer_apellido</name>
+        <lookup>apellido</lookup>
+      </key>
+      <key>
+        <name>segundo_apellido</name>
+        <lookup>apellido2</lookup>
+      </key>
+      <key>
+        <name>genero</name>
+        <lookup>genero</lookup>
+      </key>
+      <key>
+        <name>estatura</name>
+        <lookup>estatura</lookup>
+      </key>
+      <key>
+        <name>peso</name>
+        <lookup>peso</lookup>
+      </key>
+      <key>
+        <name>fecha_nac</name>
+        <lookup>fecha_nacimiento</lookup>
+      </key>
+      <key>
+        <name>fecha_fac</name>
+        <lookup>fecha_fallecimiento</lookup>
+      </key>
+      <key>
+        <name>initcap</name>
+        <lookup>nacionalidad</lookup>
+      </key>
+      <return>
+        <name>id_piloto</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>verificacion de null</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <replaceAllByValue>N/A</replaceAllByValue>
+    <replaceAllMask/>
+    <selectFields>N</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>extraccion pilotos</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -852,41 +964,7 @@ WHERE pa1.id_pais = p1.id_pais</sql>
     </GUI>
   </step>
   <step>
-    <name>If field value is null</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <replaceAllByValue>N/A</replaceAllByValue>
-    <replaceAllMask/>
-    <selectFields>N</selectFields>
-    <selectValuesType>N</selectValuesType>
-    <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>144</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Value mapper</name>
+    <name>cambio genero</name>
     <type>ValueMapper</type>
     <description/>
     <distribute>Y</distribute>
@@ -919,139 +997,6 @@ WHERE pa1.id_pais = p1.id_pais</sql>
     </remotesteps>
     <GUI>
       <xloc>304</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dw_dim_pilotos</table>
-    <connection>dw_lemans</connection>
-    <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>primer_nombre</name>
-        <lookup>nombre</lookup>
-      </key>
-      <key>
-        <name>segundo_nombre</name>
-        <lookup>nombre2</lookup>
-      </key>
-      <key>
-        <name>primer_apellido</name>
-        <lookup>apellido</lookup>
-      </key>
-      <key>
-        <name>segundo_apellido</name>
-        <lookup>apellido2</lookup>
-      </key>
-      <key>
-        <name>genero</name>
-        <lookup>genero</lookup>
-      </key>
-      <key>
-        <name>estatura</name>
-        <lookup>estatura</lookup>
-      </key>
-      <key>
-        <name>peso</name>
-        <lookup>peso</lookup>
-      </key>
-      <key>
-        <name>fecha_nac</name>
-        <lookup>fecha_nacimiento</lookup>
-      </key>
-      <key>
-        <name>fecha_fac</name>
-        <lookup>fecha_fallecimiento</lookup>
-      </key>
-      <key>
-        <name>initcap</name>
-        <lookup>nacionalidad</lookup>
-      </key>
-      <return>
-        <name>id_piloto</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Synchronize after merge</name>
-    <type>SynchronizeAfterMerge</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>lemans08</connection>
-    <commit>100</commit>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <use_batch>N</use_batch>
-    <perform_lookup>N</perform_lookup>
-    <operation_order_field>id_piloto_1</operation_order_field>
-    <order_insert/>
-    <order_update/>
-    <order_delete/>
-    <lookup>
-      <schema>public</schema>
-      <table>plantillas</table>
-      <key>
-        <name>id_piloto</name>
-        <field>id_piloto</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>id_piloto</name>
-        <rename>id_piloto_1</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>624</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>

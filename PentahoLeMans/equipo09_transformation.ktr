@@ -491,7 +491,7 @@
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>lemans20</database>
+    <database>lemans09</database>
     <port>5432</port>
     <username>postgres</username>
     <password>Encrypted 2be98afc86aa7f2e4cb79fe238ec7fe8c</password>
@@ -539,12 +539,12 @@
   </connection>
   <order>
     <hop>
-      <from>Table input</from>
-      <to>If field value is null</to>
+      <from>extraccion de equipos</from>
+      <to>verificacion de null</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>If field value is null</from>
+      <from>verificacion de null</from>
       <to>Combination lookup/update</to>
       <enabled>Y</enabled>
     </hop>
@@ -605,7 +605,7 @@
     </GUI>
   </step>
   <step>
-    <name>If field value is null</name>
+    <name>verificacion de null</name>
     <type>IfNull</type>
     <description/>
     <distribute>Y</distribute>
@@ -663,7 +663,7 @@
     </GUI>
   </step>
   <step>
-    <name>Table input</name>
+    <name>extraccion de equipos</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>

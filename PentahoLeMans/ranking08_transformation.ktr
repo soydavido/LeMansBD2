@@ -430,17 +430,68 @@
     <created_date>2021/01/27 00:11:21.732</created_date>
     <modified_user>-</modified_user>
     <modified_date>2021/01/27 00:11:21.732</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
+    <name>dw_lemans</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>dw_le_mans</database>
+    <port>5432</port>
+    <username>postgres</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79fe238ec7fe8c</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>5432</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>lemans08</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>lemans00-10</database>
+    <database>lemans08</database>
     <port>5432</port>
     <username>postgres</username>
     <password>Encrypted 2be98afc86aa7f2e4cb79fe238ec7fe8c</password>
@@ -487,6 +538,11 @@
     </attributes>
   </connection>
   <order>
+    <hop>
+      <from>ranking</from>
+      <to>Combination lookup/update</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>ranking</name>
@@ -500,29 +556,168 @@
       <schema_name/>
     </partitioning>
     <connection>lemans08</connection>
-    <sql>SELECT DISTINCT pa1.id_evento, pa1.id_equipo, pa1.nro_equipo, ca1.puesto_final posicion,
-(rd1.estadistica).velocidad_media, to_char((rd1.estadistica).tiempo_mejor_vuelta,'MM:SS.ms') mejor_vuelta, (rd1.estadistica).puesto,
-rd.nro_vueltas, rd1
-FROM participaciones pa1, carreras ca1, resumen_datos rd1
-WHERE pa1.id_equipo = ca1.id_parti_equipo
-AND pa1.id_vehiculo = ca1.id_parti_vehiculo
-AND pa1.id_evento = ca1.id_parti_evento
-AND pa1.id_event_pista = ca1.id_parti_evento_pista
-AND pa1.nro_equipo = ca1.parti_nro_equipo
-AND ca1.id_carrera = rd1.id_carrera
+    <sql>SELECT DISTINCT rd1.id_car_evento, (rd1.estadistica).velocidad_media, to_char((rd1.estadistica).tiempo_mejor_vuelta,'MM:SS.ms') mejor_vuelta,
+rd1.nro_vueltas, ca1.puesto_final, 
+CASE 
+	WHEN puesto_final > 0 THEN (rd1.nro_vueltas * pis1.total_km)
+	WHEN puesto_final = 0 THEN 0
+END kilometraje
+FROM resumen_datos rd1, carreras ca1, pistas pis1
+WHERE ca1.id_carrera = rd1.id_carrera
 AND rd1.id_car_equipo = ca1.id_parti_equipo
 AND rd1.id_car_vehiculo = ca1.id_parti_vehiculo
 AND rd1.id_car_evento = ca1.id_parti_evento
 AND rd1.id_car_pista = ca1.id_parti_evento_pista
 AND rd1.car_nro_equipo = ca1.parti_nro_equipo 
-ORDER BY 1,4</sql>
+AND pis1.id_pista = rd1.id_car_pista
+GROUP BY 1,2,3,4,5,6
+ORDER BY 1, 6 DESC</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta/>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id_car_evento</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>ranking</origin>
+        <comments>id_car_evento</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Number</type>
+        <storagetype>normal</storagetype>
+        <name>velocidad_media</name>
+        <length>5</length>
+        <precision>2</precision>
+        <origin>ranking</origin>
+        <comments>velocidad_media</comments>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>mejor_vuelta</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>ranking</origin>
+        <comments>mejor_vuelta</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>nro_vueltas</name>
+        <length>3</length>
+        <precision>0</precision>
+        <origin>ranking</origin>
+        <comments>nro_vueltas</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>puesto_final</name>
+        <length>2</length>
+        <precision>0</precision>
+        <origin>ranking</origin>
+        <comments>puesto_final</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>BigNumber</type>
+        <storagetype>normal</storagetype>
+        <name>kilometraje</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>ranking</origin>
+        <comments>kilometraje</comments>
+        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -533,6 +728,69 @@ ORDER BY 1,4</sql>
     </remotesteps>
     <GUI>
       <xloc>224</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dw_dim_ranking</table>
+    <connection>dw_lemans</connection>
+    <commit>100</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>velocidad_media</name>
+        <lookup>velocidad_media</lookup>
+      </key>
+      <key>
+        <name>mejor_vuelta</name>
+        <lookup>vuelta_rapida</lookup>
+      </key>
+      <key>
+        <name>nro_vueltas</name>
+        <lookup>nro_vueltas</lookup>
+      </key>
+      <key>
+        <name>puesto_final</name>
+        <lookup>posicion</lookup>
+      </key>
+      <key>
+        <name>kilometraje</name>
+        <lookup>kilometraje</lookup>
+      </key>
+      <return>
+        <name>id_ranking</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>

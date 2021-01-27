@@ -430,7 +430,7 @@
     <created_date>2021/01/27 00:40:19.360</created_date>
     <modified_user>-</modified_user>
     <modified_date>2021/01/27 00:40:19.360</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -491,7 +491,7 @@
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>lemans00-10</database>
+    <database>lemans08</database>
     <port>5432</port>
     <username>postgres</username>
     <password>Encrypted 2be98afc86aa7f2e4cb79fe238ec7fe8c</password>
@@ -539,13 +539,60 @@
   </connection>
   <order>
     <hop>
-      <from>Table input</from>
+      <from>extraccion fecha</from>
       <to>Combination lookup/update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Table input</name>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dw_dim_fecha</table>
+    <connection>dw_lemans</connection>
+    <commit>100</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>fecha</name>
+        <lookup>fecha</lookup>
+      </key>
+      <return>
+        <name>id_fecha</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>extraccion fecha</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -623,53 +670,6 @@ ORDER BY 1</sql>
     </remotesteps>
     <GUI>
       <xloc>176</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dw_dim_fecha</table>
-    <connection>dw_lemans</connection>
-    <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>fecha</name>
-        <lookup>fecha</lookup>
-      </key>
-      <return>
-        <name>id_fecha</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
