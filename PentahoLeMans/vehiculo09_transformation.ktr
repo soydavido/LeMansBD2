@@ -545,13 +545,13 @@
     </hop>
     <hop>
       <from>verificacion de null</from>
-      <to>Combination lookup/update</to>
+      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
+    <name>extraccion vehiculo</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -560,52 +560,203 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <schema>public</schema>
-    <table>dw_dim_vehiculo</table>
-    <connection>dw_lemans</connection>
-    <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>nombre</name>
-        <lookup>fabricante</lookup>
-      </key>
-      <key>
-        <name>nombre_1</name>
-        <lookup>modelo</lookup>
-      </key>
-      <key>
-        <name>caracteristicas</name>
-        <lookup>motor_nombre</lookup>
-      </key>
-      <key>
-        <name>caracteristicas_1</name>
-        <lookup>motor_cilindrada</lookup>
-      </key>
-      <key>
-        <name>caracteristicas_2</name>
-        <lookup>motor_capacidad</lookup>
-      </key>
-      <key>
-        <name>categoria</name>
-        <lookup>categoria</lookup>
-      </key>
-      <key>
-        <name>tipo</name>
-        <lookup>tipo</lookup>
-      </key>
-      <return>
+    <connection>lemans09</connection>
+    <sql>SELECT v1.id as id_vehiculo, f1.nombre as fabricante, m1.nombre as modelo, v1.caracteristicas[1], v1.caracteristicas[2], v1.caracteristicas[3], v1.categoria, v1.tipo
+FROM vehiculo v1, fabricante f1, modelo m1
+WHERE v1.id_modelo = m1.id AND m1.id_fabricante = f1.id
+ORDER BY 1</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
         <name>id_vehiculo</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
+        <length>10</length>
+        <precision>0</precision>
+        <origin>extraccion vehiculo</origin>
+        <comments>id_vehiculo</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>fabricante</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>extraccion vehiculo</origin>
+        <comments>fabricante</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>modelo</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>extraccion vehiculo</origin>
+        <comments>modelo</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>caracteristicas</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>extraccion vehiculo</origin>
+        <comments>caracteristicas</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>caracteristicas_1</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>extraccion vehiculo</origin>
+        <comments>caracteristicas</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>caracteristicas_2</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>extraccion vehiculo</origin>
+        <comments>caracteristicas</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>categoria</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>extraccion vehiculo</origin>
+        <comments>categoria</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>tipo</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>extraccion vehiculo</origin>
+        <comments>tipo</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -615,8 +766,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>208</yloc>
+      <xloc>208</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -655,8 +806,8 @@
     </GUI>
   </step>
   <step>
-    <name>extraccion vehiculo</name>
-    <type>TableInput</type>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -665,203 +816,71 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>lemans09</connection>
-    <sql>SELECT v1.id as id_vehiculo, f1.nombre, m1.nombre, v1.caracteristicas[1], v1.caracteristicas[2], v1.caracteristicas[3], v1.categoria, v1.tipo
-FROM vehiculo v1, fabricante f1, modelo m1
-WHERE v1.id_modelo = m1.id AND m1.id_fabricante = f1.id
-ORDER BY 1</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
+    <connection>dw_lemans</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>public</schema>
+      <table>dw_dim_vehiculo</table>
+      <key>
         <name>id_vehiculo</name>
-        <length>10</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>id_vehiculo</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>nombre</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>nombre</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>nombre_1</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>nombre</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>caracteristicas</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>caracteristicas</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>caracteristicas_1</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>caracteristicas</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>caracteristicas_2</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>caracteristicas</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
+        <field>id_vehiculo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>fabricante</name>
+        <field>fabricante</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>modelo</name>
+        <field>modelo</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_vehiculo</name>
+        <rename>id_vehiculo</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>fabricante</name>
+        <rename>fabricante</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>modelo</name>
+        <rename>modelo</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>motor_nombre</name>
+        <rename>caracteristicas</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>motor_cilindrada</name>
+        <rename>caracteristicas_1</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>motor_capacidad</name>
+        <rename>caracteristicas_2</rename>
+        <update>Y</update>
+      </value>
+      <value>
         <name>categoria</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>categoria</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
+        <rename>categoria</rename>
+        <update>Y</update>
+      </value>
+      <value>
         <name>tipo</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>tipo</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
+        <rename>tipo</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -871,8 +890,8 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>96</yloc>
+      <xloc>384</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

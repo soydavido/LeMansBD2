@@ -540,57 +540,10 @@
   <order>
     <hop>
       <from>extraccion de fecha</from>
-      <to>Combination lookup/update</to>
+      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
-  <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dw_dim_fecha</table>
-    <connection>dw_lemans</connection>
-    <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>fecha</name>
-        <lookup>fecha</lookup>
-      </key>
-      <return>
-        <name>id_fecha</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>extraccion de fecha</name>
     <type>TableInput</type>
@@ -603,8 +556,10 @@
       <schema_name/>
     </partitioning>
     <connection>lemans09</connection>
-    <sql>SELECT DISTINCT  r1.fecha
-FROM ranking r1</sql>
+    <sql>SELECT DISTINCT r1.fecha, nextval('validfecha') as id_fecha
+FROM ranking r1
+GROUP BY 1
+ORDER BY 1</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -618,9 +573,32 @@ FROM ranking r1</sql>
         <name>fecha</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>extraccion de fecha</origin>
         <comments>fecha</comments>
         <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id_fecha</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>extraccion de fecha</origin>
+        <comments>id_fecha</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -646,6 +624,54 @@ FROM ranking r1</sql>
     </remotesteps>
     <GUI>
       <xloc>208</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>dw_lemans</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>public</schema>
+      <table>dw_dim_fecha</table>
+      <key>
+        <name>id_fecha</name>
+        <field>id_fecha</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>fecha</name>
+        <rename>fecha</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>id_fecha</name>
+        <rename>id_fecha</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>

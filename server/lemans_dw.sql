@@ -1,48 +1,52 @@
     CREATE TABLE dw_dim_equipo(
         id_equipo numeric NOT NULL,
-        nombre varchar NOT NULL,
-        nro_equipo numeric NOT NULL,
-        pais varchar NOT NULL,
-        CONSTRAINT pk_dw_dim_equipo PRIMARY KEY (id_equipo)
+        nombre varchar ,
+        nro_equipo numeric ,
+        pais varchar ,
+        id_equipo_anterior numeric NOT NULL,
+        CONSTRAINT pk_dw_dim_equipo PRIMARY KEY (id_equipo, id_equipo_anterior)
     );
 
 
     CREATE TABLE dw_dim_vehiculo (
         id_vehiculo numeric NOT NULL,
-        fabricante varchar NOT NULL,
-        modelo varchar NOT NULL,
-        motor_nombre varchar NOT NULL,
-        motor_cilindrada varchar NOT NULL,
-        motor_capacidad varchar NOT NULL,
-        tipo varchar NOT NULL,
-        categoria varchar NOT NULL,
-        CONSTRAINT pk_dw_dim_vehiculo PRIMARY KEY (id_vehiculo)
+        fabricante varchar ,
+        modelo varchar,
+        motor_nombre varchar ,
+        motor_cilindrada varchar ,
+        motor_capacidad varchar ,
+        tipo varchar ,
+        categoria varchar ,
+        id_vehiculo_anterior numeric NOT NULL,
+        CONSTRAINT pk_dw_dim_vehiculo PRIMARY KEY (id_vehiculo,id_vehiculo_anterior)
     );
 
     CREATE TABLE dw_dim_ranking (
         id_ranking numeric NOT NULL,
-        vuelta_rapida varchar NOT NULL,
-        velocidad_media float NOT NULL, 
-        nro_vueltas numeric NOT NULL,
-        kilometraje float NOT NULL,
+        vuelta_rapida varchar ,
+        velocidad_media float , 
+        nro_vueltas numeric ,
+        kilometraje float ,
         posicion numeric,
+        id_ranking_anterior numeric NOT NULL,
         CONSTRAINT pk_dw_dim_ranking PRIMARY KEY (id_ranking)
     );
 
 
     CREATE TABLE dw_dim_pilotos(
         id_piloto numeric NOT NULL,
-        nombre varchar NOT NULL,
-        nombre2 varchar NOT NULL,
-        apellido varchar NOT NULL,
-        apellido2 varchar NOT NULL,
-        genero varchar NOT NULL,
-        peso varchar NOT NULL,
-        estatura varchar NOT NULL,
-        fecha_nacimiento varchar NOT NULL,
-        fecha_fallecimiento varchar NOT NULL,
-        nacionalidad varchar NOT NULL,
-        CONSTRAINT pk_dw_dim_piloto PRIMARY KEY (id_piloto)
+        nombre varchar ,
+        nombre2 varchar ,
+        apellido varchar ,
+        apellido2 varchar ,
+        genero varchar ,
+        peso varchar ,
+        estatura varchar ,
+        fecha_nacimiento varchar ,
+        fecha_fallecimiento varchar ,
+        nacionalidad varchar ,
+        id_piloto_viejo numeric NOT NULL,
+        CONSTRAINT pk_dw_dim_piloto PRIMARY KEY (id_piloto,id_piloto_viejo)
     );
 
     CREATE TABLE dw_dim_fecha(
@@ -51,21 +55,24 @@
         CONSTRAINT pk_dw_dim_fecha PRIMARY KEY (id_fecha)
     );
 
-    --Revisar si su PK puede ser SOLO la combinacion de las demas
     CREATE TABLE dw_hec_evento(
-        tipo varchar NOT NULL,
-        posicion numeric NOT NULL, 
-        nro_equipo numeric NOT NULL,
-        fabricante varchar NOT NULL,
-        kilometraje varchar NOT NULL,
-        categoria varchar NOT NULL,
+        tipo varchar ,
+        posicion numeric , 
+        nro_equipo numeric ,
+        fabricante varchar ,
+        kilometraje varchar ,
+        categoria varchar ,
         id_piloto numeric NOT NULL,
-        id_ranking numeric NOT NULL, 
+        id_piloto_viejo numeric NOT NULL,
+        id_ranking numeric NOT NULL,
+        id_ranking_anterior numeric NOT NULL, 
         id_equipo numeric NOT NULL,
         id_vehiculo numeric NOT NULL,
         id_fecha numeric NOT NULL,
-        CONSTRAINT pk_dw_dim_evento PRIMARY KEY (id_piloto,id_ranking,id_equipo,id_vehiculo,id_fecha),
+        CONSTRAINT pk_dw_dim_evento PRIMARY KEY (id_piloto,id_piloto_viejo,id_ranking,id_ranking_anterior,id_equipo,id_vehiculo,id_fecha),
         CONSTRAINT fk_equipo_dw_equipo FOREIGN KEY (id_equipo) REFERENCES dw_dim_equipo(id_equipo),
-        CONSTRAINT fk_equipo_dw_pilotos FOREIGN KEY (id_piloto) REFERENCES dw_dim_pilotos(id_piloto),
-        CONSTRAINT fk_equipo_dw_vehiculo FOREIGN KEY (id_vehiculo) REFERENCES dw_dim_vehiculo(id_vehiculo)
+        CONSTRAINT fk_equipo_dw_pilotos FOREIGN KEY (id_piloto) REFERENCES dw_dim_pilotos(id_piloto,id_piloto_viejo),
+        CONSTRAINT fk_equipo_dw_vehiculo FOREIGN KEY (id_vehiculo) REFERENCES dw_dim_vehiculo(id_vehiculo),
+        CONSTRAINT fk_equipo_dw_fecha FOREIGN KEY (id_fecha) REFERENCES dw_dim_fecha(id_fecha),
+        CONSTRAINT fk_equipo_dw_ranking FOREIGN KEY (id_ranking) REFERENCES dw_dim_ranking(id_ranking,id_ranking_anterior)
     );

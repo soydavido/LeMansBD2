@@ -487,11 +487,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>lemansinicial</name>
+    <name>lemans09</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>lemans20</database>
+    <database>lemans09</database>
     <port>5432</port>
     <username>postgres</username>
     <password>Encrypted 2be98afc86aa7f2e4cb79fe238ec7fe8c</password>
@@ -551,6 +551,16 @@
     <hop>
       <from>Database lookup</from>
       <to>Combination lookup/update</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Combination lookup/update</from>
+      <to>Update</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Database lookup</from>
+      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -565,7 +575,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <schema>public</schema>
+    <schema/>
     <table>dw_hec_evento</table>
     <connection>dw_lemans</connection>
     <commit>100</commit>
@@ -576,31 +586,23 @@
     <crcfield>hashcode</crcfield>
     <fields>
       <key>
-        <name>tipo</name>
-        <lookup>tipo</lookup>
+        <name>id_piloto</name>
+        <lookup>id_piloto</lookup>
       </key>
       <key>
-        <name>poscarrera</name>
-        <lookup>posicion</lookup>
+        <name>id_equipo</name>
+        <lookup>id_equipo</lookup>
       </key>
       <key>
-        <name>numero_equipo</name>
-        <lookup>nro_equipo</lookup>
+        <name>id_fecha</name>
+        <lookup>id_fecha</lookup>
       </key>
       <key>
-        <name>fabricante</name>
-        <lookup>fabricante</lookup>
-      </key>
-      <key>
-        <name>kilometraje</name>
-        <lookup>kilometraje</lookup>
-      </key>
-      <key>
-        <name>categoria</name>
-        <lookup>categoria</lookup>
+        <name>id_vehiculo</name>
+        <lookup>id_vehiculo</lookup>
       </key>
       <return>
-        <name>id_equipo, id_ranking, id_fecha, id_piloto, id_vehiculo</name>
+        <name>id_ranking</name>
         <creation_method>tablemax</creation_method>
         <use_autoinc>N</use_autoinc>
       </return>
@@ -617,7 +619,7 @@
     </remotesteps>
     <GUI>
       <xloc>608</xloc>
-      <yloc>208</yloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -786,7 +788,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>lemansinicial</connection>
+    <connection>lemans09</connection>
     <sql>SELECT 
 		DISTINCT rc.id_evento, rc.id as id_ranking, p1.id as id_piloto, v1.id as id_vehiculo, e1.id as id_equipo,
 		--Carrera
@@ -815,7 +817,7 @@
         <name>id_evento</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>input_hecho_evento</origin>
         <comments>id_evento</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -838,7 +840,7 @@
         <name>id_ranking</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>input_hecho_evento</origin>
         <comments>id_ranking</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -861,7 +863,7 @@
         <name>id_piloto</name>
         <length>5</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>input_hecho_evento</origin>
         <comments>id_piloto</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -884,7 +886,7 @@
         <name>id_vehiculo</name>
         <length>10</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>input_hecho_evento</origin>
         <comments>id_vehiculo</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -907,7 +909,7 @@
         <name>id_equipo</name>
         <length>4</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>input_hecho_evento</origin>
         <comments>id_equipo</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -930,7 +932,7 @@
         <name>tipo</name>
         <length>7</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>input_hecho_evento</origin>
         <comments>tipo</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -953,7 +955,7 @@
         <name>poscarrera</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>input_hecho_evento</origin>
         <comments>poscarrera</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -976,7 +978,7 @@
         <name>fecha</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>input_hecho_evento</origin>
         <comments>fecha</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -999,7 +1001,7 @@
         <name>numero_equipo</name>
         <length>3</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>input_hecho_evento</origin>
         <comments>numero_equipo</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1022,7 +1024,7 @@
         <name>fabricante</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>input_hecho_evento</origin>
         <comments>fabricante</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -1045,7 +1047,7 @@
         <name>kilometraje</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>input_hecho_evento</origin>
         <comments>kilometraje</comments>
         <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1068,7 +1070,7 @@
         <name>categoria</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>input_hecho_evento</origin>
         <comments>categoria</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -1096,6 +1098,226 @@
     </remotesteps>
     <GUI>
       <xloc>128</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Update</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>dw_lemans</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>public</schema>
+      <table>dw_hec_evento</table>
+      <key>
+        <name>id_piloto</name>
+        <field>id_piloto</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_ranking</name>
+        <field>id_ranking</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_equipo</name>
+        <field>id_equipo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_vehiculo</name>
+        <field>id_vehiculo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_ranking</name>
+        <rename>id_ranking</rename>
+      </value>
+      <value>
+        <name>id_piloto</name>
+        <rename>id_piloto</rename>
+      </value>
+      <value>
+        <name>id_vehiculo</name>
+        <rename>id_vehiculo</rename>
+      </value>
+      <value>
+        <name>id_equipo</name>
+        <rename>id_equipo</rename>
+      </value>
+      <value>
+        <name>tipo</name>
+        <rename>tipo</rename>
+      </value>
+      <value>
+        <name>posicion</name>
+        <rename>poscarrera</rename>
+      </value>
+      <value>
+        <name>nro_equipo</name>
+        <rename>numero_equipo</rename>
+      </value>
+      <value>
+        <name>fabricante</name>
+        <rename>fabricante</rename>
+      </value>
+      <value>
+        <name>kilometraje</name>
+        <rename>kilometraje</rename>
+      </value>
+      <value>
+        <name>categoria</name>
+        <rename>categoria</rename>
+      </value>
+      <value>
+        <name>id_fecha</name>
+        <rename>id_fecha</rename>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>784</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>dw_lemans</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>public</schema>
+      <table>dw_hec_evento</table>
+      <key>
+        <name>id_ranking</name>
+        <field>id_ranking</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_equipo</name>
+        <field>id_equipo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_vehiculo</name>
+        <field>id_vehiculo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_fecha</name>
+        <field>id_fecha</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_piloto</name>
+        <field>id_piloto</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_ranking</name>
+        <rename>id_ranking</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>id_piloto</name>
+        <rename>id_piloto</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>id_vehiculo</name>
+        <rename>id_vehiculo</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>id_equipo</name>
+        <rename>id_equipo</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>tipo</name>
+        <rename>tipo</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>posicion</name>
+        <rename>poscarrera</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>nro_equipo</name>
+        <rename>numero_equipo</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>fabricante</name>
+        <rename>fabricante</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>kilometraje</name>
+        <rename>kilometraje</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>categoria</name>
+        <rename>categoria</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>id_fecha</name>
+        <rename>id_fecha</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
       <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
