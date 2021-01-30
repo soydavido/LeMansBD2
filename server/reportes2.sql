@@ -8,7 +8,7 @@ BEGIN
 		DISTINCT rc.id_evento, 
 		--Carrera
 		rc.posicion poscarrera, rc.kilometraje kmcarrera, rc.vueltas vueltascarrera, (rc.desempeno).vuelta_mas_rapida vueltacarrera, (rc.desempeno).velocidad_media,
-		(SELECT ri.kilometraje - rc.kilometraje FROM ranking ri WHERE ri.posicion = rc.posicion-1 AND ri.id_evento = rc.id_evento) diferencia,
+		(SELECT ri.kilometraje - rc.kilometraje FROM ranking ri WHERE ri.posicion = rc.posicion-1 AND ri.id_evento = rc.id_evento) diferencia, --case para el #1
 		--Ensayo
 		re.posicion posensayo, (re.desempeno).vuelta_mas_rapida vueltaensayo,
 		--Equipo
