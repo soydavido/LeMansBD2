@@ -29,7 +29,7 @@
         kilometraje float ,
         posicion numeric,
         id_ranking_anterior numeric NOT NULL,
-        CONSTRAINT pk_dw_dim_ranking PRIMARY KEY (id_ranking)
+        CONSTRAINT pk_dw_dim_ranking PRIMARY KEY (id_ranking,id_ranking_anterior)
     );
 
 
@@ -67,12 +67,14 @@
         id_ranking numeric NOT NULL,
         id_ranking_anterior numeric NOT NULL, 
         id_equipo numeric NOT NULL,
+        id_equipo_anterior numeric NOT NULL,
         id_vehiculo numeric NOT NULL,
+        id_vehiculo_anterior numeric NOT NULL,
         id_fecha numeric NOT NULL,
-        CONSTRAINT pk_dw_dim_evento PRIMARY KEY (id_piloto,id_piloto_viejo,id_ranking,id_ranking_anterior,id_equipo,id_vehiculo,id_fecha),
-        CONSTRAINT fk_equipo_dw_equipo FOREIGN KEY (id_equipo) REFERENCES dw_dim_equipo(id_equipo),
-        CONSTRAINT fk_equipo_dw_pilotos FOREIGN KEY (id_piloto) REFERENCES dw_dim_pilotos(id_piloto,id_piloto_viejo),
-        CONSTRAINT fk_equipo_dw_vehiculo FOREIGN KEY (id_vehiculo) REFERENCES dw_dim_vehiculo(id_vehiculo),
+        CONSTRAINT pk_dw_dim_evento PRIMARY KEY (id_piloto,id_piloto_viejo,id_ranking,id_ranking_anterior,id_equipo,id_vehiculo,id_vehiculo_anterior,id_fecha),
+        CONSTRAINT fk_equipo_dw_equipo FOREIGN KEY (id_equipo,id_equipo_anterior) REFERENCES dw_dim_equipo(id_equipo,id_equipo_anterior),
+        CONSTRAINT fk_equipo_dw_pilotos FOREIGN KEY (id_piloto,id_piloto_viejo) REFERENCES dw_dim_pilotos(id_piloto,id_piloto_viejo),
+        CONSTRAINT fk_equipo_dw_vehiculo FOREIGN KEY (id_vehiculo,id_vehiculo_anterior) REFERENCES dw_dim_vehiculo(id_vehiculo,id_vehiculo_anterior),
         CONSTRAINT fk_equipo_dw_fecha FOREIGN KEY (id_fecha) REFERENCES dw_dim_fecha(id_fecha),
-        CONSTRAINT fk_equipo_dw_ranking FOREIGN KEY (id_ranking) REFERENCES dw_dim_ranking(id_ranking,id_ranking_anterior)
+        CONSTRAINT fk_equipo_dw_ranking FOREIGN KEY (id_ranking,id_ranking_anterior) REFERENCES dw_dim_ranking(id_ranking,id_ranking_anterior)
     );

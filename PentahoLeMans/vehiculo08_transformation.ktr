@@ -550,12 +550,12 @@
     </hop>
     <hop>
       <from>verificacion de null</from>
-      <to>Table input</to>
+      <to>Combination lookup/update</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input</from>
-      <to>Insert / update</to>
+      <from>Combination lookup/update</from>
+      <to>Update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -627,7 +627,7 @@ FROM vehiculos ve1</sql>
         <name>id_vehiculo</name>
         <length>4</length>
         <precision>0</precision>
-        <origin>input vehiculo</origin>
+        <origin>extraccion vehiculo</origin>
         <comments>id_vehiculo</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -650,7 +650,7 @@ FROM vehiculos ve1</sql>
         <name>fabricante</name>
         <length>30</length>
         <precision>-1</precision>
-        <origin>input vehiculo</origin>
+        <origin>extraccion vehiculo</origin>
         <comments>fabricante</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -673,7 +673,7 @@ FROM vehiculos ve1</sql>
         <name>modelo</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>input vehiculo</origin>
+        <origin>extraccion vehiculo</origin>
         <comments>modelo</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -696,7 +696,7 @@ FROM vehiculos ve1</sql>
         <name>nombre_motor</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>input vehiculo</origin>
+        <origin>extraccion vehiculo</origin>
         <comments>nombre_motor</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -719,7 +719,7 @@ FROM vehiculos ve1</sql>
         <name>cilindros</name>
         <length>3</length>
         <precision>-1</precision>
-        <origin>input vehiculo</origin>
+        <origin>extraccion vehiculo</origin>
         <comments>cilindros</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -742,7 +742,7 @@ FROM vehiculos ve1</sql>
         <name>cc</name>
         <length>2147483647</length>
         <precision>-1</precision>
-        <origin>input vehiculo</origin>
+        <origin>extraccion vehiculo</origin>
         <comments>cc</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -765,7 +765,7 @@ FROM vehiculos ve1</sql>
         <name>categoria</name>
         <length>7</length>
         <precision>-1</precision>
-        <origin>input vehiculo</origin>
+        <origin>extraccion vehiculo</origin>
         <comments>categoria</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -788,7 +788,7 @@ FROM vehiculos ve1</sql>
         <name>tipo</name>
         <length>2</length>
         <precision>-1</precision>
-        <origin>input vehiculo</origin>
+        <origin>extraccion vehiculo</origin>
         <comments>tipo</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -855,8 +855,8 @@ FROM vehiculos ve1</sql>
     </GUI>
   </step>
   <step>
-    <name>Table input</name>
-    <type>TableInput</type>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -865,200 +865,40 @@ FROM vehiculos ve1</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <schema>public</schema>
+    <table>dw_dim_vehiculo</table>
     <connection>dw_lemans</connection>
-    <sql>SELECT id_vehiculo+1 as id__nuevo FROM dw_dim_vehiculo ORDER BY id_vehiculo DESC FETCH FIRST 1 ROW ONLY</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
+    <commit>1</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
         <name>id_vehiculo</name>
-        <length>4</length>
-        <precision>0</precision>
-        <origin>extraccion vehiculo</origin>
-        <comments>id_vehiculo</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>fabricante</name>
-        <length>30</length>
-        <precision>-1</precision>
-        <origin>extraccion vehiculo</origin>
-        <comments>fabricante</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>modelo</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>extraccion vehiculo</origin>
-        <comments>modelo</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
+        <lookup>id_vehiculo_anterior</lookup>
+      </key>
+      <key>
         <name>nombre_motor</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>extraccion vehiculo</origin>
-        <comments>nombre_motor</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
+        <lookup>motor_nombre</lookup>
+      </key>
+      <key>
         <name>cilindros</name>
-        <length>3</length>
-        <precision>-1</precision>
-        <origin>extraccion vehiculo</origin>
-        <comments>cilindros</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
+        <lookup>motor_cilindrada</lookup>
+      </key>
+      <key>
         <name>cc</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>extraccion vehiculo</origin>
-        <comments>cc</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>categoria</name>
-        <length>7</length>
-        <precision>-1</precision>
-        <origin>extraccion vehiculo</origin>
-        <comments>categoria</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>tipo</name>
-        <length>2</length>
-        <precision>-1</precision>
-        <origin>extraccion vehiculo</origin>
-        <comments>tipo</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
+        <lookup>motor_capacidad</lookup>
+      </key>
+      <return>
+        <name>id_vehiculo</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1068,14 +908,14 @@ FROM vehiculos ve1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
+      <xloc>496</xloc>
       <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
+    <name>Update</name>
+    <type>Update</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1085,56 +925,53 @@ FROM vehiculos ve1</sql>
       <schema_name/>
     </partitioning>
     <connection>dw_lemans</connection>
+    <skip_lookup>N</skip_lookup>
     <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
     <lookup>
       <schema>public</schema>
       <table>dw_dim_vehiculo</table>
       <key>
-        <name>id_vehiculo</name>
-        <field>fabricante</field>
+        <name>id_vehiculo_1</name>
+        <field>id_vehiculo</field>
         <condition>=</condition>
         <name2/>
       </key>
-      <value>
+      <key>
         <name>id_vehiculo</name>
-        <rename>id__nuevo</rename>
-        <update>Y</update>
-      </value>
+        <field>id_vehiculo_anterior</field>
+        <condition/>
+        <name2/>
+      </key>
       <value>
         <name>fabricante</name>
         <rename>fabricante</rename>
-        <update>Y</update>
       </value>
       <value>
         <name>modelo</name>
         <rename>modelo</rename>
-        <update>Y</update>
       </value>
       <value>
         <name>motor_nombre</name>
         <rename>nombre_motor</rename>
-        <update>Y</update>
       </value>
       <value>
-        <name>motor_capacidad</name>
+        <name>motor_cilindrada</name>
         <rename>cilindros</rename>
-        <update>Y</update>
       </value>
       <value>
         <name>motor_capacidad</name>
         <rename>cc</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>categoria</name>
-        <rename>categoria</rename>
-        <update>Y</update>
       </value>
       <value>
         <name>tipo</name>
         <rename>tipo</rename>
-        <update>Y</update>
+      </value>
+      <value>
+        <name>categoria</name>
+        <rename>categoria</rename>
       </value>
     </lookup>
     <attributes/>
@@ -1146,7 +983,7 @@ FROM vehiculos ve1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
+      <xloc>672</xloc>
       <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>

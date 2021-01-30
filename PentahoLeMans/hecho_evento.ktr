@@ -545,22 +545,37 @@
     </hop>
     <hop>
       <from>If field value is null</from>
-      <to>Database lookup</to>
+      <to>lookup id_fecha</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Database lookup</from>
+      <from>lookup id_fecha</from>
+      <to>lookup id_equipo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lookup id_equipo</from>
+      <to>lookup id_vehiculo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lookup id_vehiculo</from>
+      <to>lookup id_ranking</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lookup id_ranking</from>
+      <to>lookup id_piloto</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>lookup id_piloto</from>
       <to>Combination lookup/update</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Combination lookup/update</from>
       <to>Update</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Database lookup</from>
-      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -575,10 +590,10 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <schema/>
+    <schema>public</schema>
     <table>dw_hec_evento</table>
     <connection>dw_lemans</connection>
-    <commit>100</commit>
+    <commit>1</commit>
     <cache_size>9999</cache_size>
     <replace>N</replace>
     <preloadCache>N</preloadCache>
@@ -586,23 +601,43 @@
     <crcfield>hashcode</crcfield>
     <fields>
       <key>
-        <name>id_piloto</name>
+        <name>id_piloto_dw</name>
         <lookup>id_piloto</lookup>
       </key>
       <key>
-        <name>id_equipo</name>
+        <name>id_piloto</name>
+        <lookup>id_piloto_viejo</lookup>
+      </key>
+      <key>
+        <name>id_ranking_dw</name>
+        <lookup>id_ranking</lookup>
+      </key>
+      <key>
+        <name>id_ranking</name>
+        <lookup>id_ranking_anterior</lookup>
+      </key>
+      <key>
+        <name>id_equipo_dw</name>
         <lookup>id_equipo</lookup>
+      </key>
+      <key>
+        <name>id_equipo</name>
+        <lookup>id_equipo_anterior</lookup>
+      </key>
+      <key>
+        <name>id_vehiculo_dw</name>
+        <lookup>id_vehiculo</lookup>
+      </key>
+      <key>
+        <name>id_vehiculo</name>
+        <lookup>id_vehiculo_anterior</lookup>
       </key>
       <key>
         <name>id_fecha</name>
         <lookup>id_fecha</lookup>
       </key>
-      <key>
-        <name>id_vehiculo</name>
-        <lookup>id_vehiculo</lookup>
-      </key>
       <return>
-        <name>id_ranking</name>
+        <name>id_evento</name>
         <creation_method>tablemax</creation_method>
         <use_autoinc>N</use_autoinc>
       </return>
@@ -618,55 +653,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Database lookup</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>dw_lemans</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema>public</schema>
-      <table>dw_dim_fecha</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>fecha</name>
-        <field>fecha</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>id_fecha</name>
-        <rename>id_fecha</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
+      <xloc>1040</xloc>
       <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
@@ -778,6 +765,125 @@
     </GUI>
   </step>
   <step>
+    <name>Update</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>dw_lemans</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>public</schema>
+      <table>dw_hec_evento</table>
+      <key>
+        <name>id_evento_1</name>
+        <field>id_evento</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_ranking_dw</name>
+        <field>id_ranking</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_piloto_dw</name>
+        <field>id_piloto</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_vehiculo_dw</name>
+        <field>id_vehiculo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_equipo_dw</name>
+        <field>id_equipo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_fecha</name>
+        <field>id_fecha</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_equipo</name>
+        <field>id_equipo_anterior</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_vehiculo</name>
+        <field>id_vehiculo_anterior</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_ranking</name>
+        <field>id_ranking_anterior</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_piloto</name>
+        <field>id_piloto_viejo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>tipo</name>
+        <rename>tipo</rename>
+      </value>
+      <value>
+        <name>posicion</name>
+        <rename>poscarrera</rename>
+      </value>
+      <value>
+        <name>nro_equipo</name>
+        <rename>numero_equipo</rename>
+      </value>
+      <value>
+        <name>fabricante</name>
+        <rename>fabricante</rename>
+      </value>
+      <value>
+        <name>kilometraje</name>
+        <rename>kilometraje</rename>
+      </value>
+      <value>
+        <name>categoria</name>
+        <rename>categoria</rename>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1168</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>input_hecho_evento</name>
     <type>TableInput</type>
     <description/>
@@ -794,16 +900,19 @@
 		--Carrera
 		 ec.tipo as tipo, rc.posicion poscarrera, rc.fecha,
 		--Equipo
-		e1.numero_equipo,f1.nombre as fabricante, rc.kilometraje, v1.categoria 
+		e1.numero_equipo,f1.nombre as fabricante, rc.kilometraje, v1.categoria,
+		--Piloto again
+		(p1.informacion).nombre nombrepiloto, (p1.informacion).apellido apellidopiloto
 		FROM equipo e1, ranking rc, evento ec, 
-		piloto p1, contrato c1, nacionalidad nac1, vehiculo v1, modelo m1, fabricante f1
+		piloto p1, contrato c1, nacionalidad nac1, vehiculo v1, modelo m1, fabricante f1, evento eve1
 		WHERE rc.id_equipo = e1.id 
 		AND ec.id = rc.id_evento
 		AND c1.id_equipo = e1.id AND c1.id_piloto = p1.id
 		AND ec.ano BETWEEN date_part('year',(c1.duracion).fecha_inicial) AND date_part('year',(c1.duracion).fecha_final)
 		AND nac1.id = p1.id_nacionalidad
-		AND v1.id = rc.id_vehiculo AND v1.id_modelo = m1.id AND m1.id_fabricante = f1.id
-		ORDER BY 1,7,5,2,3,4,6,8,9,10,11;</sql>
+		AND v1.id = rc.id_vehiculo AND v1.id_modelo = m1.id AND m1.id_fabricante = f1.id 
+		AND eve1.id = rc.id_evento AND eve1.tipo = 'Carrera'
+		ORDER BY 1,7,5,2,3,4,6,8,9,10,11,12,13,14;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1087,6 +1196,52 @@
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>nombrepiloto</name>
+        <length>20</length>
+        <precision>-1</precision>
+        <origin>input_hecho_evento</origin>
+        <comments>nombrepiloto</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>apellidopiloto</name>
+        <length>20</length>
+        <precision>-1</precision>
+        <origin>input_hecho_evento</origin>
+        <comments>apellidopiloto</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
     </row-meta>
     <attributes/>
     <cluster_schema/>
@@ -1103,8 +1258,8 @@
     </GUI>
   </step>
   <step>
-    <name>Update</name>
-    <type>Update</type>
+    <name>lookup id_equipo</name>
+    <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1114,81 +1269,200 @@
       <schema_name/>
     </partitioning>
     <connection>dw_lemans</connection>
-    <skip_lookup>N</skip_lookup>
-    <commit>100</commit>
-    <use_batch>N</use_batch>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
+    <cache>Y</cache>
+    <cache_load_all>Y</cache_load_all>
+    <cache_size>0</cache_size>
     <lookup>
       <schema>public</schema>
-      <table>dw_hec_evento</table>
-      <key>
-        <name>id_piloto</name>
-        <field>id_piloto</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_ranking</name>
-        <field>id_ranking</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
+      <table>dw_dim_equipo</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
       <key>
         <name>id_equipo</name>
-        <field>id_equipo</field>
+        <field>id_equipo_anterior</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>id_vehiculo</name>
-        <field>id_vehiculo</field>
+        <name>numero_equipo</name>
+        <field>nro_equipo</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>id_ranking</name>
-        <rename>id_ranking</rename>
-      </value>
-      <value>
-        <name>id_piloto</name>
-        <rename>id_piloto</rename>
-      </value>
-      <value>
-        <name>id_vehiculo</name>
-        <rename>id_vehiculo</rename>
-      </value>
-      <value>
         <name>id_equipo</name>
-        <rename>id_equipo</rename>
+        <rename>id_equipo_dw</rename>
+        <default/>
+        <type>None</type>
       </value>
-      <value>
-        <name>tipo</name>
-        <rename>tipo</rename>
-      </value>
-      <value>
-        <name>posicion</name>
-        <rename>poscarrera</rename>
-      </value>
-      <value>
-        <name>nro_equipo</name>
-        <rename>numero_equipo</rename>
-      </value>
-      <value>
-        <name>fabricante</name>
-        <rename>fabricante</rename>
-      </value>
-      <value>
-        <name>kilometraje</name>
-        <rename>kilometraje</rename>
-      </value>
-      <value>
-        <name>categoria</name>
-        <rename>categoria</rename>
-      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>lookup id_fecha</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>dw_lemans</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>dw_dim_fecha</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>fecha</name>
+        <field>fecha</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>id_fecha</name>
         <rename>id_fecha</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>lookup id_piloto</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>dw_lemans</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>dw_dim_pilotos</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>id_piloto</name>
+        <field>id_piloto_viejo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>nombrepiloto</name>
+        <field>nombre</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>apellidopiloto</name>
+        <field>apellido</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_piloto</name>
+        <rename>id_piloto_dw</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>lookup id_ranking</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>dw_lemans</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>dw_dim_ranking</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>id_ranking</name>
+        <field>id_ranking_anterior</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>kilometraje</name>
+        <field>kilometraje</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>poscarrera</name>
+        <field>posicion</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_ranking</name>
+        <rename>id_ranking_dw</rename>
+        <default/>
+        <type>None</type>
       </value>
     </lookup>
     <attributes/>
@@ -1201,13 +1475,13 @@
     </remotesteps>
     <GUI>
       <xloc>784</xloc>
-      <yloc>288</yloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
+    <name>lookup id_vehiculo</name>
+    <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1217,95 +1491,32 @@
       <schema_name/>
     </partitioning>
     <connection>dw_lemans</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
     <lookup>
       <schema>public</schema>
-      <table>dw_hec_evento</table>
-      <key>
-        <name>id_ranking</name>
-        <field>id_ranking</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_equipo</name>
-        <field>id_equipo</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
+      <table>dw_dim_vehiculo</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
       <key>
         <name>id_vehiculo</name>
-        <field>id_vehiculo</field>
+        <field>id_vehiculo_anterior</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>id_fecha</name>
-        <field>id_fecha</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_piloto</name>
-        <field>id_piloto</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>id_ranking</name>
-        <rename>id_ranking</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>id_piloto</name>
-        <rename>id_piloto</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>id_vehiculo</name>
-        <rename>id_vehiculo</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>id_equipo</name>
-        <rename>id_equipo</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>tipo</name>
-        <rename>tipo</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>posicion</name>
-        <rename>poscarrera</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>nro_equipo</name>
-        <rename>numero_equipo</rename>
-        <update>Y</update>
-      </value>
-      <value>
         <name>fabricante</name>
-        <rename>fabricante</rename>
-        <update>Y</update>
-      </value>
+        <field>fabricante</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
       <value>
-        <name>kilometraje</name>
-        <rename>kilometraje</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>categoria</name>
-        <rename>categoria</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>id_fecha</name>
-        <rename>id_fecha</rename>
-        <update>Y</update>
+        <name>id_vehiculo</name>
+        <rename>id_vehiculo_dw</rename>
+        <default/>
+        <type>None</type>
       </value>
     </lookup>
     <attributes/>
@@ -1317,7 +1528,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
+      <xloc>656</xloc>
       <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>

@@ -545,7 +545,12 @@
     </hop>
     <hop>
       <from>verificacion de null</from>
-      <to>Insert / update</to>
+      <to>Combination lookup/update</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Combination lookup/update</from>
+      <to>Update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -561,8 +566,9 @@
       <schema_name/>
     </partitioning>
     <connection>lemans09</connection>
-    <sql>SELECT r1.id as id_ranking, (r1.desempeno).vuelta_mas_rapida, (r1.desempeno).velocidad_media, r1.vueltas, r1.kilometraje, r1.posicion
-FROM ranking r1
+    <sql>SELECT r1.id, (r1.desempeno).vuelta_mas_rapida, (r1.desempeno).velocidad_media, r1.vueltas, r1.kilometraje, r1.posicion
+FROM ranking r1, evento e1
+WHERE r1.id_evento = e1.id AND e1.tipo = 'Carrera'
 ORDER BY 1</sql>
     <limit>0</limit>
     <lookup/>
@@ -574,11 +580,11 @@ ORDER BY 1</sql>
       <value-meta>
         <type>BigNumber</type>
         <storagetype>normal</storagetype>
-        <name>id_ranking</name>
+        <name>id</name>
         <length>-1</length>
         <precision>-1</precision>
         <origin>extraccion ranking</origin>
-        <comments>id_ranking</comments>
+        <comments>id</comments>
         <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol/>
@@ -720,7 +726,7 @@ ORDER BY 1</sql>
     </remotesteps>
     <GUI>
       <xloc>240</xloc>
-      <yloc>208</yloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -743,12 +749,6 @@ ORDER BY 1</sql>
     <valuetypes>
       </valuetypes>
     <fields>
-      <field>
-        <name>id_ranking</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
       <field>
         <name>vuelta_mas_rapida</name>
         <value>0</value>
@@ -795,8 +795,55 @@ ORDER BY 1</sql>
     </GUI>
   </step>
   <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dw_dim_ranking</table>
+    <connection>dw_lemans</connection>
+    <commit>1</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>id</name>
+        <lookup>id_ranking_anterior</lookup>
+      </key>
+      <return>
+        <name>id_ranking</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Update</name>
+    <type>Update</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -806,8 +853,11 @@ ORDER BY 1</sql>
       <schema_name/>
     </partitioning>
     <connection>dw_lemans</connection>
+    <skip_lookup>N</skip_lookup>
     <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
     <lookup>
       <schema>public</schema>
       <table>dw_dim_ranking</table>
@@ -818,46 +868,30 @@ ORDER BY 1</sql>
         <name2/>
       </key>
       <key>
-        <name>kilometraje</name>
-        <field>kilometraje</field>
+        <name>id</name>
+        <field>id_ranking_anterior</field>
         <condition>=</condition>
         <name2/>
       </key>
-      <key>
-        <name>vueltas</name>
-        <field>nro_vueltas</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>id_ranking</name>
-        <rename>id_ranking</rename>
-        <update>Y</update>
-      </value>
       <value>
         <name>vuelta_rapida</name>
         <rename>vuelta_mas_rapida</rename>
-        <update>Y</update>
       </value>
       <value>
         <name>velocidad_media</name>
         <rename>velocidad_media</rename>
-        <update>Y</update>
       </value>
       <value>
         <name>nro_vueltas</name>
         <rename>vueltas</rename>
-        <update>Y</update>
       </value>
       <value>
         <name>kilometraje</name>
         <rename>kilometraje</rename>
-        <update>Y</update>
       </value>
       <value>
         <name>posicion</name>
         <rename>posicion</rename>
-        <update>Y</update>
       </value>
     </lookup>
     <attributes/>
@@ -869,7 +903,7 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
+      <xloc>528</xloc>
       <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>

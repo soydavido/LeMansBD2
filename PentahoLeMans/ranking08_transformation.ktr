@@ -543,7 +543,79 @@
       <to>Combination lookup/update</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Combination lookup/update</from>
+      <to>Update</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dw_dim_ranking</table>
+    <connection>dw_lemans</connection>
+    <commit>1</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>id_car_evento</name>
+        <lookup>id_ranking_anterior</lookup>
+      </key>
+      <key>
+        <name>kilometraje</name>
+        <lookup>kilometraje</lookup>
+      </key>
+      <key>
+        <name>nro_vueltas</name>
+        <lookup>nro_vueltas</lookup>
+      </key>
+      <key>
+        <name>velocidad_media</name>
+        <lookup>velocidad_media</lookup>
+      </key>
+      <key>
+        <name>puesto_final</name>
+        <lookup>posicion</lookup>
+      </key>
+      <key>
+        <name>mejor_vuelta</name>
+        <lookup>vuelta_rapida</lookup>
+      </key>
+      <return>
+        <name>id_ranking</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>ranking</name>
     <type>TableInput</type>
@@ -733,8 +805,8 @@ ORDER BY 1, 6 DESC</sql>
     </GUI>
   </step>
   <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
+    <name>Update</name>
+    <type>Update</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -743,44 +815,48 @@ ORDER BY 1, 6 DESC</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <schema>public</schema>
-    <table>dw_dim_ranking</table>
     <connection>dw_lemans</connection>
+    <skip_lookup>N</skip_lookup>
     <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>public</schema>
+      <table>dw_dim_ranking</table>
       <key>
-        <name>velocidad_media</name>
-        <lookup>velocidad_media</lookup>
-      </key>
-      <key>
-        <name>mejor_vuelta</name>
-        <lookup>vuelta_rapida</lookup>
-      </key>
-      <key>
-        <name>nro_vueltas</name>
-        <lookup>nro_vueltas</lookup>
-      </key>
-      <key>
-        <name>puesto_final</name>
-        <lookup>posicion</lookup>
-      </key>
-      <key>
-        <name>kilometraje</name>
-        <lookup>kilometraje</lookup>
-      </key>
-      <return>
         <name>id_ranking</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
+        <field>id_ranking</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_car_evento</name>
+        <field>id_ranking_anterior</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>vuelta_rapida</name>
+        <rename>mejor_vuelta</rename>
+      </value>
+      <value>
+        <name>velocidad_media</name>
+        <rename>velocidad_media</rename>
+      </value>
+      <value>
+        <name>nro_vueltas</name>
+        <rename>nro_vueltas</rename>
+      </value>
+      <value>
+        <name>kilometraje</name>
+        <rename>kilometraje</rename>
+      </value>
+      <value>
+        <name>posicion</name>
+        <rename>puesto_final</rename>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -790,7 +866,7 @@ ORDER BY 1, 6 DESC</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
+      <xloc>576</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
