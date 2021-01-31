@@ -617,6 +617,73 @@
     </GUI>
   </step>
   <step>
+    <name>Update</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>dw_lemans</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>public</schema>
+      <table>dw_dim_ranking</table>
+      <key>
+        <name>id_ranking</name>
+        <field>id_ranking</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_car_evento</name>
+        <field>id_ranking_anterior</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>vuelta_rapida</name>
+        <rename>mejor_vuelta</rename>
+      </value>
+      <value>
+        <name>velocidad_media</name>
+        <rename>velocidad_media</rename>
+      </value>
+      <value>
+        <name>nro_vueltas</name>
+        <rename>nro_vueltas</rename>
+      </value>
+      <value>
+        <name>kilometraje</name>
+        <rename>kilometraje</rename>
+      </value>
+      <value>
+        <name>posicion</name>
+        <rename>puesto_final</rename>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>ranking</name>
     <type>TableInput</type>
     <description/>
@@ -800,73 +867,6 @@ ORDER BY 1, 6 DESC</sql>
     </remotesteps>
     <GUI>
       <xloc>224</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Update</name>
-    <type>Update</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>dw_lemans</connection>
-    <skip_lookup>N</skip_lookup>
-    <commit>100</commit>
-    <use_batch>N</use_batch>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
-    <lookup>
-      <schema>public</schema>
-      <table>dw_dim_ranking</table>
-      <key>
-        <name>id_ranking</name>
-        <field>id_ranking</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_car_evento</name>
-        <field>id_ranking_anterior</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>vuelta_rapida</name>
-        <rename>mejor_vuelta</rename>
-      </value>
-      <value>
-        <name>velocidad_media</name>
-        <rename>velocidad_media</rename>
-      </value>
-      <value>
-        <name>nro_vueltas</name>
-        <rename>nro_vueltas</rename>
-      </value>
-      <value>
-        <name>kilometraje</name>
-        <rename>kilometraje</rename>
-      </value>
-      <value>
-        <name>posicion</name>
-        <rename>puesto_final</rename>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>576</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
