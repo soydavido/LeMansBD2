@@ -62,6 +62,29 @@ BEGIN
 END;
 $$LANGUAGE plpgsql;
 
+--REPORTE 6
+CREATE FUNCTION reporte6(nombre_fabricante varchar, nombre_modelo varchar)
+RETURNS TABLE (anho_competicion float, fabricante_nombre dw_dim_vehiculo.fabricante%TYPE, modelo_nombre dw_dim_vehiculo.modelo%TYPE, nombre_equipo dw_dim_equipo.nombre %TYPE, nro_equipo dw_dim_equipo.nro_equipo %TYPE, pais_equipo dw_dim_equipo.pais %TYPE, velocidad_media dw_dim_ranking.velocidad_media%TYPE, nombre_piloto dw_dim_pilotos.nombre%TYPE, apellido_piloto dw_dim_pilotos.apellido%TYPE, nacionalidad_piloto dw_dim_pilotos.nacionalidad%TYPE, cantidad_pilotos bigint)
+AS $$
+BEGIN
+	 RETURN QUERY 
+		SELECT DISTINCT date_part('year',fe.fecha), 
+		ve.fabricante, ve.modelo,
+		eq.nombre, eq.nro_equipo, eq.pais,
+		ra.velocidad_media,
+		pi.nombre, pi.apellido, pi.nacionalidad,
+		(SELECT COUNT (*) FROM dw_hec_evento ex WHERE ex.id_equipo=ev.id_equipo AND ex.id_ranking = ev.id_ranking) cantidad_pilotos
+		FROM dw_hec_evento ev, dw_dim_vehiculo ve, dw_dim_fecha fe, dw_dim_equipo eq, dw_dim_pilotos pi, dw_dim_ranking ra
+		WHERE ev.id_vehiculo = ve.id_vehiculo
+		AND fe.id_fecha = ev.id_fecha
+		AND ve.fabricante LIKE (nombre_fabricante)
+		AND ve.modelo LIKE (nombre_modelo)
+		AND ev.id_piloto = pi.id_piloto
+		AND ev.id_equipo = eq.id_equipo
+		AND ev.id_ranking = ra.id_ranking
+		AND ev.id_piloto = pi.id_piloto;
+END;
+$$LANGUAGE plpgsql;	
 
 --REPORTE 7
 CREATE FUNCTION reporte7(anho integer)
@@ -132,33 +155,30 @@ END;
 $$LANGUAGE plpgsql;
 
 --REPORTE 11
-CREATE FUNCTION reporte11(anho integer)
-RETURNS TABLE (velocidad_media dw_dim_ranking.velocidad_media%TYPE, fabricante dw_dim_vehiculo.fabricante%TYPE, modelo dw_dim_vehiculo.modelo%TYPE, nombre_equipo dw_dim_equipo.nombre%TYPE, numero_equipo dw_dim_equipo.nro_equipo%TYPE, nacionalidad dw_dim_equipo.pais%TYPE, ano integer)
+CREATE OR REPLACE FUNCTION reporte11 (anho integer)
+RETURNS TABLE (velocidad_media dw_dim_ranking.velocidad_media%TYPE, fabricante dw_dim_vehiculo.fabricante%TYPE, modelo dw_dim_vehiculo.modelo%TYPE, nombre_equipo dw_dim_equipo.nombre%TYPE, numero_equipo dw_dim_equipo.nro_equipo%TYPE, nacionalidad dw_dim_equipo.pais%TYPE, ano float)
 AS $$
 BEGIN
 	IF(anho is null) THEN
-		RETURN QUERY
-			SELECT DISTINCT ra.velocidad_media, ve.fabricante, ve.modelo, eq.nombre, eq.nro_equipo, eq.pais, 2000
-			FROM dw_hec_evento ev, dw_dim_equipo eq, dw_dim_vehiculo ve, dw_dim_fecha fe, dw_dim_ranking ra
-			WHERE ev.id_equipo = eq.id_equipo
-			AND ev.nro_equipo = eq.nro_equipo
-			AND ev.id_vehiculo = ve.id_vehiculo
-			AND ev.id_fecha = fe.id_fecha 
-			AND ev.id_ranking = ra.id_ranking 
-			ORDER BY 1 DESC 
-			FETCH FIRST 1 ROW ONLY;
-	ELSE
-		RETURN QUERY
-			SELECT DISTINCT ra.velocidad_media, ve.fabricante, ve.modelo, eq.nombre, eq.nro_equipo, eq.pais, 2000
-			FROM dw_hec_evento ev, dw_dim_equipo eq, dw_dim_vehiculo ve, dw_dim_fecha fe, dw_dim_ranking ra
-			WHERE ev.id_equipo = eq.id_equipo
-			AND ev.nro_equipo = eq.nro_equipo
-			AND ev.id_vehiculo = ve.id_vehiculo
-			AND ev.id_fecha = fe.id_fecha 
-			AND date_part('year',fe.fecha) = anho
-			AND ev.id_ranking = ra.id_ranking 
-			ORDER BY 1 DESC 
-			FETCH FIRST 1 ROW ONLY;
+		RETURN QUERY SELECT DISTINCT ON (date_part('year',fe.fecha)) ra.velocidad_media, ve.fabricante, ve.modelo, eq.nombre, eq.nro_equipo, eq.pais, (date_part('year',fe.fecha))
+		FROM dw_hec_evento ev, dw_dim_equipo eq, dw_dim_vehiculo ve, dw_dim_fecha fe, dw_dim_ranking ra
+		WHERE ev.id_equipo = eq.id_equipo
+		AND ev.nro_equipo = eq.nro_equipo
+		AND ev.id_vehiculo = ve.id_vehiculo
+		AND ev.id_fecha = fe.id_fecha 
+		AND ev.id_ranking = ra.id_ranking 
+		ORDER BY (date_part('year',fe.fecha)) , 1 DESC;
+	ELSE 
+		RETURN QUERY 
+		SELECT DISTINCT ON (date_part('year',fe.fecha)) ra.velocidad_media, ve.fabricante, ve.modelo, eq.nombre, eq.nro_equipo, eq.pais, (date_part('year',fe.fecha))
+		FROM dw_hec_evento ev, dw_dim_equipo eq, dw_dim_vehiculo ve, dw_dim_fecha fe, dw_dim_ranking ra
+		WHERE ev.id_equipo = eq.id_equipo
+		AND ev.nro_equipo = eq.nro_equipo
+		AND ev.id_vehiculo = ve.id_vehiculo
+		AND ev.id_fecha = fe.id_fecha 
+		AND ev.id_ranking = ra.id_ranking 
+		AND date_part('year',fe.fecha) = anho
+		ORDER BY (date_part('year',fe.fecha)) , 1 DESC;
 	END IF;
 END;
 $$LANGUAGE plpgsql;
