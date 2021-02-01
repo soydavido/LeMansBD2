@@ -42,6 +42,8 @@ public class Reporte4_vista extends javax.swing.JFrame {
     int id_donde_termina = 0;
     int id_anterior = 0;
     int numero_evento_viejo = 0;
+    
+    private String ano;
    
     
   public Reporte4_vista() {
@@ -56,7 +58,7 @@ public class Reporte4_vista extends javax.swing.JFrame {
          
         
         con.llenarComboAno(combo_ano);
-        con.llenarComboEquipo(combo_equipo);
+       
           
     }
 
@@ -399,9 +401,9 @@ public class Reporte4_vista extends javax.swing.JFrame {
             nohay.setText("");
      
         
-       String ano = combo_equipo.getSelectedItem().toString();
+       String ano = combo_ano.getSelectedItem().toString();
         
-       int numero_equipo = Integer.parseInt(combo_equipo.getSelectedItem().toString());
+       String numero_equipo = combo_equipo.getSelectedItem().toString();
         
         this.lista = reporte_conexion.reporte4(ano,numero_equipo);
         
@@ -417,7 +419,10 @@ public class Reporte4_vista extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void combo_equipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_equipoActionPerformed
-        // TODO add your handling code here:
+        btnsiguiente1.setVisible(false);
+            btnanterior.setVisible(false);
+            this.id_anterior=0;
+            this.id_donde_termina=0;
     }//GEN-LAST:event_combo_equipoActionPerformed
 
     private void btnanteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnanteriorActionPerformed
@@ -442,7 +447,18 @@ public class Reporte4_vista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnsiguiente1ActionPerformed
 
     private void combo_anoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_anoActionPerformed
-        // TODO add your handling code here:
+            btnsiguiente1.setVisible(false);
+            btnanterior.setVisible(false);
+             this.id_anterior=0;
+            this.id_donde_termina=0;
+            
+        
+        combo_equipo.removeAllItems();
+        
+        this.ano = combo_ano.getSelectedItem().toString();
+       
+     
+       con.llenarComboEquipos(ano,combo_equipo);
     }//GEN-LAST:event_combo_anoActionPerformed
 
     
@@ -461,10 +477,17 @@ public class Reporte4_vista extends javax.swing.JFrame {
                   mostrar(0+1,1);
                   mostrar(0+2,2);
                   this.id_donde_termina = 3;
-                  }
+                  }else{
+                     mostrar(0,0);
+                  mostrar(0+1,1);
+                  mostrar(0+2,2);
+                  this.id_donde_termina = 3;
+                }
                 
                 if(this.lista.size() > 3){
                      btnsiguiente1.setVisible(true);
+                }else{
+                    btnsiguiente1.setVisible(false);
                 }
        }catch(Exception e){
            System.out.println("llego al final");

@@ -156,10 +156,9 @@ public class control {
             
         }
        
-        public void llenarComboModelos(JComboBox op){
+        public void llenarComboModelos(String fabricante,JComboBox op){
         
-        
-        op.addItem("Seleccionar");
+     
             
            try{
         
@@ -171,19 +170,19 @@ public class control {
        
         
          sql
-                = "SELECT  * from fabricantes();";
+                = "SELECT  * from modelos_autos('"+fabricante+"');";
        
         ResultSet result = st.executeQuery(sql);
        
         while(result.next()){
-            op.addItem(result.getString("fabricantes"));
+            op.addItem(result.getString("modelos"));
         }
            
             
             
         
         }catch(Exception e){
-               System.out.println("error al traer los fabricantes");
+               System.out.println("error al traer los modelos");
         }
             
         }
@@ -191,7 +190,7 @@ public class control {
         
         
  
-    public void llenarComboEquipo(JComboBox op){
+    public void llenarComboEquipos(String ano,JComboBox op){
         
         
         op.addItem("Seleccionar");
@@ -203,11 +202,13 @@ public class control {
         java.sql.Statement st = conexion.createStatement();
         
         String sql;
-       
-        
-         sql
+         if(ano.equals("Seleccionar")){
+          sql
                 = "SELECT  * from numeros_equipo();";
-       
+         }else{ 
+         sql
+                = "SELECT  * from numeros_equipo_por_ano("+ano+");";
+         }
         ResultSet result = st.executeQuery(sql);
        
         while(result.next()){

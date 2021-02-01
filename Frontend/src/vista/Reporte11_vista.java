@@ -88,6 +88,7 @@ public class Reporte11_vista extends javax.swing.JFrame {
         btnanterior = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         txt_nacionalidad = new javax.swing.JLabel();
+        etiquetaTiempo6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -142,16 +143,15 @@ public class Reporte11_vista extends javax.swing.JFrame {
 
         nohay.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         nohay.setForeground(new java.awt.Color(255, 0, 51));
-        jPanel1.add(nohay, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, 380, 40));
+        jPanel1.add(nohay, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 380, 40));
 
         combo_ano.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        combo_ano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
         combo_ano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 combo_anoActionPerformed(evt);
             }
         });
-        jPanel1.add(combo_ano, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 120, 210, 40));
+        jPanel1.add(combo_ano, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 210, 40));
 
         etiquetaTiempo.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -203,6 +203,11 @@ public class Reporte11_vista extends javax.swing.JFrame {
 
         txt_nacionalidad.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jPanel1.add(txt_nacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, 520, 40));
+
+        etiquetaTiempo6.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
+        etiquetaTiempo6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        etiquetaTiempo6.setText("Año");
+        jPanel1.add(etiquetaTiempo6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, 320, 90));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1570, 910));
 
@@ -828,6 +833,7 @@ public class Reporte11_vista extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> combo_ano;
     private javax.swing.JLabel etiquetaTiempo;
     private javax.swing.JLabel etiquetaTiempo5;
+    private javax.swing.JLabel etiquetaTiempo6;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

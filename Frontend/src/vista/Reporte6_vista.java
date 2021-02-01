@@ -37,6 +37,7 @@ public class Reporte6_vista extends javax.swing.JFrame {
     
     ReportesConexion reporte_conexion = new ReportesConexion();
     
+    String fabricante;
     
     int contador = 0;
     int id_donde_termina = 0;
@@ -56,7 +57,7 @@ public class Reporte6_vista extends javax.swing.JFrame {
          
         con.llenarComboFabricantes(combo_fabricante);
         
-        con.llenarComboModelos(combo_modelo);
+       
           
     }
 
@@ -156,7 +157,6 @@ public class Reporte6_vista extends javax.swing.JFrame {
         jPanel1.add(txt_nombre_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 440, 40));
 
         combo_modelo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        combo_modelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
         combo_modelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 combo_modeloActionPerformed(evt);
@@ -301,7 +301,11 @@ public class Reporte6_vista extends javax.swing.JFrame {
         jPanel1.add(btnsiguiente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 200, 170, 50));
 
         combo_fabricante.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        combo_fabricante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
+        combo_fabricante.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                combo_fabricanteMouseClicked(evt);
+            }
+        });
         combo_fabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 combo_fabricanteActionPerformed(evt);
@@ -389,8 +393,16 @@ public class Reporte6_vista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnsiguiente1ActionPerformed
 
     private void combo_fabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_fabricanteActionPerformed
-        // TODO add your handling code here:
+         combo_modelo.removeAllItems();
+        this.fabricante = combo_fabricante.getSelectedItem().toString();
+       
+        if(!this.fabricante.isEmpty())
+       con.llenarComboModelos(this.fabricante,combo_modelo);
     }//GEN-LAST:event_combo_fabricanteActionPerformed
+
+    private void combo_fabricanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combo_fabricanteMouseClicked
+     
+    }//GEN-LAST:event_combo_fabricanteMouseClicked
 
     
     public void subir(){

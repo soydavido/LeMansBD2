@@ -47,7 +47,7 @@ public class Reporte10_vista extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
             this.setSize(1800,1800);
        
-        
+         con.llenarComboAno(combo_ano);
           
     }
 
@@ -75,6 +75,7 @@ public class Reporte10_vista extends javax.swing.JFrame {
         etiquetaTiempo2 = new javax.swing.JLabel();
         nohay = new javax.swing.JLabel();
         combo_ano = new javax.swing.JComboBox<>();
+        etiquetaTiempo6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -139,13 +140,17 @@ public class Reporte10_vista extends javax.swing.JFrame {
         jPanel1.add(nohay, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, 380, 40));
 
         combo_ano.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        combo_ano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
         combo_ano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 combo_anoActionPerformed(evt);
             }
         });
         jPanel1.add(combo_ano, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 120, 210, 40));
+
+        etiquetaTiempo6.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
+        etiquetaTiempo6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        etiquetaTiempo6.setText("Año");
+        jPanel1.add(etiquetaTiempo6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 320, 90));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1570, 910));
 
@@ -493,6 +498,7 @@ public class Reporte10_vista extends javax.swing.JFrame {
     private javax.swing.JButton btnCerrar;
     private javax.swing.JComboBox<String> combo_ano;
     private javax.swing.JLabel etiquetaTiempo2;
+    private javax.swing.JLabel etiquetaTiempo6;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;

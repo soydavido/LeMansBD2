@@ -26,7 +26,7 @@ public class ReportesConexion {
     
     
     
-    public ArrayList<Reporte4> reporte4(String ano,int numero_equipo){
+    public ArrayList<Reporte4> reporte4(String ano,String numero_equipo){
         
         ArrayList<Reporte4> lista = new ArrayList<Reporte4>();
        
@@ -135,7 +135,7 @@ public class ReportesConexion {
         java.sql.Statement st = conexion.createStatement();
        
         String sql
-                = "SELECT  * from reporte4();";
+                = "SELECT  * from reporte5();";
         ResultSet result = st.executeQuery(sql);
        
         Reporte4 reporte = new Reporte4();

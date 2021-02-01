@@ -50,6 +50,8 @@ public class Reporte15_vista extends javax.swing.JFrame {
        
          btnsiguiente.setVisible(false);
             btnanterior.setVisible(false);
+            
+            con.llenarComboFabricantes(combo_marca);
     }
 
     
@@ -148,7 +150,6 @@ public class Reporte15_vista extends javax.swing.JFrame {
         jPanel1.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 410, 40));
 
         combo_marca.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        combo_marca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
         jPanel1.add(combo_marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, 350, 50));
 
         btnanterior.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N

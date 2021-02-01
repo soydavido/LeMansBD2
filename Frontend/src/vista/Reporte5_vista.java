@@ -432,10 +432,7 @@ public class Reporte5_vista extends javax.swing.JFrame {
 
     private void combo_nombresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combo_nombresMouseClicked
         
-        this.nombre = combo_nombres.getSelectedItem().toString();
        
-        if(!nombre.isEmpty())
-       con.llenarComboApellidos(nombre,combo_apellidos);
     }//GEN-LAST:event_combo_nombresMouseClicked
 
     
