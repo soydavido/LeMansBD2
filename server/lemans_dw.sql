@@ -60,7 +60,7 @@
         posicion numeric , 
         nro_equipo numeric ,
         fabricante varchar ,
-        kilometraje varchar ,
+        kilometraje float ,
         categoria varchar ,
         id_piloto numeric NOT NULL,
         id_piloto_viejo numeric NOT NULL,

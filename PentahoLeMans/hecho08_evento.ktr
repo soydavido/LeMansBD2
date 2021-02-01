@@ -644,6 +644,10 @@
         <name>nro_equipo</name>
         <lookup>nro_equipo</lookup>
       </key>
+      <key>
+        <name>kilometraje</name>
+        <lookup>kilometraje</lookup>
+      </key>
       <return>
         <name>id_evento</name>
         <creation_method>tablemax</creation_method>
@@ -790,7 +794,7 @@ ca.puesto_final posicion,
 CASE 
 	WHEN puesto_final > 0 THEN (rd.nro_vueltas * pi.total_km)
 	WHEN puesto_final = 0 THEN 0
-END kilometraje, rd.id_car_evento as id_ranking, to_date(to_char(ev.fecha,'DD-MM-YYYY'),'DD-MM-YYYY') as fecha,
+END kilometraje, rd.id_car_evento as id_ranking, to_date(to_char(ev.fecha,'DD-MM-YYYY'),'DD-MM-YYYY') as fecha, rd.nro_vueltas,
 --Datos Equipo
 ca.id_parti_equipo as id_equipo, ca.parti_nro_equipo as nro_equipo,
 --Datos Vehiculo 
@@ -918,6 +922,29 @@ ORDER BY 1,3 DESC ,2</sql>
         <origin>Table input</origin>
         <comments>fecha</comments>
         <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>nro_vueltas</name>
+        <length>3</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>nro_vueltas</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -1471,6 +1498,18 @@ ORDER BY 1,3 DESC ,2</sql>
       <key>
         <name>posicion</name>
         <field>posicion</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>posicion</name>
+        <field>posicion</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>nro_vueltas</name>
+        <field>nro_vueltas</field>
         <condition>=</condition>
         <name2/>
       </key>

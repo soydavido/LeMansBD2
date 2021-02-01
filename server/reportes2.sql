@@ -1,61 +1,67 @@
 --REPORTE 4
 CREATE FUNCTION reporte4(anho integer, num_equipo integer)
-RETURNS TABLE (id_evento evento.id%TYPE, posicioncarrera ranking.posicion%TYPE, kmcarrera ranking.kilometraje%TYPE, vueltascarrera ranking.vueltas%TYPE, vuelta_rapida_carrera varchar, velocidad_media float, diferencia float, posicionensayo ranking.posicion%TYPE, vuelta_rapida_ensayo varchar, numero_equipo equipo.numero_equipo%TYPE, nombre_equipo equipo.nombre%TYPE, fabricante fabricante.nombre%TYPE, modelo modelo.nombre%TYPE, caracteristicas_vehiculo vehiculo.caracteristicas%TYPE, categoria_vehiculo vehiculo.categoria%TYPE, nombre_piloto varchar, nombre2 varchar, apellido varchar, apellido2 varchar, nacionalidad varchar )
+RETURNS TABLE (id_evento dw_hec_evento.id_evento%TYPE, numero_equipo dw_hec_evento.nro_equipo%TYPE, nombre_equipo dw_dim_equipo.nombre%TYPE, pais_equipo dw_dim_equipo.pais%TYPE, fabricante dw_dim_vehiculo.fabricante%TYPE, modelo dw_dim_vehiculo.modelo%TYPE, motor text, categoria dw_dim_vehiculo.categoria%TYPE, nombre_piloto dw_dim_pilotos.nombre%TYPE, apellido_piloto dw_dim_pilotos.apellido%TYPE, nacionalidad dw_dim_pilotos.nacionalidad%TYPE, posicion dw_hec_evento.posicion%TYPE, kilometraje dw_hec_evento.kilometraje%TYPE, vueltas dw_dim_ranking.nro_vueltas%TYPE, vuelta_rapida dw_dim_ranking.vuelta_rapida%TYPE, velocidad_media dw_dim_ranking.velocidad_media%TYPE, diferencia float, cantidad_pilotos bigint )
 AS $$
 BEGIN
 	IF(anho is null) THEN
 		RETURN QUERY SELECT 
-		DISTINCT rc.id_evento, 
-		--Carrera
-		rc.posicion poscarrera, rc.kilometraje kmcarrera, rc.vueltas vueltascarrera, (rc.desempeno).vuelta_mas_rapida vueltacarrera, (rc.desempeno).velocidad_media,
-		(SELECT ri.kilometraje - rc.kilometraje FROM ranking ri WHERE ri.posicion = rc.posicion-1 AND ri.id_evento = rc.id_evento) diferencia, --case para el #1
-		--Ensayo
-		re.posicion posensayo, (re.desempeno).vuelta_mas_rapida vueltaensayo,
-		--Equipo
-		e1.numero_equipo, e1.nombre nombreequipo,
-		--Vehiculo
-		f1.nombre fabricante, m1.nombre modelo, v1.caracteristicas, v1.categoria,
-		--Piloto
-		(p1.informacion).nombre, (p1.informacion).nombre2, (p1.informacion).apellido, (p1.informacion).apellido2, nac1.gentilicio  
-		FROM equipo e1, ranking rc, evento ec, ranking re, evento ee,
-		piloto p1, contrato c1, nacionalidad nac1, vehiculo v1, modelo m1, fabricante f1
-		WHERE e1.numero_equipo = num_equipo
-		AND rc.id_equipo = e1.id AND re.id_equipo = e1.id
-		AND ec.id = rc.id_evento AND ee.id = re.id_evento
-		AND ec.tipo = 'Carrera' AND ee.tipo = 'Ensayo'
-		AND ee.ano = ec.ano
-		AND c1.id_equipo = e1.id AND c1.id_piloto = p1.id
-		AND ec.ano BETWEEN date_part('year',(c1.duracion).fecha_inicial) AND date_part('year',(c1.duracion).fecha_final)
-		AND nac1.id = p1.id_nacionalidad
-		AND v1.id = rc.id_vehiculo AND v1.id_modelo = m1.id AND m1.id_fabricante = f1.id;
+		--DATOS EQUIPO 
+		ev.id_evento, ev.nro_equipo, eq.nombre, eq.pais,
+		--DATOS VEHICULO 
+		ve.fabricante, ve.modelo, concat(ve.motor_nombre,' ',ve.motor_cilindrada,' ',ve.motor_capacidad) motor, ve.categoria categoria,
+		--DATOS PILOTO
+		pi.nombre, pi.apellido, pi.nacionalidad,
+		--DATOS RANKING 
+		ev.posicion, ev.kilometraje, ra.nro_vueltas, ra.vuelta_rapida, ra.velocidad_media,
+		CASE 
+			WHEN ev.posicion = 1 THEN 0
+			WHEN ev.posicion != 1 THEN (SELECT ri.kilometraje - ra.kilometraje 
+										FROM dw_dim_ranking ri, dw_hec_evento ei, dw_dim_fecha fi
+										WHERE ri.id_ranking = ei.id_ranking
+										AND ei.id_fecha = fi.id_fecha
+										AND date_part('year',fe.fecha) = date_part('year',fi.fecha)
+										AND ri.posicion = ra.posicion-1 FETCH FIRST 1 ROW ONLY) 
+		END diferencia,
+		(SELECT COUNT (*) FROM dw_hec_evento ex WHERE ex.id_equipo=ev.id_equipo AND ex.id_ranking = ev.id_ranking) cantidad_pilotos
+		FROM dw_hec_evento ev, dw_dim_equipo eq, dw_dim_vehiculo ve, dw_dim_fecha fe, dw_dim_pilotos pi, dw_dim_ranking ra
+		WHERE ev.nro_equipo = num_equipo
+		AND ev.id_vehiculo = ve.id_vehiculo 
+		AND ev.id_equipo = eq.id_equipo
+		AND fe.id_fecha = ev.id_fecha
+		AND ev.id_piloto = pi.id_piloto
+		AND ev.id_ranking = ra.id_ranking;
 	ELSE
 		RETURN QUERY SELECT 
-		DISTINCT rc.id_evento, 
-		--Carrera
-		rc.posicion poscarrera, rc.kilometraje kmcarrera, rc.vueltas vueltascarrera, (rc.desempeno).vuelta_mas_rapida vueltacarrera, (rc.desempeno).velocidad_media,
-		(SELECT ri.kilometraje - rc.kilometraje FROM ranking ri WHERE ri.posicion = rc.posicion-1 AND ri.id_evento = rc.id_evento) diferencia,
-		--Ensayo
-		re.posicion posensayo, (re.desempeno).vuelta_mas_rapida vueltaensayo,
-		--Equipo
-		e1.numero_equipo, e1.nombre nombreequipo,
-		--Vehiculo
-		f1.nombre fabricante, m1.nombre modelo, v1.caracteristicas, v1.categoria,
-		--Piloto
-		(p1.informacion).nombre, (p1.informacion).nombre2, (p1.informacion).apellido, (p1.informacion).apellido2, nac1.gentilicio  
-		FROM equipo e1, ranking rc, evento ec, ranking re, evento ee,
-		piloto p1, contrato c1, nacionalidad nac1, vehiculo v1, modelo m1, fabricante f1
-		WHERE e1.numero_equipo = num_equipo
-		AND rc.id_equipo = e1.id AND re.id_equipo = e1.id
-		AND ec.id = rc.id_evento AND ee.id = re.id_evento
-		AND ec.tipo = 'Carrera' AND ee.tipo = 'Ensayo'
-		AND ee.ano = anho AND ee.ano = ec.ano
-		AND c1.id_equipo = e1.id AND c1.id_piloto = p1.id
-		AND ec.ano BETWEEN date_part('year',(c1.duracion).fecha_inicial) AND date_part('year',(c1.duracion).fecha_final)
-		AND nac1.id = p1.id_nacionalidad
-		AND v1.id = rc.id_vehiculo AND v1.id_modelo = m1.id AND m1.id_fabricante = f1.id;
+		--DATOS EQUIPO 
+		ev.id_evento, ev.nro_equipo, eq.nombre, eq.pais,
+		--DATOS VEHICULO 
+		ve.fabricante, ve.modelo, concat(ve.motor_nombre,' ',ve.motor_cilindrada,' ',ve.motor_capacidad) motor, ve.categoria categoria,
+		--DATOS PILOTO
+		pi.nombre, pi.apellido, pi.nacionalidad,
+		--DATOS RANKING 
+		ev.posicion, ev.kilometraje, ra.nro_vueltas, ra.vuelta_rapida, ra.velocidad_media,
+		CASE 
+			WHEN ev.posicion = 1 THEN 0
+			WHEN ev.posicion != 1 THEN (SELECT ri.kilometraje - ra.kilometraje 
+										FROM dw_dim_ranking ri, dw_hec_evento ei, dw_dim_fecha fi
+										WHERE ri.id_ranking = ei.id_ranking
+										AND ei.id_fecha = fi.id_fecha
+										AND date_part('year',fe.fecha) = date_part('year',fi.fecha)
+										AND ri.posicion = ra.posicion-1 FETCH FIRST 1 ROW ONLY) 
+		END diferencia,
+		(SELECT COUNT (*) FROM dw_hec_evento ex WHERE ex.id_equipo=ev.id_equipo AND ex.id_ranking = ev.id_ranking) cantidad_pilotos
+		FROM dw_hec_evento ev, dw_dim_equipo eq, dw_dim_vehiculo ve, dw_dim_fecha fe, dw_dim_pilotos pi, dw_dim_ranking ra
+		WHERE ev.nro_equipo = num_equipo
+		AND ev.id_vehiculo = ve.id_vehiculo 
+		AND ev.id_equipo = eq.id_equipo
+		AND fe.id_fecha = ev.id_fecha
+		AND date_part('year',fe.fecha) = anho
+		AND ev.id_piloto = pi.id_piloto
+		AND ev.id_ranking = ra.id_ranking;
 	END IF;
 END;
 $$LANGUAGE plpgsql;
+
 
 --REPORTE 7
 CREATE FUNCTION reporte7(anho integer)

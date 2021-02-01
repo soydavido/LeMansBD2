@@ -545,6 +545,54 @@
     </hop>
   </order>
   <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>dw_lemans</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>public</schema>
+      <table>dw_dim_fecha</table>
+      <key>
+        <name>id_fecha</name>
+        <field>id_fecha</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>fecha</name>
+        <rename>fecha</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>id_fecha</name>
+        <rename>id_fecha</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>extraccion de fecha</name>
     <type>TableInput</type>
     <description/>
@@ -557,7 +605,8 @@
     </partitioning>
     <connection>lemans09</connection>
     <sql>SELECT DISTINCT r1.fecha, nextval('validfecha') as id_fecha
-FROM ranking r1
+FROM ranking r1, evento e1
+WHERE r1.id_evento = e1.id AND e1.tipo = 'Carrera'
 GROUP BY 1
 ORDER BY 1</sql>
     <limit>0</limit>
@@ -624,54 +673,6 @@ ORDER BY 1</sql>
     </remotesteps>
     <GUI>
       <xloc>208</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>dw_lemans</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>public</schema>
-      <table>dw_dim_fecha</table>
-      <key>
-        <name>id_fecha</name>
-        <field>id_fecha</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>fecha</name>
-        <rename>fecha</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>id_fecha</name>
-        <rename>id_fecha</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>352</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
