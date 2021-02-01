@@ -52,7 +52,7 @@ public class Reporte11_vista extends javax.swing.JFrame {
         btnanterior.setVisible(false);
          
         
-          
+          con.llenarComboAno(combo_ano);
     }
 
     
