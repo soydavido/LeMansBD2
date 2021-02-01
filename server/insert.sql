@@ -857,7 +857,7 @@ UPDATE piloto SET informacion =('Roman','Aleksándrovich','Rusinov',NULL,'21-10-
 UPDATE piloto SET informacion =('Mathias',NULL,'Beche',NULL,'28-06-1986',NULL,NULL,NULL,'M') WHERE id = 106 ;
 UPDATE piloto SET informacion =('Alex',NULL,'Brundle',NULL,'07-08-1990',NULL,NULL,NULL,'M') WHERE id = 107 ;
 UPDATE piloto SET informacion =('Matthew',NULL,'Griffin',NULL,'01-10-1981',NULL,NULL,NULL,'M') WHERE id = 108 ;
-UPDATE piloto SET informacion =('David',NULL,'Heinemeier',NULL,'15-10-1 979',NULL,NULL,NULL,'M') WHERE id = 109 ;
+UPDATE piloto SET informacion =('David',NULL,'Heinemeier',NULL,'15-10-1979',NULL,NULL,NULL,'M') WHERE id = 109 ;
 UPDATE piloto SET informacion =('Paolo',NULL,'Ruberti',NULL,'22-04-1975',NULL,NULL,NULL,'M') WHERE id = 110 ;
 UPDATE piloto SET informacion =('Brendon',NULL,'Hartley',NULL,'10-11-1989',NULL,NULL,NULL,'M') WHERE id = 111 ;
 UPDATE piloto SET informacion =('Mike',NULL,'Conway',NULL,'19-08-1983',NULL,NULL,NULL,'M') WHERE id = 112 ;

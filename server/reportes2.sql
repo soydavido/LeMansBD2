@@ -271,6 +271,23 @@ BEGIN
 END;
 $$LANGUAGE plpgsql;
 
+--REPORTE 14
+CREATE FUNCTION reporte14()
+RETURNS TABLE (nombre dw_dim_pilotos.nombre%TYPE, apellido dw_dim_pilotos.apellido%TYPE, nacionalidad dw_dim_pilotos.nacionalidad%TYPE, abandonos bigint)
+AS $$
+BEGIN
+	RETURN QUERY SELECT DISTINCT pi.nombre, pi.apellido, pi.nacionalidad, (SELECT COUNT(*)
+			FROM dw_hec_evento evc
+			WHERE evc.kilometraje = 0 AND evc.id_piloto = pi.id_piloto) 
+	FROM dw_hec_evento ev, dw_dim_pilotos pi
+	WHERE (SELECT COUNT(*)
+			FROM dw_hec_evento ei
+			WHERE ei.kilometraje > 0 AND ei.id_piloto = pi.id_piloto) < 1
+	AND ev.id_piloto = pi.id_piloto;
+END;
+$$LANGUAGE plpgsql;
+
+
 --REPORTE 15
 CREATE FUNCTION reporte15()
 RETURNS TABLE (nombre_fabricante dw_dim_vehiculo.fabricante%TYPE, victorias bigint)
