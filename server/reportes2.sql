@@ -89,37 +89,24 @@ $$LANGUAGE plpgsql;
 
 --REPORTE 8
 CREATE FUNCTION reporte8(anho integer)
-RETURNS TABLE (id_evento evento.id%TYPE, nombre_equipo equipo.nombre%TYPE, numero_equipo equipo.numero_equipo%TYPE, nombre_piloto varchar, nombre2 varchar, apellido varchar, apellido2 varchar, nacionalidad varchar, edad interval)
+RETURNS TABLE (nombre dw_dim_pilotos.nombre%TYPE, apellido dw_dim_pilotos.apellido%TYPE, edad interval, nacionalidad dw_dim_pilotos.nacionalidad%TYPE)
 AS $$
 BEGIN
 	IF(anho is null) THEN
 		RETURN QUERY
-		SELECT DISTINCT r1.id_evento, e1.nombre nombreequipo, e1.numero_equipo numeroequipo , 
-		(p1.informacion).nombre, (p1.informacion).nombre2, (p1.informacion).apellido, (p1.informacion).apellido2, nac1.gentilicio,
-		AGE(current_date,to_date((p1.informacion).fecha_nacimiento,'DD-MM-YYYY'))
-		FROM ranking r1, piloto p1, equipo e1, contrato c1, nacionalidad nac1, evento ev1
-		WHERE p1.id = c1.id_piloto AND e1.id = c1.id_equipo
-		AND r1.id_equipo = e1.id
-		AND nac1.id = p1.id_nacionalidad
-		AND r1.id_evento = ev1.id AND ev1.tipo = 'Carrera'
-		AND ev1.ano BETWEEN date_part('year',(c1.duracion).fecha_inicial) AND date_part('year',(c1.duracion).fecha_final)
-		GROUP BY 1,2,3,4,5,6,7,8,9
-		ORDER BY 9 DESC,8,2,1,3,4,5,6,7
-		FETCH FIRST 1 ROW ONLY;
+			SELECT DISTINCT ON (date_part('year',fe.fecha))  pi.nombre, pi.apellido, AGE(current_date,to_date(pi.fecha_nacimiento,'DD-MM-YYYY')), pi.nacionalidad
+			FROM dw_hec_evento ev,dw_dim_fecha fe, dw_dim_pilotos pi
+			WHERE fe.id_fecha = ev.id_fecha
+			AND ev.id_piloto = pi.id_piloto 
+			ORDER BY (date_part('year',fe.fecha)), 3 DESC;
 	ELSE
 		RETURN QUERY
-		SELECT DISTINCT r1.id_evento, e1.nombre nombreequipo, e1.numero_equipo numeroequipo , 
-		(p1.informacion).nombre, (p1.informacion).nombre2, (p1.informacion).apellido, (p1.informacion).apellido2, nac1.gentilicio,
-		AGE(current_date,to_date((p1.informacion).fecha_nacimiento,'DD-MM-YYYY'))
-		FROM ranking r1, piloto p1, equipo e1, contrato c1, nacionalidad nac1, evento ev1
-		WHERE p1.id = c1.id_piloto AND e1.id = c1.id_equipo
-		AND r1.id_equipo = e1.id
-		AND nac1.id = p1.id_nacionalidad
-		AND r1.id_evento = ev1.id AND ev1.ano = anho AND ev1.tipo = 'Carrera'
-		AND ev1.ano BETWEEN date_part('year',(c1.duracion).fecha_inicial) AND date_part('year',(c1.duracion).fecha_final)
-		GROUP BY 1,2,3,4,5,6,7,8,9
-		ORDER BY 9 DESC,8,2,1,3,4,5,6,7
-		FETCH FIRST 1 ROW ONLY;
+			SELECT DISTINCT ON (date_part('year',fe.fecha))  pi.nombre, pi.apellido, AGE(current_date,to_date(pi.fecha_nacimiento,'DD-MM-YYYY')), pi.nacionalidad
+			FROM dw_hec_evento ev,dw_dim_fecha fe, dw_dim_pilotos pi
+			WHERE date_part('year',fe.fecha) = anho
+			AND fe.id_fecha = ev.id_fecha
+			AND ev.id_piloto = pi.id_piloto 
+			ORDER BY (date_part('year',fe.fecha)), 3 DESC;
 	END IF;
 END;
 $$LANGUAGE plpgsql;
