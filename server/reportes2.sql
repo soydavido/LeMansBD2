@@ -271,6 +271,26 @@ BEGIN
 END;
 $$LANGUAGE plpgsql;
 
+--REPORTE 13
+CREATE FUNCTION reporte13()
+RETURNS TABLE (nombre dw_dim_pilotos.nombre%TYPE, apellido dw_dim_pilotos.apellido%TYPE, nacionalidad dw_dim_pilotos.nacionalidad%TYPE, abandonos bigint)
+AS $$
+BEGIN
+	RETURN QUERY SELECT DISTINCT pi.nombre, pi.apellido, pi.nacionalidad, (SELECT COUNT(*)
+				FROM dw_hec_evento evc2
+				WHERE evc2.id_piloto = pi.id_piloto and evc2.posicion > 1 AND evc2.posicion < 4 )
+	FROM dw_hec_evento ev, dw_dim_pilotos pi
+	WHERE (SELECT COUNT(*)
+			FROM dw_hec_evento evc
+			WHERE evc.id_piloto = pi.id_piloto AND evc.posicion = 1) < 1
+	AND ev.id_piloto = pi.id_piloto
+	AND (SELECT COUNT(*)
+				FROM dw_hec_evento evc2
+				WHERE evc2.id_piloto = pi.id_piloto and evc2.posicion > 1 AND evc2.posicion < 4 ) > 0
+	ORDER BY 4 DESC;
+END;
+$$LANGUAGE plpgsql;
+
 --REPORTE 14
 CREATE FUNCTION reporte14()
 RETURNS TABLE (nombre dw_dim_pilotos.nombre%TYPE, apellido dw_dim_pilotos.apellido%TYPE, nacionalidad dw_dim_pilotos.nacionalidad%TYPE, abandonos bigint)
