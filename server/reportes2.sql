@@ -103,12 +103,12 @@ $$LANGUAGE plpgsql;
 
 --REPORTE 6
 CREATE FUNCTION reporte6(nombre_fabricante varchar, nombre_modelo varchar)
-RETURNS TABLE (anho_competicion float, fabricante_nombre dw_dim_vehiculo.fabricante%TYPE, modelo_nombre dw_dim_vehiculo.modelo%TYPE, nombre_equipo dw_dim_equipo.nombre %TYPE, nro_equipo dw_dim_equipo.nro_equipo %TYPE, pais_equipo dw_dim_equipo.pais %TYPE, velocidad_media dw_dim_ranking.velocidad_media%TYPE, nombre_piloto dw_dim_pilotos.nombre%TYPE, apellido_piloto dw_dim_pilotos.apellido%TYPE, nacionalidad_piloto dw_dim_pilotos.nacionalidad%TYPE, cantidad_pilotos bigint)
+RETURNS TABLE (anho_competicion float, fabricante_nombre dw_dim_vehiculo.fabricante%TYPE, modelo_nombre dw_dim_vehiculo.modelo%TYPE, motor text, categoria dw_dim_vehiculo.categoria%TYPE, tipo_auto dw_dim_vehiculo.tipo%TYPE, nombre_equipo dw_dim_equipo.nombre %TYPE, nro_equipo dw_dim_equipo.nro_equipo %TYPE, pais_equipo dw_dim_equipo.pais %TYPE, velocidad_media dw_dim_ranking.velocidad_media%TYPE, nombre_piloto dw_dim_pilotos.nombre%TYPE, apellido_piloto dw_dim_pilotos.apellido%TYPE, nacionalidad_piloto dw_dim_pilotos.nacionalidad%TYPE, cantidad_pilotos bigint)
 AS $$
 BEGIN
 	 RETURN QUERY 
 		SELECT DISTINCT date_part('year',fe.fecha), 
-		ve.fabricante, ve.modelo,
+		ve.fabricante, ve.modelo, concat(ve.motor_nombre,' ',ve.motor_cilindrada,' ',ve.motor_capacidad) motor, ve.categoria categoria, ve.tipo,
 		eq.nombre, eq.nro_equipo, eq.pais,
 		ra.velocidad_media,
 		pi.nombre, pi.apellido, pi.nacionalidad,
@@ -181,28 +181,42 @@ BEGIN
 	 RETURN QUERY
 		SELECT DISTINCT pi.nombre, pi.apellido, pi.nacionalidad, (SELECT COUNT (*) FROM dw_hec_evento ei WHERE ei.id_piloto = pi.id_piloto)
 		FROM dw_hec_evento ev, dw_dim_pilotos pi
-		WHERE ev.id_piloto = pi.id_piloto;
+		WHERE ev.id_piloto = pi.id_piloto
+		GROUP BY 1,2,3,4
+		ORDER BY 4 DESC;
 END;
 $$LANGUAGE plpgsql;	
 
 
 --REPORTE 10
 CREATE OR REPLACE FUNCTION reporte10 (anho_ins integer)
-RETURNS TABLE (anho float, nombre_piloto varchar, nombre2 varchar, apellido varchar, apellido2 varchar, nacionalidad varchar)
+RETURNS TABLE (anho float, nombre_piloto varchar, apellido varchar, nacionalidad varchar)
 AS $$
 BEGIN
-	SELECT date_part('year',fe.fecha), pi.nombre, pi.apellido,  pi.nacionalidad
-	FROM dw_hec_evento ev,dw_dim_fecha fe, dw_dim_pilotos pi
-	WHERE fe.id_fecha = ev.id_fecha
-	AND ev.id_piloto = pi.id_piloto
-	AND ev.posicion = 1 
-	AND fe.fecha = (SELECT fe1.fecha
-					FROM dw_hec_evento ev1,dw_dim_fecha fe1
-					WHERE fe1.id_fecha = ev1.id_fecha
-					AND ev1.id_piloto = ev.id_piloto
-					ORDER BY 1 ASC FETCH FIRST 1 ROW ONLY); 	
-
-	END IF;
+	IF (anho_ins is null) THEN
+		RETURN QUERY SELECT date_part('year',fe.fecha), pi.nombre, pi.apellido,  pi.nacionalidad
+		FROM dw_hec_evento ev,dw_dim_fecha fe, dw_dim_pilotos pi
+		WHERE fe.id_fecha = ev.id_fecha
+		AND ev.id_piloto = pi.id_piloto
+		AND ev.posicion = 1 
+		AND fe.fecha = (SELECT fe1.fecha
+						FROM dw_hec_evento ev1,dw_dim_fecha fe1
+						WHERE fe1.id_fecha = ev1.id_fecha
+						AND ev1.id_piloto = ev.id_piloto
+						ORDER BY 1 ASC FETCH FIRST 1 ROW ONLY); 	
+	ELSE
+		RETURN QUERY SELECT date_part('year',fe.fecha), pi.nombre, pi.apellido,  pi.nacionalidad
+		FROM dw_hec_evento ev,dw_dim_fecha fe, dw_dim_pilotos pi
+		WHERE fe.id_fecha = ev.id_fecha
+		AND ev.id_piloto = pi.id_piloto
+		AND ev.posicion = 1 
+		AND date_part('year',fe.fecha) = anho_ins
+		AND fe.fecha = (SELECT fe1.fecha
+						FROM dw_hec_evento ev1,dw_dim_fecha fe1
+						WHERE fe1.id_fecha = ev1.id_fecha
+						AND ev1.id_piloto = ev.id_piloto
+						ORDER BY 1 ASC FETCH FIRST 1 ROW ONLY); 	
+	END IF;	
 END;
 $$LANGUAGE plpgsql;
 
