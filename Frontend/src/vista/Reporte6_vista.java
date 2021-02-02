@@ -82,7 +82,6 @@ public class Reporte6_vista extends javax.swing.JFrame {
         combo_modelo = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        txtnumero_equipo = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -120,6 +119,8 @@ public class Reporte6_vista extends javax.swing.JFrame {
         txt_tipo = new javax.swing.JLabel();
         etiquetaTiempo4 = new javax.swing.JLabel();
         etiquetaTiempo5 = new javax.swing.JLabel();
+        txtnumero_equipo = new javax.swing.JLabel();
+        fabricante_type = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -176,9 +177,6 @@ public class Reporte6_vista extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setText("Numero de Equipo:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 210, 40));
-
-        txtnumero_equipo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txtnumero_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 100, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setText("Posición:");
@@ -335,7 +333,39 @@ public class Reporte6_vista extends javax.swing.JFrame {
         etiquetaTiempo5.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiquetaTiempo5.setText("Fabricante");
-        jPanel1.add(etiquetaTiempo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 320, 90));
+        jPanel1.add(etiquetaTiempo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 200, 90));
+
+        txtnumero_equipo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txtnumero_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 100, 40));
+
+        fabricante_type.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        fabricante_type.setForeground(new java.awt.Color(204, 204, 204));
+        fabricante_type.setText("Buscar por Nombre");
+        fabricante_type.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fabricante_typeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                fabricante_typeMouseEntered(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                fabricante_typeMousePressed(evt);
+            }
+        });
+        fabricante_type.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fabricante_typeActionPerformed(evt);
+            }
+        });
+        fabricante_type.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fabricante_typeKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fabricante_typeKeyTyped(evt);
+            }
+        });
+        jPanel1.add(fabricante_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 280, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 0, 1570, 910));
 
@@ -409,6 +439,36 @@ public class Reporte6_vista extends javax.swing.JFrame {
     private void combo_fabricanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combo_fabricanteMouseClicked
      
     }//GEN-LAST:event_combo_fabricanteMouseClicked
+
+    private void fabricante_typeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fabricante_typeKeyTyped
+        System.out.println("marque una letra");
+        
+        String fabricante = fabricante_type.getText();
+        
+        con.llenarComboFabricantes(fabricante,combo_fabricante);
+        
+    }//GEN-LAST:event_fabricante_typeKeyTyped
+
+    private void fabricante_typeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fabricante_typeKeyPressed
+       
+        
+    }//GEN-LAST:event_fabricante_typeKeyPressed
+
+    private void fabricante_typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fabricante_typeActionPerformed
+       
+    }//GEN-LAST:event_fabricante_typeActionPerformed
+
+    private void fabricante_typeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fabricante_typeMouseClicked
+         
+    }//GEN-LAST:event_fabricante_typeMouseClicked
+
+    private void fabricante_typeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fabricante_typeMouseEntered
+         
+    }//GEN-LAST:event_fabricante_typeMouseEntered
+
+    private void fabricante_typeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fabricante_typeMousePressed
+       fabricante_type.setText("");
+    }//GEN-LAST:event_fabricante_typeMousePressed
 
     
     public void subir(){
@@ -744,6 +804,7 @@ public class Reporte6_vista extends javax.swing.JFrame {
     private javax.swing.JLabel etiquetaTiempo3;
     private javax.swing.JLabel etiquetaTiempo4;
     private javax.swing.JLabel etiquetaTiempo5;
+    private javax.swing.JTextField fabricante_type;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

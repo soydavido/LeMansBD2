@@ -4874,7 +4874,7 @@ UPDATE contrato set duracion =(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12
 UPDATE contrato set duracion =(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2019','DD-MM-YYYY')) WHERE id =  3 ; 
 UPDATE contrato set duracion =(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  4 ; 
 UPDATE contrato set duracion =(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  5 ; 
-UPDATE contrato set duracion =(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  6 ; 
+UPDATE contrato set duracion =(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  6 ; 
 UPDATE contrato set duracion =(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2019','DD-MM-YYYY')) WHERE id =  7 ; 
 UPDATE contrato set duracion =(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2019','DD-MM-YYYY')) WHERE id =  8 ; 
 UPDATE contrato set duracion =(to_date('01-01-2019','DD-MM-YYYY'),to_date('31-12-2019','DD-MM-YYYY')) WHERE id =  9 ; 
@@ -4910,7 +4910,7 @@ UPDATE contrato set duracion =(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12
 UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  39 ; 
 UPDATE contrato set duracion =(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2019','DD-MM-YYYY')) WHERE id =  40 ; 
 UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  41 ; 
-UPDATE contrato set duracion =(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  42 ; 
+UPDATE contrato set duracion =(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  42 ; 
 UPDATE contrato set duracion =(to_date('01-01-2019','DD-MM-YYYY'),to_date('31-12-2019','DD-MM-YYYY')) WHERE id =  43 ; 
 UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  44 ; 
 UPDATE contrato set duracion =(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  45 ; 
@@ -4952,7 +4952,7 @@ UPDATE contrato set duracion =(to_date('01-01-2020','DD-MM-YYYY'),to_date('31-12
 UPDATE contrato set duracion =(to_date('01-01-2019','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  81 ; 
 UPDATE contrato set duracion =(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  82 ; 
 UPDATE contrato set duracion =(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  83 ; 
-UPDATE contrato set duracion =(to_date('01-01-2015','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  84 ; 
+UPDATE contrato set duracion =(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  84 ; 
 UPDATE contrato set duracion =(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  85 ; 
 UPDATE contrato set duracion =(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  86 ; 
 UPDATE contrato set duracion =(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2020','DD-MM-YYYY')) WHERE id =  87 ; 

@@ -25,6 +25,22 @@ RETURN QUERY SELECT DISTINCT fabricante
 END;
 $$LANGUAGE plpgsql;
 
+
+CREATE OR REPLACE FUNCTION fabricantes (nombre varchar)
+RETURNS TABLE (fabricantes varchar)
+AS $$
+BEGIN 
+RETURN QUERY SELECT DISTINCT fabricante
+			FROM dw_dim_vehiculo 
+			Where fabricante LIKE nombre
+			GROUP BY 1 ORDER BY 1;
+END;
+$$LANGUAGE plpgsql;
+
+
+
+
+
 CREATE OR REPLACE FUNCTION nombres_pilotos ()
 RETURNS TABLE (nombres varchar)
 AS $$

@@ -268,7 +268,7 @@ INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (221,'AF
 INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (222,'JMB Racing',83,9,'F');
 INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (223,'JWA-Avila',55,10,'F');
 INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (224,'Pescarolo Team',17,45,'F');
-INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (225,'Status Grand Prix',33,43,'F');
+INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (225,'Status Grand Prix',30,43,'F');
 INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (226,'Team Felbermayr-Proton',88,10,'F');
 INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (227,'Oak Racing',15,18,'F');
 INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (228,'Team Felbermayr-Proton',77,10,'F');
@@ -998,6 +998,10 @@ INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (592,('Stéphane',null
 INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (593,('Mike',null,'Waltrip',null,'30-04-1963',null,null,null,'M'),30);
 INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (594,('Bryce',null,'Miller',null,'26-07-1982',null,null,null,'M'),30);
 
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (605,('Yelder',null,'Buurrman',null,'19-02-1987',null,null,null,'M'),19);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (606,('Romain',null,'Iannetta',null,'27-11-1979',null,null,null,'M'),2);
+
+
 --Contratos
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (322,19,309,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2018','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (324,97,18,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
@@ -1067,7 +1071,6 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (387,93,74,(to_date
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (388,73,74,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (389,93,157,(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2018','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (390,23,157,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (391,125,157,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (392,93,510,(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2018','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (393,20,194,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (394,44,34,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
@@ -1082,8 +1085,6 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (402,127,95,(to_dat
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (403,130,95,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (404,132,161,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (405,131,161,(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2018','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (406,133,161,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (407,133,86,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2018','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (408,132,86,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (409,131,86,(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2018','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (410,131,511,(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2018','DD-MM-YYYY')));
@@ -1130,7 +1131,7 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (450,146,89,(to_dat
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (451,149,166,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (452,120,166,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (453,121,148,(to_date('01-01-2016','DD-MM-YYYY'),to_date('01-01-2016','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (454,150,148,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
+
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (455,3,524,(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2018','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (456,13,137,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (457,152,169,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
@@ -1178,7 +1179,6 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (498,51,235,(to_dat
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (499,169,30,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (500,6,30,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (501,27,30,(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2018','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (502,169,29,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (503,129,29,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (504,27,29,(to_date('01-01-2018','DD-MM-YYYY'),to_date('31-12-2018','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (505,520,381,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
@@ -1194,7 +1194,6 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (514,172,48,(to_dat
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (515,7,48,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (516,7,185,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (517,117,115,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (518,173,61,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (519,50,61,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (520,117,325,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (521,174,325,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
@@ -1227,7 +1226,6 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (547,155,114,(to_da
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (548,180,114,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (549,152,60,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (550,180,60,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (551,540,38,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (552,180,38,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (553,156,330,(to_date('01-01-2015','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (554,123,330,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
@@ -1283,7 +1281,7 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (603,73,319,(to_dat
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (604,143,93,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (605,143,105,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (606,162,450,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (607,162,362,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
+
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (608,162,5,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (609,52,425,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (610,166,106,(to_date('01-01-2017','DD-MM-YYYY'),to_date('31-12-2017','DD-MM-YYYY')));
@@ -1321,7 +1319,6 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (641,561,356,(to_da
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (642,561,357,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (643,159,458,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (644,159,459,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (645,73,78,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (646,73,331,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (647,148,460,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (648,44,432,(to_date('01-01-2016','DD-MM-YYYY'),to_date('31-12-2016','DD-MM-YYYY')));
@@ -1420,7 +1417,6 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (742,54,74,(to_date
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (743,20,65,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (744,20,78,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (745,20,331,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (746,502,84,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (747,502,100,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (748,502,68,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (749,503,332,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
@@ -1496,8 +1492,6 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (818,526,377,(to_da
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (819,526,115,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (820,526,378,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (821,56,379,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (822,56,121,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (823,56,82,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (824,528,380,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (825,528,381,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (826,528,382,(to_date('01-01-2013','DD-MM-YYYY'),to_date('31-12-2013','DD-MM-YYYY')));
@@ -1580,7 +1574,6 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (902,550,400,(to_da
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (903,550,401,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (904,550,523,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (905,55,395,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (906,55,144,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (907,55,109,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (908,502,83,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (909,502,68,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
@@ -1662,7 +1655,6 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (984,558,420,(to_da
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (985,559,378,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (986,559,377,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (987,559,145,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (988,520,381,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (989,520,41,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (990,520,421,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (991,108,314,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
@@ -1671,7 +1663,6 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (993,108,422,(to_da
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (994,560,423,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (995,560,424,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (996,560,140,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (997,54,142,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (998,54,77,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (999,54,319,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1000,99,48,(to_date('01-01-2014','DD-MM-YYYY'),to_date('31-12-2014','DD-MM-YYYY')));
@@ -1784,7 +1775,6 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1106,76,492,(to_da
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1107,201,493,(to_date('01-01-2015','DD-MM-YYYY'),to_date('31-12-2015','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1108,201,163,(to_date('01-01-2015','DD-MM-YYYY'),to_date('31-12-2015','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1109,201,494,(to_date('01-01-2015','DD-MM-YYYY'),to_date('31-12-2015','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1110,56,83,(to_date('01-01-2015','DD-MM-YYYY'),to_date('31-12-2015','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1111,202,162,(to_date('01-01-2015','DD-MM-YYYY'),to_date('31-12-2015','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1112,202,319,(to_date('01-01-2015','DD-MM-YYYY'),to_date('31-12-2015','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1113,202,495,(to_date('01-01-2015','DD-MM-YYYY'),to_date('31-12-2015','DD-MM-YYYY')));
@@ -1946,9 +1936,9 @@ INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1268,63,556,(to_da
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1269,522,45,(to_date('01-01-2012','DD-MM-YYYY'),to_date('31-12-2012','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1270,522,44,(to_date('01-01-2012','DD-MM-YYYY'),to_date('31-12-2012','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1271,522,557,(to_date('01-01-2012','DD-MM-YYYY'),to_date('31-12-2012','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1272,225,45,(to_date('01-01-2012','DD-MM-YYYY'),to_date('31-12-2012','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1273,225,44,(to_date('01-01-2012','DD-MM-YYYY'),to_date('31-12-2012','DD-MM-YYYY')));
-INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1274,225,557,(to_date('01-01-2012','DD-MM-YYYY'),to_date('31-12-2012','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1272,225,527,(to_date('01-01-2012','DD-MM-YYYY'),to_date('31-12-2012','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1273,225,605,(to_date('01-01-2012','DD-MM-YYYY'),to_date('31-12-2012','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1274,225,606,(to_date('01-01-2012','DD-MM-YYYY'),to_date('31-12-2012','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1275,226,96,(to_date('01-01-2012','DD-MM-YYYY'),to_date('31-12-2012','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1276,226,363,(to_date('01-01-2012','DD-MM-YYYY'),to_date('31-12-2012','DD-MM-YYYY')));
 INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1277,226,110,(to_date('01-01-2012','DD-MM-YYYY'),to_date('31-12-2012','DD-MM-YYYY')));

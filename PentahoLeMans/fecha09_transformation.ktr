@@ -440,10 +440,10 @@
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>dw_le_mans</database>
+    <database>dw_lemans</database>
     <port>5432</port>
     <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79fe238ec7fe8c</password>
+    <password>Encrypted 2be98afc86aa7f287aa0bff228d9ea0c9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -494,7 +494,7 @@
     <database>lemans09</database>
     <port>5432</port>
     <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79fe238ec7fe8c</password>
+    <password>Encrypted 2be98afc86aa7f287aa0bff228d9ea0c9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -673,7 +673,7 @@ ORDER BY 1</sql>
     </remotesteps>
     <GUI>
       <xloc>208</xloc>
-      <yloc>176</yloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
