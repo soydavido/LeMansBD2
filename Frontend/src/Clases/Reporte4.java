@@ -33,7 +33,8 @@ public class Reporte4 {
         private String caracteristicas_vehiculo;
          private String categoria_vehiculo;
         
-        
+        private String tipo_vehiculo;
+         
           private int posicioncarrera;
           private Double kmcarrera;
            private int vueltascarrera;
@@ -133,8 +134,48 @@ public class Reporte4 {
         this.cantidad_pilotos = cantidad_pilotos;
     }
 
+    public Reporte4(String fecha_participacion, String nombre_equipo, int numero_equipo, String pais_equipo, String fabricante, String modelo, String caracteristicas_vehiculo, String categoria_vehiculo, String tipo_vehiculo, double velocidad_media) {
+        this.fecha_participacion = fecha_participacion;
+        this.nombre_equipo = nombre_equipo;
+        this.numero_equipo = numero_equipo;
+        this.pais_equipo = pais_equipo;
+        this.fabricante = fabricante;
+        this.modelo = modelo;
+        this.caracteristicas_vehiculo = caracteristicas_vehiculo;
+        this.categoria_vehiculo = categoria_vehiculo;
+        this.tipo_vehiculo = tipo_vehiculo;
+        this.velocidad_media = velocidad_media;
+    }
+
+    public Reporte4(String fecha_participacion,String fabricante, String modelo, String caracteristicas_vehiculo, String categoria_vehiculo, String tipo_vehiculo, String nombre_equipo, int numero_equipo, String pais_equipo, double velocidad_media,String nombre_piloto, String apellido, String nacionalidad,  int cantidad_pilotos) {
+        this.fecha_participacion = fecha_participacion;
+        this.nombre_equipo = nombre_equipo;
+        this.numero_equipo = numero_equipo;
+        this.pais_equipo = pais_equipo;
+        this.nombre_piloto = nombre_piloto;
+        this.apellido = apellido;
+        this.nacionalidad = nacionalidad;
+        this.fabricante = fabricante;
+        this.modelo = modelo;
+        this.caracteristicas_vehiculo = caracteristicas_vehiculo;
+        this.categoria_vehiculo = categoria_vehiculo;
+        this.tipo_vehiculo = tipo_vehiculo;
+        this.velocidad_media = velocidad_media;
+        this.cantidad_pilotos = cantidad_pilotos;
+    }
+  
+    
+
     public String getPais_equipo() {
         return pais_equipo;
+    }
+
+    public String getTipo_vehiculo() {
+        return tipo_vehiculo;
+    }
+
+    public void setTipo_vehiculo(String tipo_vehiculo) {
+        this.tipo_vehiculo = tipo_vehiculo;
     }
 
     public void setPais_equipo(String pais_equipo) {

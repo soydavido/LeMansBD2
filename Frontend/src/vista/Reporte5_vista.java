@@ -160,13 +160,13 @@ public class Reporte5_vista extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Nacionalidad:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 390, 160, 40));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 390, 160, 40));
 
         txt_nacionalidad_equipo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_nacionalidad_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 390, 200, 40));
+        jPanel1.add(txt_nacionalidad_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 390, 260, 40));
 
         txt_categoria.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 540, 290, 40));
+        jPanel1.add(txt_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 540, 270, 40));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton1.setText("Buscar");
@@ -178,14 +178,14 @@ public class Reporte5_vista extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 70, 120, 50));
 
         txtnumero_equipo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txtnumero_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 310, 110, 40));
+        jPanel1.add(txtnumero_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 310, 110, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setText("Fabricante:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 580, 130, 40));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 580, 130, 40));
 
         txt_fabricante.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_fabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 580, 290, 40));
+        jPanel1.add(txt_fabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 580, 270, 40));
 
         txt_piloto2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jPanel1.add(txt_piloto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 700, 380, 40));
@@ -235,7 +235,7 @@ public class Reporte5_vista extends javax.swing.JFrame {
         jPanel1.add(txt_numero_participaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 590, 110, 40));
 
         txt_podium1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_podium1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 630, 80, 40));
+        jPanel1.add(txt_podium1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 630, 90, 40));
 
         btnanterior.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnanterior.setText("Anterior");
@@ -261,7 +261,7 @@ public class Reporte5_vista extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel15.setText("Datos del Equipo:");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 270, 210, 40));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 270, 210, 40));
 
         etiquetaTiempo3.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -280,7 +280,7 @@ public class Reporte5_vista extends javax.swing.JFrame {
         jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, 250, 40));
 
         txt_fecha_fallecimiento.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_fecha_fallecimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 320, 270, 40));
+        jPanel1.add(txt_fecha_fallecimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 320, 230, 40));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel20.setText("Edad:");
@@ -305,18 +305,18 @@ public class Reporte5_vista extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel13.setText("Nombre:");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 350, 100, 40));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 350, 100, 40));
 
         txt_nombre_equipo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_nombre_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 350, 280, 40));
+        jPanel1.add(txt_nombre_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 350, 290, 40));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel23.setText("Numero:");
-        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 310, 100, 40));
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 310, 100, 40));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel24.setText("Categoria:");
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 540, 110, 40));
+        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 540, 110, 40));
 
         etiquetaTiempo4.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -404,7 +404,7 @@ public class Reporte5_vista extends javax.swing.JFrame {
         try{
             nohay.setText("");
         btnsiguiente1.setVisible(true);
-        btnanterior.setVisible(true);
+      
         
       String nombre = combo_nombres.getSelectedItem().toString();
       
@@ -425,6 +425,8 @@ public class Reporte5_vista extends javax.swing.JFrame {
         btnsiguiente1.setVisible(true);
         try{
         mostrar();
+         if(contador == 0)
+                btnanterior.setVisible(false);
         }catch(Exception e){
            btnanterior.setVisible(false);
         }
@@ -435,6 +437,9 @@ public class Reporte5_vista extends javax.swing.JFrame {
           btnanterior.setVisible(true);
         try{
         mostrar();
+        
+        if(contador == this.lista.size())
+                btnanterior.setVisible(false);
         }catch(Exception e){
              btnsiguiente1.setVisible(false);
         }

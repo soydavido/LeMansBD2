@@ -306,7 +306,6 @@ BEGIN
 	ORDER BY 4 DESC;
 END;
 $$LANGUAGE plpgsql;
-
 --REPORTE 14
 CREATE FUNCTION reporte14()
 RETURNS TABLE (nombre dw_dim_pilotos.nombre%TYPE, apellido dw_dim_pilotos.apellido%TYPE, nacionalidad dw_dim_pilotos.nacionalidad%TYPE, abandonos bigint)
