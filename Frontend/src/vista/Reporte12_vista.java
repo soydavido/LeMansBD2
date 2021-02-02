@@ -428,7 +428,20 @@ public class Reporte12_vista extends javax.swing.JFrame {
                   mostrar(0+1,1);
                   mostrar(0+2,2);
                   this.id_donde_termina = 3;
-                  }
+                
+                }else if(this.lista.get(i).getCantidad_pilotos() == 2){
+                  mostrar(0,0);
+                  mostrar(0+1,1);
+                  this.id_donde_termina = 2;
+              
+                 }else{
+                    mostrar(0,0);
+                  mostrar(0+1,1);
+                  mostrar(0+2,2);
+                  this.id_donde_termina = 3;
+                  
+                  
+              }
                 
                 if(this.lista.size() > 3){
                      btnsiguiente1.setVisible(true);
@@ -459,7 +472,25 @@ public class Reporte12_vista extends javax.swing.JFrame {
                   i= i+3;
                   this.id_donde_termina = i;
               
-            } 
+            } else if(this.lista.get(i).getCantidad_pilotos() == 2){
+                  this.id_anterior = i-1;
+                  mostrar(i,0);
+                  mostrar(i+1,1);
+                 
+                  
+                  i= i+2;
+                  this.id_donde_termina = i;
+              
+            }  else{
+                   this.id_anterior = i-1;
+                  mostrar(i,0);
+                  mostrar(i+1,1);
+                  mostrar(i+2,2);
+                  
+                  i= i+3;
+                  this.id_donde_termina = i;
+                  
+              }
               
        }
           
@@ -500,7 +531,23 @@ public class Reporte12_vista extends javax.swing.JFrame {
                  
                   this.id_donde_termina = i+1;
               
-            } 
+            } else if(this.lista.get(i).getCantidad_pilotos() == 2){
+                
+                  mostrar(i-1,1);
+                  mostrar(i,2);
+                  this.id_anterior = i - 2;
+                 
+                  this.id_donde_termina = i+1;
+              
+            }  else{
+                   mostrar(i-2,0);
+                  mostrar(i-1,1);
+                  mostrar(i,2);
+                  this.id_anterior = i - 3;
+                 
+                  this.id_donde_termina = i+1;
+                  
+              }
               
        }
        

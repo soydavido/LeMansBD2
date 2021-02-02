@@ -354,13 +354,19 @@ public class Reporte6_vista extends javax.swing.JFrame {
             nohay.setText("");
      
         
-       String fabricante = combo_modelo.getSelectedItem().toString();
+       String fabricante = combo_fabricante.getSelectedItem().toString();
         String modelo = combo_modelo.getSelectedItem().toString();
        
+            
         this.lista = reporte_conexion.reporte6(fabricante,modelo);
         
         subir();
         
+        if(this.lista.size() == 0)
+        nohay.setText("No hay Registros de esta Busqueda");
+        else if (this.lista.size() > 0){
+            btnsiguiente1.setVisible(true);
+        }
         }catch(Exception e){
             nohay.setText("No hay Registros de esta Busqueda");
         }
@@ -537,47 +543,29 @@ public class Reporte6_vista extends javax.swing.JFrame {
         txt_diferencia.setText(df.format(lista.get(contador).getDiferencia()));*/
        
         txt_fabricante.setText(lista.get(contador).getFabricante());
-        txt_fabricante.setText(lista.get(contador).getModelo());
+        txt_modelo.setText(lista.get(contador).getModelo());
         txt_motor.setText(lista.get(contador).getCaracteristicas_vehiculo());
         txt_categoria.setText(lista.get(contador).getCategoria_vehiculo());
+        txt_tipo.setText(lista.get(contador).getTipo_vehiculo());
         
+          txt_nombre_conductor.setText(lista.get(contador).getNombre_piloto());
         
-        if(lista.get(contador).getNombre2() != null)
-        txt_nombre_conductor.setText(lista.get(contador).getNombre_piloto()+" "+lista.get(contador).getNombre2());
-        else
-             txt_nombre_conductor.setText(lista.get(contador).getNombre_piloto());
-        
-        if(lista.get(contador).getApellido() != null)
-        txt_apellido.setText(lista.get(contador).getApellido()+" "+lista.get(contador).getApellido2());
-        else
-        txt_apellido.setText(lista.get(contador).getApellido());
+       txt_apellido.setText(lista.get(contador).getApellido());
         
         
         txt_nacionalidad_conductor.setText(lista.get(contador).getNacionalidad());
         } else if ((piloto == 1) || (piloto == -1)){
              
-                if(lista.get(contador).getNombre2() != null)
-                txt_nombre_conductor1.setText(lista.get(contador).getNombre_piloto()+" "+lista.get(contador).getNombre2());
-                else
-                     txt_nombre_conductor1.setText(lista.get(contador).getNombre_piloto());
+                   txt_nombre_conductor1.setText(lista.get(contador).getNombre_piloto());
 
-                if(lista.get(contador).getApellido() != null)
-                txt_apellido1.setText(lista.get(contador).getApellido()+" "+lista.get(contador).getApellido2());
-                else
-                txt_apellido1.setText(lista.get(contador).getApellido());
+                 txt_apellido1.setText(lista.get(contador).getApellido());
                 
                 txt_nacionalidad_conductor1.setText(lista.get(contador).getNacionalidad());
         }
         else if ((piloto == 2) || (piloto == -2)){
-             if(lista.get(contador).getNombre2() != null)
-                txt_nombre_conductor2.setText(lista.get(contador).getNombre_piloto()+" "+lista.get(contador).getNombre2());
-                else
-                     txt_nombre_conductor2.setText(lista.get(contador).getNombre_piloto());
+                txt_nombre_conductor2.setText(lista.get(contador).getNombre_piloto());
 
-                if(lista.get(contador).getApellido() != null)
-                txt_apellido2.setText(lista.get(contador).getApellido()+" "+lista.get(contador).getApellido2());
-                else
-                txt_apellido2.setText(lista.get(contador).getApellido());
+               txt_apellido2.setText(lista.get(contador).getApellido());
                 
                 txt_nacionalidad_conductor2.setText(lista.get(contador).getNacionalidad());
         }

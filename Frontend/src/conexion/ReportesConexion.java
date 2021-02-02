@@ -215,50 +215,47 @@ public class ReportesConexion {
        
      
         sql
-                = "SELECT  * from reporte4('"+fabricante+"','"+modelo+"');";
+                = "SELECT  * from reporte6('"+fabricante+"','"+modelo+"');";
         
         ResultSet result = st.executeQuery(sql);
        
         Reporte4 reporte = new Reporte4();
       
-         String nombre2 = "";
-      String apellido2 = "";
+      
       
         while(result.next()){
-           if(result.getString("nombre2") != null){
-              nombre2 =  result.getString("nombre2");
-          }
-          if(result.getString("apellido2") != null){
-              apellido2 =  result.getString("apellido2");
-          }
          
          
          
-          /*reporte = new Reporte4(   result.getString("anho_competicion"),
+         
+          reporte = new Reporte4(   result.getString("anho_competicion"),
                                     result.getString("fabricante_nombre"),
                                     result.getString("modelo_nombre"),
+                                    result.getString("motor"),
                   
+                                    
+                                    result.getString("categoria"),
+                                    result.getString("tipo_auto"),
                                     result.getString("nombre_equipo"),
                                     Integer.parseInt(result.getString("nro_equipo")),
                                     result.getString("pais_equipo"),
                                    
-                                    result.getString("velocidad_media"),
+                                    Double.parseDouble(result.getString("velocidad_media")),
                   
                                    result.getString("nombre_piloto"),
                                    result.getString("apellido_piloto"),
                                    result.getString("nacionalidad_piloto"),
                                     
-                                    result.getString("caracteristicas_vehiculo"),
-                                    result.getString("categoria_vehiculo")
+                                  
+                                    Integer.parseInt(result.getString("cantidad_pilotos"))
                                     
                                     );
        
-        */
+        
        
            
            lista.add(reporte);
-            nombre2 = "";
-            apellido2 = "";
+           
             }
        
         
@@ -515,31 +512,25 @@ public class ReportesConexion {
                 = "SELECT  * from reporte10(null);";
         }else{
            sql
-                = "SELECT  * from reporte10('"+ano+"');";
+                = "SELECT  * from reporte10("+ano+");";
         }
         
         ResultSet result = st.executeQuery(sql);
        
         Reporte7 reporte = new Reporte7();
       
-        String nombre2 = "";
-      String apellido2 = "";
+       
       
         while(result.next()){
        
-            if(result.getString("nombre2") != null){
-              nombre2 =  result.getString("nombre2");
-          }
-          if(result.getString("apellido2") != null){
-              apellido2 =  result.getString("apellido2");
-          }
+           
          
          
-          reporte = new Reporte7(  
+          reporte = new Reporte7(  result.getString("anho"),
                                     result.getString("nombre_piloto"),
-                                    nombre2,
+                                    
                                     result.getString("apellido"),
-                                    apellido2,
+                                    
                                     result.getString("nacionalidad")
                                     );
        
@@ -547,8 +538,7 @@ public class ReportesConexion {
        
            
            lista.add(reporte);
-            nombre2 = "";
-            apellido2 = "";
+            
             }
        
         
@@ -741,29 +731,21 @@ public class ReportesConexion {
       
         while(result.next()){
       
-          if(result.getString("nombre2") != null){
-              nombre2 =  result.getString("nombre2");
-          }
-          if(result.getString("apellido2") != null){
-              apellido2 =  result.getString("apellido2");
-          }
-         
          
           reporte = new Reporte7(  
-                                    result.getString("nombre_piloto"),
-                                    nombre2,
+                                    result.getString("nombre"),
+                                   
                                     result.getString("apellido"),
-                                    apellido2,
+                                   
                                     result.getString("nacionalidad"),
-                                    result.getString("edad")
+                                    Integer.parseInt(result.getString("podiums"))
                                     );
        
         
        
            
            lista.add(reporte);
-            nombre2 = "";
-            apellido2 = "";
+          
             }
        
         
@@ -809,35 +791,26 @@ public class ReportesConexion {
        
         Reporte7 reporte = new Reporte7();
       
-        String nombre2 = "";
-      String apellido2 = "";
+      
       
         while(result.next()){
-            // System.out.println(result.getString("nombre_equipo")+Integer.parseInt(result.getString("numero_equipo")));
-          //  System.out.println( result.getString("nombre_piloto")+result.getString("nombre2")+result.getString("apellido")+result.getString("apellido2"));
-          if(result.getString("nombre2") != null){
-              nombre2 =  result.getString("nombre2");
-          }
-          if(result.getString("apellido2") != null){
-              apellido2 =  result.getString("apellido2");
-          }
+          
          
          
           reporte = new Reporte7(  
                                     result.getString("nombre_piloto"),
-                                    nombre2,
+                                  
                                     result.getString("apellido"),
-                                    apellido2,
+                                   
                                     result.getString("nacionalidad"),
-                                    result.getString("edad")
+                                    result.getString("abandonos")
                                     );
        
         
        
            
            lista.add(reporte);
-            nombre2 = "";
-            apellido2 = "";
+           
             }
        
         
@@ -875,18 +848,16 @@ public class ReportesConexion {
         if(marca.equals("Seleccionar")){
           
          sql
-                = "SELECT  * from reporte7(null);";
+                = "SELECT  * from reporte15(null);";
         }else{
            sql
-                = "SELECT  * from reporte7('"+marca+"');";
+                = "SELECT  * from reporte15('"+marca+"');";
         }
         
         ResultSet result = st.executeQuery(sql);
        
         Reporte15 reporte = new Reporte15();
       
-        String nombre2 = "";
-      String apellido2 = "";
       
         while(result.next()){
            

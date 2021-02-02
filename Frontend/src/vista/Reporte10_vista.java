@@ -48,7 +48,8 @@ public class Reporte10_vista extends javax.swing.JFrame {
             this.setSize(1800,1800);
        
          con.llenarComboAno(combo_ano);
-          
+           btnsiguiente1.setVisible(false);
+        btnanterior.setVisible(false);
     }
 
     
@@ -76,6 +77,10 @@ public class Reporte10_vista extends javax.swing.JFrame {
         nohay = new javax.swing.JLabel();
         combo_ano = new javax.swing.JComboBox<>();
         etiquetaTiempo6 = new javax.swing.JLabel();
+        btnanterior = new javax.swing.JButton();
+        btnsiguiente1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txt_anho = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -107,37 +112,37 @@ public class Reporte10_vista extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 110, 120, 50));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 120, 50));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel8.setText("Nombres:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 110, 40));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 110, 40));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel9.setText("Apellidos:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 120, 40));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, 110, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Nacionalidad:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 160, 40));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, 150, 40));
 
         txt_nombre_conductor.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_nombre_conductor, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 410, 40));
+        jPanel1.add(txt_nombre_conductor, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 410, 40));
 
         txt_apellido.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 400, 40));
+        jPanel1.add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, 400, 40));
 
         txt_nacionalidad_conductor.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_nacionalidad_conductor, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, 280, 40));
+        jPanel1.add(txt_nacionalidad_conductor, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, 280, 40));
 
         etiquetaTiempo2.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiquetaTiempo2.setText("Datos del Conductor");
-        jPanel1.add(etiquetaTiempo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 390, 90));
+        jPanel1.add(etiquetaTiempo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 390, 90));
 
         nohay.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         nohay.setForeground(new java.awt.Color(255, 0, 51));
-        jPanel1.add(nohay, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, 380, 40));
+        jPanel1.add(nohay, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 380, 40));
 
         combo_ano.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         combo_ano.addActionListener(new java.awt.event.ActionListener() {
@@ -145,12 +150,37 @@ public class Reporte10_vista extends javax.swing.JFrame {
                 combo_anoActionPerformed(evt);
             }
         });
-        jPanel1.add(combo_ano, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 120, 210, 40));
+        jPanel1.add(combo_ano, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 210, 40));
 
         etiquetaTiempo6.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiquetaTiempo6.setText("Año");
-        jPanel1.add(etiquetaTiempo6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 320, 90));
+        jPanel1.add(etiquetaTiempo6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 320, 90));
+
+        btnanterior.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnanterior.setText("Anterior");
+        btnanterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnanteriorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnanterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 180, 170, 50));
+
+        btnsiguiente1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnsiguiente1.setText("Siguiente");
+        btnsiguiente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsiguiente1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnsiguiente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 180, 170, 50));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setText("Año:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 360, 50, 40));
+
+        txt_anho.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txt_anho, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 360, 310, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1570, 910));
 
@@ -178,6 +208,11 @@ public class Reporte10_vista extends javax.swing.JFrame {
         
         mostrar();
         
+        
+        if(this.lista.size() > 1)
+         btnsiguiente1.setVisible(true);
+      
+        
         }catch(Exception e){
             nohay.setText("No hay Registros de esta Busqueda");
         }
@@ -188,21 +223,37 @@ public class Reporte10_vista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_anoActionPerformed
 
+    private void btnanteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnanteriorActionPerformed
+        this.contador --;
+        btnsiguiente1.setVisible(true);
+        try{
+            mostrar();
+        }catch(Exception e){
+            btnanterior.setVisible(false);
+        }
+    }//GEN-LAST:event_btnanteriorActionPerformed
+
+    private void btnsiguiente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsiguiente1ActionPerformed
+        this.contador ++;
+        btnanterior.setVisible(true);
+        try{
+            mostrar();
+        }catch(Exception e){
+            btnsiguiente1.setVisible(false);
+        }
+    }//GEN-LAST:event_btnsiguiente1ActionPerformed
+
     
     public void mostrar(){
      
         
-        if(lista.get(contador).getNombre2() != null)
-        txt_nombre_conductor.setText(lista.get(contador).getNombre_piloto()+" "+lista.get(contador).getNombre2());
-        else
-             txt_nombre_conductor.setText(lista.get(contador).getNombre_piloto());
+       txt_nombre_conductor.setText(lista.get(contador).getNombre_piloto());
         
-        if(lista.get(contador).getApellido2() != null)
-        txt_apellido.setText(lista.get(contador).getApellido()+" "+lista.get(contador).getApellido2());
-        else
-        txt_apellido.setText(lista.get(contador).getApellido());
+       txt_apellido.setText(lista.get(contador).getApellido());
        
         txt_nacionalidad_conductor.setText(lista.get(contador).getNacionalidad());
+        
+        txt_anho.setText(lista.get(contador).getAnho());
         
         }
  
@@ -496,15 +547,19 @@ public class Reporte10_vista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnanterior;
+    private javax.swing.JButton btnsiguiente1;
     private javax.swing.JComboBox<String> combo_ano;
     private javax.swing.JLabel etiquetaTiempo2;
     private javax.swing.JLabel etiquetaTiempo6;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nohay;
+    private javax.swing.JLabel txt_anho;
     private javax.swing.JLabel txt_apellido;
     private javax.swing.JLabel txt_nacionalidad_conductor;
     private javax.swing.JLabel txt_nombre_conductor;
