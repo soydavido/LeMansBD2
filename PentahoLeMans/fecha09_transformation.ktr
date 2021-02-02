@@ -672,7 +672,7 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
+      <xloc>192</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
