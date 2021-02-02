@@ -32,7 +32,7 @@ AS $$
 BEGIN 
 RETURN QUERY SELECT DISTINCT fabricante
 			FROM dw_dim_vehiculo 
-			Where fabricante LIKE nombre
+			Where LOWER(fabricante) LIKE LOWER(nombre)
 			GROUP BY 1 ORDER BY 1;
 END;
 $$LANGUAGE plpgsql;
