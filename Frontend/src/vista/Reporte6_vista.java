@@ -408,31 +408,33 @@ public class Reporte6_vista extends javax.swing.JFrame {
     public void subir(){
         
         
-        numero_evento_viejo = lista.get(0).getId_evento();
+       try{
         int marcador = this.id_donde_termina;
         int contador = 0;
         int i = 0;
         
-        for ( i =0 ; this.id_donde_termina < lista.size() ; this.id_donde_termina ++)
-            {  
+       
                 
-                if(lista.get(this.id_donde_termina).getId_evento() == numero_evento_viejo){
-                    mostrar(marcador,contador);
-                    contador ++;
-                }else{
-                    btnsiguiente1.setVisible(true);
-                    numero_evento_viejo = lista.get(this.id_donde_termina).getId_evento();
-                    this.id_anterior =this.id_donde_termina -1;
-                    contador = 0;
-                    break;
-                    
+                if(this.lista.get(0).getCantidad_pilotos() == 3){
+                  mostrar(0,0);
+                  mostrar(0+1,1);
+                  mostrar(0+2,2);
+                  this.id_donde_termina = 3;
+                  }else{
+                     mostrar(0,0);
+                  mostrar(0+1,1);
+                  mostrar(0+2,2);
+                  this.id_donde_termina = 3;
                 }
                 
-                
-                
-                
-            }
-       
+                if(this.lista.size() > 3){
+                     btnsiguiente1.setVisible(true);
+                }else{
+                    btnsiguiente1.setVisible(false);
+                }
+       }catch(Exception e){
+           System.out.println("llego al final");
+       }
        }
     
     public void siguiente(){
@@ -440,94 +442,82 @@ public class Reporte6_vista extends javax.swing.JFrame {
         try{
         
            
-        
-        this.id_anterior = this.id_donde_termina;
-        int marcador = this.id_donde_termina;
-        this.numero_evento_viejo = lista.get(this.id_donde_termina).getId_evento();
+        int cantidad_pilotos = 0;
         int contador = 0;
-        int i = 0;
-        
+        int i = this.id_donde_termina;
+        int o=0;
        
         
-        for ( i =0 ; this.id_donde_termina <= lista.size() ; this.id_donde_termina ++)
-            {  
+       if(this.lista.size() != i){
+              if(this.lista.get(i).getCantidad_pilotos() == 3){
+                  this.id_anterior = i-1;
+                  mostrar(i,0);
+                  mostrar(i+1,1);
+                  mostrar(i+2,2);
+                  
+                  i= i+3;
+                  this.id_donde_termina = i;
               
-                if(lista.get(this.id_donde_termina).getId_evento() == numero_evento_viejo){
-                    mostrar(marcador,contador);
-                    contador ++;
-                }else{
-                     numero_evento_viejo = lista.get(this.id_donde_termina).getId_evento();
-                    contador = 0;
-                    break;
-                    
-                }
-                
-                
-                
-                
-            } /* System.out.println("2   marcador   "+marcador+"  contador  "+contador);
-                   System.out.println("evento viejo   "+numero_evento_viejo);
-                    System.out.println("id termina   "+this.id_donde_termina);*/
+            } 
+              
+       }
+          
+       if(this.lista.size() == i){
+           btnsiguiente1.setVisible(false);
+             System.out.println("llego al final en siguiente");
+       }
+       
+       
         }catch(Exception e){
             
             //ocultamos el boton siguiente ya que llego al final
              btnsiguiente1.setVisible(false);
-             System.out.println("llego al final en siguiente");
+             System.out.println("error en siguiente");
          }
        
        }
     
-     public void anterior(){
+    
+    public void anterior(){
         
-         
-         try{
-         this.id_donde_termina = this.id_anterior;
-         this.id_anterior = this.id_anterior - 1;
-        int marcador = this.id_anterior;
-        numero_evento_viejo = lista.get(marcador).getId_evento();
+        try{
+        
+           
+        int cantidad_pilotos = 0;
         int contador = 0;
-        int i = 0;
-        
-        for ( i =0 ; marcador < lista.size() ; marcador --)
-            {  
-               
-                if(lista.get(marcador).getId_evento() == numero_evento_viejo){
-                    mostrar(this.id_anterior,contador);
-                    contador --;
-                }else{
-                   
-                    numero_evento_viejo = lista.get(marcador).getId_evento();
-                    contador = 0;
-                    this.id_anterior = marcador +1;
-                    break;
-                    
-                }
-                
-                
-                
-                
-            }
-         }catch(Exception e){
-             this.id_anterior = 0;
+        int i = this.id_anterior;
+        int o=0;
+       
+           
             
-            /* System.out.println("anterior  "+this.id_anterior);
-             System.out.println("siguiente  "+this.id_donde_termina);
-             System.out.println("numero_evento_viejo  "+this.numero_evento_viejo);*/
+       if(this.id_anterior != -1){
+              if(this.lista.get(i).getCantidad_pilotos() == 3){
+                  mostrar(i-2,0);
+                  mostrar(i-1,1);
+                  mostrar(i,2);
+                  this.id_anterior = i - 3;
+                 
+                  this.id_donde_termina = i+1;
+              
+            } 
+              
+       }
+       
+       if(this.id_anterior == -1){
+           btnanterior.setVisible(false);
+             System.out.println("llego al final en anterior");
+       }
+       
+       
+        }catch(Exception e){
             
-
-            //ocultamos el boton anterior ya que llego al inicio
-              btnanterior.setVisible(false);
-             System.out.println("llego al inicio en anterior");
+            //ocultamos el boton siguiente ya que llego al final
+             btnanterior.setVisible(false);
+             System.out.println("error en anterior");
          }
        
        }
-    
-    
-    
-    
-    
  
-    
     
     public void mostrar(int contador,int piloto){
        // System.out.println("imprimir   contador "+contador+"   piloto  "+piloto );
@@ -536,12 +526,18 @@ public class Reporte6_vista extends javax.swing.JFrame {
         txtnumero_equipo.setText(Integer.toString(lista.get(contador).getNumero_equipo()));
        // txt_nacionalidad_equipo.setText(lista.get(contador).getNacionalidad_equipo());
         
-       
+       /* txt_puesto_carrera.setText(Integer.toString(lista.get(contador).getPosicioncarrera()));
+        txt_numero_vuelta.setText(Integer.toString(lista.get(contador).getVueltascarrera()));
+        txt_km.setText(Double.toString(lista.get(contador).getKmcarrera()));
+        txt_mejor_vuelta.setText(lista.get(contador).getVuelta_rapida_carrera());
+        txt_velocidad_media.setText(Double.toString(lista.get(contador).getVelocidad_media()));
         
         DecimalFormat df = new DecimalFormat("#0.00");
              
-        
-        txt_fabricante.setText(lista.get(contador).getFabricante()+" "+lista.get(contador).getModelo());
+        txt_diferencia.setText(df.format(lista.get(contador).getDiferencia()));*/
+       
+        txt_fabricante.setText(lista.get(contador).getFabricante());
+        txt_fabricante.setText(lista.get(contador).getModelo());
         txt_motor.setText(lista.get(contador).getCaracteristicas_vehiculo());
         txt_categoria.setText(lista.get(contador).getCategoria_vehiculo());
         
@@ -560,33 +556,34 @@ public class Reporte6_vista extends javax.swing.JFrame {
         txt_nacionalidad_conductor.setText(lista.get(contador).getNacionalidad());
         } else if ((piloto == 1) || (piloto == -1)){
              
-                if(lista.get(contador+piloto).getNombre2() != null)
-                txt_nombre_conductor1.setText(lista.get(contador+piloto).getNombre_piloto()+" "+lista.get(contador+piloto).getNombre2());
+                if(lista.get(contador).getNombre2() != null)
+                txt_nombre_conductor1.setText(lista.get(contador).getNombre_piloto()+" "+lista.get(contador).getNombre2());
                 else
-                     txt_nombre_conductor1.setText(lista.get(contador+piloto).getNombre_piloto());
+                     txt_nombre_conductor1.setText(lista.get(contador).getNombre_piloto());
 
-                if(lista.get(contador+piloto).getApellido() != null)
-                txt_apellido1.setText(lista.get(contador+piloto).getApellido()+" "+lista.get(contador+piloto).getApellido2());
+                if(lista.get(contador).getApellido() != null)
+                txt_apellido1.setText(lista.get(contador).getApellido()+" "+lista.get(contador).getApellido2());
                 else
-                txt_apellido1.setText(lista.get(contador+piloto).getApellido());
+                txt_apellido1.setText(lista.get(contador).getApellido());
                 
-                txt_nacionalidad_conductor1.setText(lista.get(contador+piloto).getNacionalidad());
+                txt_nacionalidad_conductor1.setText(lista.get(contador).getNacionalidad());
         }
         else if ((piloto == 2) || (piloto == -2)){
-             if(lista.get(contador+piloto).getNombre2() != null)
-                txt_nombre_conductor2.setText(lista.get(contador+piloto).getNombre_piloto()+" "+lista.get(contador+piloto).getNombre2());
+             if(lista.get(contador).getNombre2() != null)
+                txt_nombre_conductor2.setText(lista.get(contador).getNombre_piloto()+" "+lista.get(contador).getNombre2());
                 else
-                     txt_nombre_conductor2.setText(lista.get(contador+piloto).getNombre_piloto());
+                     txt_nombre_conductor2.setText(lista.get(contador).getNombre_piloto());
 
-                if(lista.get(contador+piloto).getApellido() != null)
-                txt_apellido2.setText(lista.get(contador+piloto).getApellido()+" "+lista.get(contador+piloto).getApellido2());
+                if(lista.get(contador).getApellido() != null)
+                txt_apellido2.setText(lista.get(contador).getApellido()+" "+lista.get(contador).getApellido2());
                 else
-                txt_apellido2.setText(lista.get(contador+piloto).getApellido());
+                txt_apellido2.setText(lista.get(contador).getApellido());
                 
-                txt_nacionalidad_conductor2.setText(lista.get(contador+piloto).getNacionalidad());
+                txt_nacionalidad_conductor2.setText(lista.get(contador).getNacionalidad());
         }
         
        }
+    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -47,7 +47,8 @@ public class Reporte9_vista extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
             this.setSize(1800,1800);
        
-        
+        btnsiguiente.setVisible(false);
+        btnanterior.setVisible(false);
           
     }
 
@@ -76,8 +77,8 @@ public class Reporte9_vista extends javax.swing.JFrame {
         nohay = new javax.swing.JLabel();
         txt_participaciones = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        btnanterior1 = new javax.swing.JButton();
-        btnsiguiente1 = new javax.swing.JButton();
+        btnanterior = new javax.swing.JButton();
+        btnsiguiente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -148,23 +149,23 @@ public class Reporte9_vista extends javax.swing.JFrame {
         jLabel15.setText("Cantidad de Participaciones:");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, 300, 40));
 
-        btnanterior1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnanterior1.setText("Anterior");
-        btnanterior1.addActionListener(new java.awt.event.ActionListener() {
+        btnanterior.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnanterior.setText("Anterior");
+        btnanterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnanterior1ActionPerformed(evt);
+                btnanteriorActionPerformed(evt);
             }
         });
-        jPanel1.add(btnanterior1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 170, 50));
+        jPanel1.add(btnanterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 170, 50));
 
-        btnsiguiente1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnsiguiente1.setText("Siguiente");
-        btnsiguiente1.addActionListener(new java.awt.event.ActionListener() {
+        btnsiguiente.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnsiguiente.setText("Siguiente");
+        btnsiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsiguiente1ActionPerformed(evt);
+                btnsiguienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnsiguiente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 150, 170, 50));
+        jPanel1.add(btnsiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 150, 170, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1570, 910));
 
@@ -187,51 +188,51 @@ public class Reporte9_vista extends javax.swing.JFrame {
         
         mostrar();
         
+        btnsiguiente.setVisible(true);
+        
         }catch(Exception e){
             nohay.setText("No hay Registros de esta Busqueda");
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btnanterior1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnanterior1ActionPerformed
+    private void btnanteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnanteriorActionPerformed
         this.contador --;
-        btnsiguiente1.setVisible(true);
+        btnsiguiente.setVisible(true);
         try{
            mostrar();
         }catch(Exception e){
             btnanterior.setVisible(false);
         }
-    }//GEN-LAST:event_btnanterior1ActionPerformed
+    }//GEN-LAST:event_btnanteriorActionPerformed
 
-    private void btnsiguiente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsiguiente1ActionPerformed
+    private void btnsiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsiguienteActionPerformed
         this.contador ++;
         btnanterior.setVisible(true);
         try{
             mostrar();
 
         }catch(Exception e){
-            btnsiguiente1.setVisible(false);
+            btnsiguiente.setVisible(false);
         }
-    }//GEN-LAST:event_btnsiguiente1ActionPerformed
+    }//GEN-LAST:event_btnsiguienteActionPerformed
 
     
     public void mostrar(){
      
+       
         
-        if(lista.get(contador).getNombre2() != null)
-        txt_nombre_conductor.setText(lista.get(contador).getNombre_piloto()+" "+lista.get(contador).getNombre2());
-        else
              txt_nombre_conductor.setText(lista.get(contador).getNombre_piloto());
         
-        if(lista.get(contador).getApellido2() != null)
-        txt_apellido.setText(lista.get(contador).getApellido()+" "+lista.get(contador).getApellido2());
-        else
+       
         txt_apellido.setText(lista.get(contador).getApellido());
        
         txt_nacionalidad_conductor.setText(lista.get(contador).getNacionalidad());
-        txt_participaciones.setText(lista.get(contador).getEdad());
+        txt_participaciones.setText(Integer.toString(lista.get(contador).getNumero_participaciones()));
         
-        }
+       
+        
+    }
  
     
     public static void main(String args[]) {
@@ -524,8 +525,7 @@ public class Reporte9_vista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnanterior;
-    private javax.swing.JButton btnanterior1;
-    private javax.swing.JButton btnsiguiente1;
+    private javax.swing.JButton btnsiguiente;
     private javax.swing.JLabel etiquetaTiempo2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel15;

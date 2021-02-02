@@ -40,6 +40,9 @@ public class Reporte16 {
         private String modelo; 
         private String motor;
          private String categoria;
+         
+         
+          private String fecha;
         
         
  public Reporte16() {
@@ -66,6 +69,42 @@ public class Reporte16 {
         this.motor = motor;
         this.categoria = categoria;
     }
+
+    public Reporte16(String nombre_piloto, String apellido, String fecha_nacimiento, String fecha_fallecimiento, String nacionalidad, String edad, String participaciones_totales, String primera_participacion, String podium1, String podium2, String podium3, String corredores, String nombre_equipo, int numero_equipo, String pais_equipo, String fabricante, String modelo, String motor, String categoria, String fecha) {
+        this.nombre_piloto = nombre_piloto;
+        this.apellido = apellido;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.fecha_fallecimiento = fecha_fallecimiento;
+        this.nacionalidad = nacionalidad;
+        this.edad = edad;
+        this.participaciones_totales = participaciones_totales;
+        this.primera_participacion = primera_participacion;
+        this.podium1 = podium1;
+        this.podium2 = podium2;
+        this.podium3 = podium3;
+        this.corredores = corredores;
+        this.nombre_equipo = nombre_equipo;
+        this.numero_equipo = numero_equipo;
+        this.pais_equipo = pais_equipo;
+        this.fabricante = fabricante;
+        this.modelo = modelo;
+        this.motor = motor;
+        this.categoria = categoria;
+        this.fecha = fecha;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+    
+    
+    
+    
+    
 
     public String getNombre_piloto() {
         return nombre_piloto;

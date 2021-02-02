@@ -7,6 +7,7 @@ package vista;
 
 import Clases.Carrera;
 import Clases.Reporte1;
+import Clases.Reporte16;
 import Clases.Reporte4;
 
 import conexion.Reporte1Conexion;
@@ -19,6 +20,7 @@ import javax.swing.table.TableColumnModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -33,7 +35,7 @@ public class Reporte5_vista extends javax.swing.JFrame {
     control con = new control();
     
     int contador = 0;
-    ArrayList<Reporte4> lista = new ArrayList<Reporte4>();
+    ArrayList<Reporte16> lista = new ArrayList<Reporte16>();
     
     ReportesConexion reporte_conexion = new ReportesConexion();
    // ArrayList<Participante> lista = new ArrayList<Participante>();
@@ -75,26 +77,25 @@ public class Reporte5_vista extends javax.swing.JFrame {
         etiquetaTiempo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txt_nacionalidad_equipo = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txt_categoria = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         txtnumero_equipo = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txt_modelo = new javax.swing.JLabel();
-        txt_tercer_piloto = new javax.swing.JLabel();
+        txt_fabricante = new javax.swing.JLabel();
+        txt_piloto2 = new javax.swing.JLabel();
         etiquetaTiempo1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txt_nombre_conductor = new javax.swing.JLabel();
+        txt_nombre = new javax.swing.JLabel();
         txt_apellido = new javax.swing.JLabel();
-        txt_nacionalidad_conductor = new javax.swing.JLabel();
+        txt_nacionalidad = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txt_primera_participacion = new javax.swing.JLabel();
         txt_numero_participaciones = new javax.swing.JLabel();
-        txt_victorias = new javax.swing.JLabel();
+        txt_podium1 = new javax.swing.JLabel();
         btnanterior = new javax.swing.JButton();
         btnsiguiente1 = new javax.swing.JButton();
         nohay = new javax.swing.JLabel();
@@ -102,27 +103,32 @@ public class Reporte5_vista extends javax.swing.JFrame {
         etiquetaTiempo3 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         txt_fecha_nacimiento = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        txt_lugar_nacimiento = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         txt_fecha_fallecimiento = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         txt_edad = new javax.swing.JLabel();
-        txt_podium = new javax.swing.JLabel();
+        txt_podium3 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         txtano = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txt_nacionalidad_equipo1 = new javax.swing.JLabel();
+        txt_nombre_equipo = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         etiquetaTiempo4 = new javax.swing.JLabel();
-        txt_primer_piloto1 = new javax.swing.JLabel();
-        txt_segundo_piloto1 = new javax.swing.JLabel();
+        txt_piloto1 = new javax.swing.JLabel();
         etiquetaTiempo6 = new javax.swing.JLabel();
         combo_nombres = new javax.swing.JComboBox<>();
         etiquetaTiempo7 = new javax.swing.JLabel();
         combo_apellidos = new javax.swing.JComboBox<>();
+        etiquetaTiempo2 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        txt_motor = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txt_modelo = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        txt_podium2 = new javax.swing.JLabel();
+        etiquetaTiempo5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -149,8 +155,8 @@ public class Reporte5_vista extends javax.swing.JFrame {
 
         etiquetaTiempo.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        etiquetaTiempo.setText("Pilotos");
-        jPanel1.add(etiquetaTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 560, 620, 90));
+        etiquetaTiempo.setText("Datos del Auto");
+        jPanel1.add(etiquetaTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 440, 260, 90));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Nacionalidad:");
@@ -159,12 +165,8 @@ public class Reporte5_vista extends javax.swing.JFrame {
         txt_nacionalidad_equipo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jPanel1.add(txt_nacionalidad_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 390, 200, 40));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel3.setText("Datos del Auto:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 440, 210, 40));
-
         txt_categoria.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 480, 230, 40));
+        jPanel1.add(txt_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 540, 290, 40));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton1.setText("Buscar");
@@ -179,14 +181,14 @@ public class Reporte5_vista extends javax.swing.JFrame {
         jPanel1.add(txtnumero_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 310, 110, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel6.setText("Modelo:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 520, 110, 40));
+        jLabel6.setText("Fabricante:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 580, 130, 40));
 
-        txt_modelo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 520, 200, 40));
+        txt_fabricante.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txt_fabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 580, 290, 40));
 
-        txt_tercer_piloto.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_tercer_piloto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 670, 310, 40));
+        txt_piloto2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txt_piloto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 700, 380, 40));
 
         etiquetaTiempo1.setFont(new java.awt.Font("Lucida Sans", 0, 24)); // NOI18N
         etiquetaTiempo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -205,14 +207,14 @@ public class Reporte5_vista extends javax.swing.JFrame {
         jLabel2.setText("Nacionalidad:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 160, 40));
 
-        txt_nombre_conductor.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_nombre_conductor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 410, 40));
+        txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 300, 40));
 
         txt_apellido.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 400, 40));
+        jPanel1.add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 290, 40));
 
-        txt_nacionalidad_conductor.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_nacionalidad_conductor, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 280, 40));
+        txt_nacionalidad.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txt_nacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 280, 40));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel10.setText("Año de la primera participación:");
@@ -227,13 +229,13 @@ public class Reporte5_vista extends javax.swing.JFrame {
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 630, 110, 40));
 
         txt_primera_participacion.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_primera_participacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 550, 130, 40));
+        jPanel1.add(txt_primera_participacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 550, 190, 40));
 
         txt_numero_participaciones.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_numero_participaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 70, 40));
+        jPanel1.add(txt_numero_participaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 590, 110, 40));
 
-        txt_victorias.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_victorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 630, 80, 40));
+        txt_podium1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txt_podium1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 630, 80, 40));
 
         btnanterior.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnanterior.setText("Anterior");
@@ -273,33 +275,26 @@ public class Reporte5_vista extends javax.swing.JFrame {
         txt_fecha_nacimiento.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jPanel1.add(txt_fecha_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 270, 260, 40));
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel18.setText("Lugar de Nacimiento:");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 250, 40));
-
-        txt_lugar_nacimiento.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_lugar_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 310, 290, 40));
-
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel19.setText("Fecha de Fallecimiento:");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 360, 250, 40));
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, 250, 40));
 
         txt_fecha_fallecimiento.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_fecha_fallecimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 360, 270, 40));
+        jPanel1.add(txt_fecha_fallecimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 320, 270, 40));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel20.setText("Edad:");
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 70, 40));
 
         txt_edad.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 110, 40));
+        jPanel1.add(txt_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 480, 40));
 
-        txt_podium.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_podium, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 670, 80, 40));
+        txt_podium3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txt_podium3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 710, 80, 40));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel21.setText("Podium:");
-        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 670, 110, 40));
+        jLabel21.setText("Podium3:");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 710, 100, 40));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel22.setText("Año:");
@@ -312,27 +307,24 @@ public class Reporte5_vista extends javax.swing.JFrame {
         jLabel13.setText("Nombre:");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 350, 100, 40));
 
-        txt_nacionalidad_equipo1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_nacionalidad_equipo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 350, 280, 40));
+        txt_nombre_equipo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txt_nombre_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 350, 280, 40));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel23.setText("Numero:");
         jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 310, 100, 40));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel24.setText("Categoria del Auto:");
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 480, 210, 40));
+        jLabel24.setText("Categoria:");
+        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 540, 110, 40));
 
         etiquetaTiempo4.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        etiquetaTiempo4.setText("Datos relevantes de participación");
-        jPanel1.add(etiquetaTiempo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 620, 90));
+        etiquetaTiempo4.setText("Datos relevantes ");
+        jPanel1.add(etiquetaTiempo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 390, 90));
 
-        txt_primer_piloto1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_primer_piloto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 670, 290, 40));
-
-        txt_segundo_piloto1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_segundo_piloto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 670, 300, 40));
+        txt_piloto1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txt_piloto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 700, 370, 40));
 
         etiquetaTiempo6.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -364,6 +356,37 @@ public class Reporte5_vista extends javax.swing.JFrame {
             }
         });
         jPanel1.add(combo_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 340, 40));
+
+        etiquetaTiempo2.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
+        etiquetaTiempo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        etiquetaTiempo2.setText("Piloto 3");
+        jPanel1.add(etiquetaTiempo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 630, 260, 90));
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel25.setText("Motor:");
+        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 540, 70, 40));
+
+        txt_motor.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txt_motor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 540, 330, 40));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel7.setText("Modelo:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 580, 110, 40));
+
+        txt_modelo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txt_modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 580, 320, 40));
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel26.setText("Podium2:");
+        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 670, 100, 40));
+
+        txt_podium2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txt_podium2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 670, 80, 40));
+
+        etiquetaTiempo5.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
+        etiquetaTiempo5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        etiquetaTiempo5.setText("Piloto 2");
+        jPanel1.add(etiquetaTiempo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 630, 260, 90));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1570, 910));
 
@@ -435,20 +458,75 @@ public class Reporte5_vista extends javax.swing.JFrame {
        
     }//GEN-LAST:event_combo_nombresMouseClicked
 
+   
     
     public void mostrar(){
-        txt_categoria.setText(lista.get(contador).getNombre_equipo());
+      
+        txt_nombre_equipo.setText(lista.get(contador).getNombre_equipo());
         txtnumero_equipo.setText(Integer.toString(lista.get(contador).getNumero_equipo()));
-      //  txt_nacionalidad_equipo.setText(lista.get(contador).getNacionalidad_equipo());
+        txt_nacionalidad_equipo.setText(lista.get(contador).getPais_equipo());
         
-       // txt_modelo.setText(Integer.toString(lista.get(contador).getPosicion_actual()));
-       /* txt_km.setText(Long.toString(lista.get(contador).getKm_recorrido()));
-        txt_tercer_piloto.setText(Integer.toString(lista.get(contador).getNumero_vuelta()));
-        txt_velocidad_media.setText(Integer.toString(lista.get(contador).getVelocidad_media()));
+        txt_fecha_nacimiento.setText(lista.get(contador).getFecha_nacimiento());
+        txt_fecha_fallecimiento.setText(lista.get(contador).getFecha_fallecimiento());
         
-        txt_mejor_vuelta.setText(lista.get(contador).getTiempo_mejor_vuelta().toString());*/
+        txt_primera_participacion.setText(lista.get(contador).getPrimera_participacion());
+        txt_numero_participaciones.setText(lista.get(contador).getParticipaciones_totales());
+        txt_podium1.setText(lista.get(contador).getPodium1());
+        txt_podium2.setText(lista.get(contador).getPodium2());
+        txt_podium3.setText(lista.get(contador).getPodium3());
         
-       }
+        DecimalFormat df = new DecimalFormat("#0.00");
+             
+        
+        txt_fabricante.setText(lista.get(contador).getFabricante());
+        txt_modelo.setText(lista.get(contador).getModelo());
+        txt_motor.setText(lista.get(contador).getMotor());
+        txt_categoria.setText(lista.get(contador).getCategoria());
+        
+        
+       
+        txt_nombre.setText(lista.get(contador).getNombre_piloto());
+        txt_apellido.setText(lista.get(contador).getApellido());
+        txt_edad.setText(lista.get(contador).getEdad());
+        
+        txt_nacionalidad.setText(lista.get(contador).getNacionalidad());
+        
+        String nombres = lista.get(contador).getCorredores();
+        String primer_piloto = "";
+        String segundo_piloto = "";
+        
+       
+                int o = 0;
+        
+        for(int i = 0; i< nombres.length();i++){
+            if(nombres.charAt(i) == '-'){
+                 primer_piloto =nombres.substring(o,i-1);
+                 o= i+1;
+                 txt_piloto1.setText(primer_piloto);
+                 break;
+            }
+        }
+       primer_piloto = nombres.substring(o,nombres.length());
+        txt_piloto2.setText(primer_piloto);
+        /*} else if ((piloto == 1) || (piloto == -1)){
+             
+                
+                 txt_nombre_conductor1.setText(lista.get(contador+piloto).getNombre_piloto());
+
+              //  txt_apellido1.setText(lista.get(contador+piloto).getApellido());
+                
+               // txt_nacionalidad_conductor1.setText(lista.get(contador+piloto).getNacionalidad());
+        }
+        else if ((piloto == 2) || (piloto == -2)){
+             
+                 txt_nombre_conductor2.setText(lista.get(contador+piloto).getNombre_piloto());
+                 //txt_apellido2.setText(lista.get(contador+piloto).getApellido());
+                
+                //txt_nacionalidad_conductor2.setText(lista.get(contador+piloto).getNacionalidad());
+        }
+        */
+       
+    }
  
     
     public static void main(String args[]) {
@@ -550,14 +628,14 @@ public class Reporte5_vista extends javax.swing.JFrame {
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnanterior;
     private javax.swing.JButton btnsiguiente1;
-    private javax.swing.JComboBox<String> combo_ano;
-    private javax.swing.JComboBox<String> combo_ano1;
     private javax.swing.JComboBox<String> combo_apellidos;
     private javax.swing.JComboBox<String> combo_nombres;
     private javax.swing.JLabel etiquetaTiempo;
     private javax.swing.JLabel etiquetaTiempo1;
+    private javax.swing.JLabel etiquetaTiempo2;
     private javax.swing.JLabel etiquetaTiempo3;
     private javax.swing.JLabel etiquetaTiempo4;
+    private javax.swing.JLabel etiquetaTiempo5;
     private javax.swing.JLabel etiquetaTiempo6;
     private javax.swing.JLabel etiquetaTiempo7;
     private javax.swing.JButton jButton1;
@@ -568,7 +646,6 @@ public class Reporte5_vista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -576,8 +653,10 @@ public class Reporte5_vista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -585,21 +664,22 @@ public class Reporte5_vista extends javax.swing.JFrame {
     private javax.swing.JLabel txt_apellido;
     private javax.swing.JLabel txt_categoria;
     private javax.swing.JLabel txt_edad;
+    private javax.swing.JLabel txt_fabricante;
     private javax.swing.JLabel txt_fecha_fallecimiento;
     private javax.swing.JLabel txt_fecha_nacimiento;
-    private javax.swing.JLabel txt_lugar_nacimiento;
     private javax.swing.JLabel txt_modelo;
-    private javax.swing.JLabel txt_nacionalidad_conductor;
+    private javax.swing.JLabel txt_motor;
+    private javax.swing.JLabel txt_nacionalidad;
     private javax.swing.JLabel txt_nacionalidad_equipo;
-    private javax.swing.JLabel txt_nacionalidad_equipo1;
-    private javax.swing.JLabel txt_nombre_conductor;
+    private javax.swing.JLabel txt_nombre;
+    private javax.swing.JLabel txt_nombre_equipo;
     private javax.swing.JLabel txt_numero_participaciones;
-    private javax.swing.JLabel txt_podium;
-    private javax.swing.JLabel txt_primer_piloto1;
+    private javax.swing.JLabel txt_piloto1;
+    private javax.swing.JLabel txt_piloto2;
+    private javax.swing.JLabel txt_podium1;
+    private javax.swing.JLabel txt_podium2;
+    private javax.swing.JLabel txt_podium3;
     private javax.swing.JLabel txt_primera_participacion;
-    private javax.swing.JLabel txt_segundo_piloto1;
-    private javax.swing.JLabel txt_tercer_piloto;
-    private javax.swing.JLabel txt_victorias;
     private javax.swing.JLabel txtano;
     private javax.swing.JLabel txtnumero_equipo;
     // End of variables declaration//GEN-END:variables

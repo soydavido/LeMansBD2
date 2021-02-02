@@ -56,6 +56,19 @@ public class Reporte7 {
         this.numero_participaciones = numero_participaciones;
     }
 
+    public Reporte7(String nombre_piloto, String apellido, String nacionalidad, int numero_participaciones) {
+        this.nombre_piloto = nombre_piloto;
+        this.apellido = apellido;
+        this.nacionalidad = nacionalidad;
+        this.numero_participaciones = numero_participaciones;
+    }
+
+    
+    
+    
+    
+    
+    
     public int getNumero_participaciones() {
         return numero_participaciones;
     }
