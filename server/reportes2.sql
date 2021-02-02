@@ -272,7 +272,7 @@ BEGIN
 										AND ei.id_fecha = fi.id_fecha
 										AND date_part('year',fe.fecha) = date_part('year',fi.fecha)
 										AND ri.posicion = ra.posicion-1 FETCH FIRST 1 ROW ONLY) 
-		END diferencia,
+		END diferencia, 
 		(SELECT COUNT (*) FROM dw_hec_evento ex WHERE ex.id_equipo=ev.id_equipo AND ex.id_ranking = ev.id_ranking) cantidad_pilotos
 		FROM dw_hec_evento ev, dw_dim_equipo eq, dw_dim_vehiculo ve, dw_dim_fecha fe, dw_dim_pilotos pi, dw_dim_ranking ra
 		WHERE  ev.id_vehiculo = ve.id_vehiculo 
@@ -280,6 +280,8 @@ BEGIN
 		AND fe.id_fecha = ev.id_fecha
 		AND ev.id_piloto = pi.id_piloto
 		AND ev.id_ranking = ra.id_ranking
+		AND ev.nro_equipo = 14
+		GROUP BY 1,2,18,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
 		ORDER BY 13 DESC 
 		FETCH FIRST resultados ROWS ONLY ;
 END;
