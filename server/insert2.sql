@@ -709,8 +709,8 @@ INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristica
 
 
 --Piloto
-INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (129,('Mika',null,'Salo',null,'24441',null,null,null,'M'),13);
-INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (130,('Anton',null,'Ladygin',null,'32726',null,null,null,'M'),9);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (129,('Mika',null,'Salo',null,'30-11-1966',null,null,null,'M'),13);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (130,('Anton',null,'Ladygin',null,'06-08-1989',null,null,null,'M'),9);
 INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (309,('Hugo',null,'De Sadeleer',null,'16-07-1997',null,null,null,'M'),15);
 INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (310,('Nick',null,'Leventis',null,'31-01-1980',null,null,null,'M'),4);
 INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (311,('Danny',null,'Watts',null,'31-12-1979',null,null,null,'M'),4);

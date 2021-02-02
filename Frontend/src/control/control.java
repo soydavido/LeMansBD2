@@ -19,9 +19,9 @@ public class control {
     
    
     
-    private String url = "jdbc:postgresql://localhost:5432/dw_lemans";
+    private String url = "jdbc:postgresql://localhost:5432/dw_le_mans";
     private String usuario = "postgres";
-    private String contrasenia = "car123los";
+    private String contrasenia = "030516";
     
     
     public control() {
