@@ -79,3 +79,7 @@
         CONSTRAINT fk_equipo_dw_fecha FOREIGN KEY (id_fecha) REFERENCES dw_dim_fecha(id_fecha),
         CONSTRAINT fk_equipo_dw_ranking FOREIGN KEY (id_ranking,id_ranking_anterior) REFERENCES dw_dim_ranking(id_ranking,id_ranking_anterior)
     );
+
+    CREATE INDEX fecha_id ON dw_hec_evento (id_fecha);
+
+    
