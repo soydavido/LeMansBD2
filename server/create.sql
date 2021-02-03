@@ -276,3 +276,10 @@ CREATE TABLE public.inventario_repuesto
     CONSTRAINT fk_parada FOREIGN KEY (id_parada) REFERENCES parada(id),
     CONSTRAINT chk_operacion CHECK (operacion in ('Inicial','Salida','Final'))
 );
+
+create sequence validfecha
+  start with 1
+  increment by 1
+  maxvalue 100
+  minvalue 1
+cycle;
