@@ -24,6 +24,15 @@ public class Reporte15 {
         this.numero_victorias = numero_victorias;
     }
 
+    public Reporte15(String nombre, int numero_victorias) {
+        this.nombre = nombre;
+        this.numero_victorias = numero_victorias;
+    }
+
+    
+    
+    
+    
     public Reporte15() {
     }
 

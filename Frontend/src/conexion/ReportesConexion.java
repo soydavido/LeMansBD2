@@ -851,10 +851,10 @@ public class ReportesConexion {
         if(marca.equals("Seleccionar")){
           
          sql
-                = "SELECT  * from reporte7(null);";
+                = "SELECT  * from reporte15(null);";
         }else{
            sql
-                = "SELECT  * from reporte7('"+marca+"');";
+                = "SELECT  * from reporte15('"+marca+"');";
         }
         
         ResultSet result = st.executeQuery(sql);
@@ -868,9 +868,8 @@ public class ReportesConexion {
            
          
           reporte = new Reporte15(  
-                                    result.getString("nombre"),
-                                    result.getString("pais"),
-                                    Integer.parseInt(result.getString("cantidad_victoria"))
+                                    result.getString("nombre_fabricante"),
+                                   Integer.parseInt(result.getString("victorias"))
                                     );
        
         

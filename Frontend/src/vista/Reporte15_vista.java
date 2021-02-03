@@ -70,9 +70,7 @@ public class Reporte15_vista extends javax.swing.JFrame {
         btnCerrar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txt_pais = new javax.swing.JLabel();
         txt_victorias = new javax.swing.JLabel();
         etiquetaTiempo2 = new javax.swing.JLabel();
         nohay = new javax.swing.JLabel();
@@ -118,19 +116,12 @@ public class Reporte15_vista extends javax.swing.JFrame {
         jLabel8.setText("Nombre:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 110, 40));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel9.setText("Pais:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 60, 40));
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Numero de Victorias:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 230, 40));
-
-        txt_pais.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_pais, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, 400, 40));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 230, 40));
 
         txt_victorias.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_victorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 280, 40));
+        jPanel1.add(txt_victorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, 280, 40));
 
         etiquetaTiempo2.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -246,7 +237,7 @@ public class Reporte15_vista extends javax.swing.JFrame {
              txt_nombre.setText(lista.get(contador).getNombre());
         
        
-        txt_pais.setText(lista.get(contador).getPais());
+       
        
         txt_victorias.setText(Integer.toString(lista.get(contador).getNumero_victorias()));
       
@@ -423,11 +414,9 @@ public class Reporte15_vista extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nohay;
     private javax.swing.JLabel txt_nombre;
-    private javax.swing.JLabel txt_pais;
     private javax.swing.JLabel txt_victorias;
     // End of variables declaration//GEN-END:variables
 }
