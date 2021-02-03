@@ -709,8 +709,8 @@ INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristica
 
 
 --Piloto
-INSERT INTO pilotos(id,informacion,id_nacionalidad) VALUES (129,('Mika',null,'Salo',null,'24441',null,null,null,'M'),13);
-INSERT INTO pilotos(id,informacion,id_nacionalidad) VALUES (130,('Anton',null,'Ladygin',null,'32726',null,null,null,'M'),9);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (129,('Mika',null,'Salo',null,'30-11-1966',null,null,null,'M'),13);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (130,('Anton',null,'Ladygin',null,'06-08-1989',null,null,null,'M'),9);
 INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (309,('Hugo',null,'De Sadeleer',null,'16-07-1997',null,null,null,'M'),15);
 INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (310,('Nick',null,'Leventis',null,'31-01-1980',null,null,null,'M'),4);
 INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (311,('Danny',null,'Watts',null,'31-12-1979',null,null,null,'M'),4);
@@ -2520,3 +2520,156 @@ INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,
 INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (643,55,0,20,to_date('16-06-2012','DD-MM-YYYY'),233,405,15,('3:44.206',null,null,'0'));
 INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (644,56,0,17,to_date('16-06-2012','DD-MM-YYYY'),234,406,15,('3:49.076',null,null,'0'));
 
+-------------------------------------------------------------------------------------------------------------
+
+--Equipo
+INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (256,'Pecom Racing',39,27,'F');
+INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (257,'Hankook Team Farnbacher',89,9,'F');
+INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (258,'Lotus jetalliance',64,32,'F');
+INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (259,'Hope Racing',5,5,'F');
+INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (260,'CRS Racing',62,9,'F');
+INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (261,'Jota',79,14,'F');
+INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (262,'Quifel Asm Team',20,37,'F');
+INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (263,'Audi Sport North America',3,16,'F');
+INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (264,'Aston Martin Racing',7,14,'F');
+INSERT INTO equipo(id,nombre,numero_equipo,id_fabricante,activo) VALUES (265,'Aston Martin Racing',9,14,'F');
+
+--Piloto
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (595,('Matias','NULL','Russo','NULL','04-09-1985','NULL','NULL','NULL','M'),14);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (596,('Anthony','NULL','Beltoise','NULL','21-07-1971','NULL','NULL','NULL','M'),2);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (597,('François','NULL','Jakubowski','NULL','28-04-1958','NULL','NULL','NULL','M'),2);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (598,('Oskar','NULL','Slingerland','NULL','18-09-1965','NULL','NULL','NULL','M'),19);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (599,('John','NULL','Hartshorne','NULL','18-04-1957','NULL','NULL','NULL','M'),4);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (600,('Steve','NULL','Zacchia','NULL','15-08-1982','NULL','NULL','NULL','M'),15);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (601,('Casper','NULL','Elgaard','NULL','05-04-1978','NULL','NULL','NULL','M'),6);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (602,('Shaun','NULL','Lynn','NULL','13-11-1962','NULL','NULL','NULL','M'),4);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (603,('Guillaume','NULL','Moreau','NULL','08-03-1983','NULL','NULL','NULL','M'),2);
+INSERT INTO piloto(id,informacion,id_nacionalidad) VALUES (604,('Miguel','NULL','Amaral','NULL','31-07-1954','NULL','NULL','NULL','M'),3);
+
+--Contrato
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1452,256,75,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1453,256,595,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1454,256,319,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1455,257,336,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1456,257,396,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1457,257,477,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1458,230,596,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1459,230,93,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1460,230,597,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1461,258,598,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1462,258,405,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1463,258,599,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1464,531,88,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1465,531,89,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1466,531,427,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1467,104,53,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1468,104,52,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1469,104,54,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1470,101,29,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1471,101,30,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1472,101,31,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1473,259,600,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1474,259,504,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1475,259,601,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1476,260,404,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1477,260,559,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1478,260,602,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1479,227,603,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1480,227,26,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1481,227,495,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1482,261,33,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1483,261,134,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1484,261,496,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1485,262,604,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1486,262,69,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1487,262,561,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1488,263,19,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1489,263,18,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1490,263,17,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1491,264,21,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1492,264,34,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1493,264,133,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1494,265,22,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1495,265,20,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+INSERT INTO contrato(id,id_equipo,id_piloto,duracion) VALUES (1496,265,16,(to_date('01-01-2011','DD-MM-YYYY'),to_date('31-12-2011','DD-MM-YYYY')));
+
+--Modelo
+INSERT INTO modelo(id,nombre,id_fabricante) VALUES (98,'01 SwissHightechHybrid',5);
+INSERT INTO modelo(id,nombre,id_fabricante) VALUES (99,'09SC',37);
+INSERT INTO modelo(id,nombre,id_fabricante) VALUES (100,'AMR One',14);
+
+--Vehiculo
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (447,60,'LM-GTE AM','Normal',27,255,Array['Motor Aston Martin','V8','4475cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (448,39,'LM-P2.','Normal',32,256,Array['Motor Judd BMW','V8','3592cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (449,89,'LM-GTE PRO','Normal',47,257,Array['Motor  Ferrari','V8','4498cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (450,58,'LM-GTE PRO','Normal',47,230,Array['Motor  Ferrari','V8','4498cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (451,64,'LM-GTE PRO','Normal',92,258,Array['Motor Toyota','V6','3968cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (452,57,'LM-GTE AM','Normal',94,531,Array['Motor  Ferrari','V8','3996cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (453,24,'LM-P1.','Normal',96,104,Array['Motor Judd','V8','3397cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (454,1,'LM-P1.','Normal',81,101,Array['Motor Audi','V6','3700cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (455,5,'LM-P1.','Hibrido',98,259,Array['Motor SwissHytech','L4','1999cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (456,62,'LM-GTE AM','Normal',94,260,Array['Motor  Ferrari','V8','3996cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (457,15,'LM-P1.','Normal',96,227,Array['Motor Judd','V8','3397cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (458,79,'LM-GTE PRO','Normal',27,261,Array['Motor Aston Martin','V8','4475cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (459,20,'LM-P1.','Normal',99,262,Array['Motor Wytek','V8','3397cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (460,3,'LM-P1.','Normal',81,263,Array['Motor Audi','V6','3700cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (461,7,'LM-P1.','Normal',100,264,Array['Motor Aston Martin','L6','2000cc']);
+INSERT INTO vehiculo(id,numero,categoria,tipo,id_modelo,id_equipo,caracteristicas) VALUES (462,9,'LM-P1.','Normal',100,265,Array['Motor Aston Martin','L6','2000cc']);
+
+--Ranking
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (645,1,4830.383,355,'11-06-2011',97,407,16,('3:25.289',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (646,2,4829.61,355,'11-06-2011',235,408,16,('3:26.298',null,null,'201.234'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (647,3,4799.651,353,'11-06-2011',236,409,16,('3:27.790',null,null,'199.985'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (648,4,4773.466,352,'11-06-2011',237,410,16,('3:27.713',null,null,'198.894'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (649,5,4606.938,339,'11-06-2011',238,411,16,('3:29.443',null,null,'191.956'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (650,6,4592.789,338,'11-06-2011',519,412,16,('3:36.495',null,null,'191.366'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (651,7,4453.327,328,'11-06-2011',239,413,16,('3:39.803',null,null,'185.555'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (652,8,4434.992,326,'11-06-2011',560,414,16,('3:43.883',null,null,'184.791'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (653,9,4346.352,320,'11-06-2011',213,415,16,('3:42.625',null,null,'181.098'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (654,10,4333.782,319,'11-06-2011',522,416,16,('3:46.809',null,null,'180.574'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (655,11,4270.962,314,'11-06-2011',548,417,16,('4:00.553',null,null,'177.957'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (656,12,4267.109,314,'11-06-2011',240,418,16,('3:45.622',null,null,'177.796'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (657,13,4263.597,314,'11-06-2011',241,419,16,('3:59.415',null,null,'177.65'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (658,14,4253.667,313,'11-06-2011',242,420,16,('3:45.057',null,null,'177.236'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (659,15,4249.945,313,'11-06-2011',243,421,16,('3:58.876',null,null,'177.081'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (660,16,4238.461,312,'11-06-2011',244,422,16,('4:00.221',null,null,'176.603'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (661,17,4224.551,311,'11-06-2011',505,423,16,('4:00.952',null,null,'176.023'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (662,18,4215.846,310,'11-06-2011',231,424,16,('4:01.585',null,null,'175.66'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (663,19,4136.037,304,'11-06-2011',218,425,16,('3:44.546',null,null,'172.335'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (664,20,4109.098,302,'11-06-2011',175,426,16,('4:06.478',null,null,'171.212'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (665,21,4088.711,301,'11-06-2011',521,427,16,('4:04.546',null,null,'170.363'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (666,22,4011.921,295,'11-06-2011',245,428,16,('4:07.958',null,null,'167.163'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (667,23,3984.876,293,'11-06-2011',516,429,16,('4:00.980',null,null,'166.037'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (668,24,3944.999,289,'11-06-2011',76,430,16,('4:01.480',null,null,'164.375'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (669,25,3914.833,288,'11-06-2011',103,431,16,('3:50.658',null,null,'163.118'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (670,26,3868.295,285,'11-06-2011',246,432,16,('4:07.417',null,null,'161.179'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (671,27,3699.692,272,'11-06-2011',222,433,16,('4:05.762',null,null,'154.154'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (672,28,3355.154,247,'11-06-2011',247,434,16,('3:55.254',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (673,29,0,305,'11-06-2011',233,435,16,('3:34.472',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (674,30,0,300,'11-06-2011',248,436,16,('3:55.254',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (675,31,0,211,'11-06-2011',502,437,16,('3:59.815',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (676,32,0,211,'11-06-2011',249,438,16,('4:05.411',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (677,33,0,200,'11-06-2011',250,439,16,('3:41.536',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (678,34,0,199,'11-06-2011',251,440,16,('4:03.613',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (679,35,0,190,'11-06-2011',520,441,16,('3:37.102',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (680,36,0,188,'11-06-2011',252,442,16,('4:04.288',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (681,37,0,183,'11-06-2011',216,443,16,('4:00.788',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (682,38,0,178,'11-06-2011',253,444,16,('4:03.057',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (683,39,0,169,'11-06-2011',254,445,16,('4:02.299',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (684,40,0,144,'11-06-2011',186,446,16,('3:44.820',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (685,41,0,141,'11-06-2011',255,447,16,('4:04.755',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (686,42,0,139,'11-06-2011',256,448,16,('3:45.283',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (687,43,0,137,'11-06-2011',257,449,16,('4:01.390',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (688,44,0,136,'11-06-2011',230,450,16,('4:02.357',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (689,45,0,126,'11-06-2011',258,451,16,('4:19.377',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (690,46,0,123,'11-06-2011',531,452,16,('4:05.181',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (691,47,0,119,'11-06-2011',104,453,16,('3:45.127',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (692,48,0,116,'11-06-2011',101,454,16,('3:28.389',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (693,49,0,115,'11-06-2011',259,455,16,('3:50.255',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (694,50,0,84,'11-06-2011',260,456,16,('4:08.998',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (695,51,0,80,'11-06-2011',227,457,16,('3:38.674',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (696,52,0,74,'11-06-2011',261,458,16,('4:02.871',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (697,53,0,48,'11-06-2011',262,459,16,('3:40.191',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (698,54,0,14,'11-06-2011',263,460,16,('3:28.462',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (699,55,0,4,'11-06-2011',264,461,16,('3:48.099',null,null,'0'));
+INSERT INTO ranking(id,posicion,kilometraje,vueltas,fecha,id_equipo,id_vehiculo,id_evento,desempeno) VALUES (700,56,0,2,'11-06-2011',265,462,16,('3:51.783',null,null,'0'));

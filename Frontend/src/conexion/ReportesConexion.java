@@ -22,8 +22,9 @@ public class ReportesConexion {
     }
     
     
-     private String url = "jdbc:postgresql://localhost:5432/dw_lemans";
-    
+    private String url = "jdbc:postgresql://localhost:5432/dw_le_mans";
+    private String usuario = "postgres";
+    private String contrasenia = "030516";
     
     
     public ArrayList<Reporte4> reporte4(String ano,String numero_equipo){
@@ -33,8 +34,7 @@ public class ReportesConexion {
         
          
     
-    String usuario = "postgres";
-    String contrasenia = "car123los";
+    
     
     
     try{
@@ -124,10 +124,6 @@ public class ReportesConexion {
        
         
     
-    String usuario = "postgres";
-    String contrasenia = "car123los";
-    
-    
     try{
         
         Class.forName("org.postgresql.Driver");
@@ -200,10 +196,6 @@ public class ReportesConexion {
         ArrayList<Reporte4> lista = new ArrayList<Reporte4>();
        
         
-    
-    String usuario = "postgres";
-    String contrasenia = "car123los";
-    
     
     try{
         
@@ -279,11 +271,7 @@ public class ReportesConexion {
         
         ArrayList<Reporte7> lista = new ArrayList<Reporte7>();
        
-        
-    
-    String usuario = "postgres";
-    String contrasenia = "car123los";
-    
+       
     
     try{
         
@@ -354,9 +342,6 @@ public class ReportesConexion {
         ArrayList<Reporte7> lista = new ArrayList<Reporte7>();
        
         
-    String usuario = "postgres";
-    String contrasenia = "car123los";
-    
     
     try{
         
@@ -428,9 +413,6 @@ public class ReportesConexion {
         ArrayList<Reporte7> lista = new ArrayList<Reporte7>();
        
     
-    String usuario = "postgres";
-    String contrasenia = "car123los";
-    
     
     try{
         
@@ -493,10 +475,7 @@ public class ReportesConexion {
         ArrayList<Reporte7> lista = new ArrayList<Reporte7>();
        
         
-    
-    String usuario = "postgres";
-    String contrasenia = "car123los";
-    
+ 
     
     try{
         
@@ -560,9 +539,6 @@ public class ReportesConexion {
         
         ArrayList<Reporte11> lista = new ArrayList<Reporte11>();
        
-    
-    String usuario = "postgres";
-    String contrasenia = "car123los";
     
     
     try{
@@ -631,9 +607,6 @@ public class ReportesConexion {
         ArrayList<Reporte4> lista = new ArrayList<Reporte4>();
        
         
-    
-    String usuario = "postgres";
-    String contrasenia = "car123los";
     
     
     try{
@@ -705,9 +678,6 @@ public class ReportesConexion {
        
         
     
-    String usuario = "postgres";
-    String contrasenia = "car123los";
-    
     
     try{
         
@@ -768,11 +738,6 @@ public class ReportesConexion {
         ArrayList<Reporte7> lista = new ArrayList<Reporte7>();
        
         
-         
-    
-    String usuario = "postgres";
-    String contrasenia = "car123los";
-    
     
     try{
         
@@ -831,11 +796,7 @@ public class ReportesConexion {
      public ArrayList<Reporte15> reporte15(String marca){
         
         ArrayList<Reporte15> lista = new ArrayList<Reporte15>();
-       
-    
-    String usuario = "postgres";
-    String contrasenia = "car123los";
-    
+     
     
     try{
         
@@ -896,11 +857,6 @@ public class ReportesConexion {
         
         ArrayList<Reporte16> lista = new ArrayList<Reporte16>();
        
-        
-    
-    String usuario = "postgres";
-    String contrasenia = "car123los";
-    
     
     try{
         

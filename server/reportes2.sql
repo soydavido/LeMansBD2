@@ -280,7 +280,6 @@ BEGIN
 		AND fe.id_fecha = ev.id_fecha
 		AND ev.id_piloto = pi.id_piloto
 		AND ev.id_ranking = ra.id_ranking
-		AND ev.nro_equipo = 14
 		GROUP BY 1,2,18,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
 		ORDER BY 13 DESC 
 		FETCH FIRST resultados ROWS ONLY ;
@@ -324,7 +323,7 @@ $$LANGUAGE plpgsql;
 
 
 --REPORTE 15
-CREATE FUNCTION reporte15()
+CREATE FUNCTION reporte15(nombre_marca varchar)
 RETURNS TABLE (nombre_fabricante dw_dim_vehiculo.fabricante%TYPE, victorias bigint)
 AS $$
 BEGIN
@@ -336,6 +335,7 @@ BEGIN
 								AND ve1.fabricante LIKE ve.fabricante) / 3)
 		FROM dw_hec_evento ev, dw_dim_vehiculo ve
 		WHERE ev.id_vehiculo = ve.id_vehiculo
+		AND ve.fabricante LIKE (nombre_marca)
 		ORDER BY 2 DESC,1;
 END;
 $$LANGUAGE plpgsql;	
