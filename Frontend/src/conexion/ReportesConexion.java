@@ -22,9 +22,9 @@ public class ReportesConexion {
     }
     
     
-    private String url = "jdbc:postgresql://localhost:5432/dw_le_mans";
+    private String url = "jdbc:postgresql://localhost:5432/dw_lemans";
     private String usuario = "postgres";
-    private String contrasenia = "030516";
+    private String contrasenia = "car123los";
     
     
     public ArrayList<Reporte4> reporte4(String ano,String numero_equipo){
