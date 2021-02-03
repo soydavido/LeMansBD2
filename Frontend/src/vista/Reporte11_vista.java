@@ -223,10 +223,11 @@ public class Reporte11_vista extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try{
-            nohay.setText("");
-     
-         btnsiguiente1.setVisible(true);
-        btnanterior.setVisible(true);
+             nohay.setText("");
+            this.contador = 0;
+        btnsiguiente1.setVisible(false);
+        btnanterior.setVisible(false);
+        
         
        String ano = combo_ano.getSelectedItem().toString();
         
@@ -235,7 +236,14 @@ public class Reporte11_vista extends javax.swing.JFrame {
        
         this.lista = reporte_conexion.reporte11(ano);
         
+        if(lista.size() !=0)
         mostrar();
+      else{
+          nohay.setText("No hay Registros de esta Busqueda");
+      }
+        if(lista.size() > 1){
+            btnsiguiente1.setVisible(true);
+        }
         
         }catch(Exception e){
             nohay.setText("No hay Registros de esta Busqueda");
@@ -251,7 +259,11 @@ public class Reporte11_vista extends javax.swing.JFrame {
         this.contador ++;
         btnanterior.setVisible(true);
         try{
-            mostrar();
+            if(this.lista.size() - 1 == contador){
+                btnsiguiente1.setVisible(false);
+                mostrar();
+            }else
+           mostrar();
         }catch(Exception e){
             btnsiguiente1.setVisible(false);
         }
@@ -261,7 +273,11 @@ public class Reporte11_vista extends javax.swing.JFrame {
         this.contador --;
         btnsiguiente1.setVisible(true);
         try{
+            if(0 == contador){
             mostrar();
+             btnanterior.setVisible(false);
+             }else
+                 mostrar();
         }catch(Exception e){
             btnanterior.setVisible(false);
         }

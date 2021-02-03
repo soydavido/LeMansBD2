@@ -74,8 +74,6 @@ public class Reporte12_vista extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnCerrar = new javax.swing.JButton();
         etiquetaTiempo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        txt_nacionalidad_equipo = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txt_nombre_equipo = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -154,13 +152,6 @@ public class Reporte12_vista extends javax.swing.JFrame {
         etiquetaTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiquetaTiempo.setText("Cantidad de Autos:");
         jPanel1.add(etiquetaTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 390, 90));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Nacionalidad:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 160, 40));
-
-        txt_nacionalidad_equipo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_nacionalidad_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 380, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("Nombre:");
@@ -428,23 +419,17 @@ public class Reporte12_vista extends javax.swing.JFrame {
                   mostrar(0+1,1);
                   mostrar(0+2,2);
                   this.id_donde_termina = 3;
-                
-                }else if(this.lista.get(i).getCantidad_pilotos() == 2){
-                  mostrar(0,0);
-                  mostrar(0+1,1);
-                  this.id_donde_termina = 2;
-              
-                 }else{
-                    mostrar(0,0);
+                  }else{
+                     mostrar(0,0);
                   mostrar(0+1,1);
                   mostrar(0+2,2);
                   this.id_donde_termina = 3;
-                  
-                  
-              }
+                }
                 
                 if(this.lista.size() > 3){
                      btnsiguiente1.setVisible(true);
+                }else{
+                    btnsiguiente1.setVisible(false);
                 }
        }catch(Exception e){
            System.out.println("llego al final");
@@ -472,24 +457,14 @@ public class Reporte12_vista extends javax.swing.JFrame {
                   i= i+3;
                   this.id_donde_termina = i;
               
-            } else if(this.lista.get(i).getCantidad_pilotos() == 2){
+            } else{
                   this.id_anterior = i-1;
-                  mostrar(i,0);
-                  mostrar(i+1,1);
-                 
-                  
-                  i= i+2;
-                  this.id_donde_termina = i;
-              
-            }  else{
-                   this.id_anterior = i-1;
                   mostrar(i,0);
                   mostrar(i+1,1);
                   mostrar(i+2,2);
                   
                   i= i+3;
                   this.id_donde_termina = i;
-                  
               }
               
        }
@@ -531,22 +506,13 @@ public class Reporte12_vista extends javax.swing.JFrame {
                  
                   this.id_donde_termina = i+1;
               
-            } else if(this.lista.get(i).getCantidad_pilotos() == 2){
-                
-                  mostrar(i-1,1);
-                  mostrar(i,2);
-                  this.id_anterior = i - 2;
-                 
-                  this.id_donde_termina = i+1;
-              
-            }  else{
+            } else{
                    mostrar(i-2,0);
                   mostrar(i-1,1);
                   mostrar(i,2);
                   this.id_anterior = i - 3;
                  
                   this.id_donde_termina = i+1;
-                  
               }
               
        }
@@ -590,45 +556,25 @@ public class Reporte12_vista extends javax.swing.JFrame {
         txt_motor.setText(lista.get(contador).getCaracteristicas_vehiculo());
         txt_categoria.setText(lista.get(contador).getCategoria_vehiculo());
         
+         txt_nombre_conductor.setText(lista.get(contador).getNombre_piloto());
         
-        if(lista.get(contador).getNombre2() != null)
-        txt_nombre_conductor.setText(lista.get(contador).getNombre_piloto()+" "+lista.get(contador).getNombre2());
-        else
-             txt_nombre_conductor.setText(lista.get(contador).getNombre_piloto());
-        
-        if(lista.get(contador).getApellido() != null)
-        txt_apellido.setText(lista.get(contador).getApellido()+" "+lista.get(contador).getApellido2());
-        else
-        txt_apellido.setText(lista.get(contador).getApellido());
+       txt_apellido.setText(lista.get(contador).getApellido());
         
         
         txt_nacionalidad_conductor.setText(lista.get(contador).getNacionalidad());
         } else if ((piloto == 1) || (piloto == -1)){
-             
-                if(lista.get(contador+piloto).getNombre2() != null)
-                txt_nombre_conductor1.setText(lista.get(contador+piloto).getNombre_piloto()+" "+lista.get(contador+piloto).getNombre2());
-                else
-                     txt_nombre_conductor1.setText(lista.get(contador+piloto).getNombre_piloto());
+                 txt_nombre_conductor1.setText(lista.get(contador).getNombre_piloto());
 
-                if(lista.get(contador+piloto).getApellido() != null)
-                txt_apellido1.setText(lista.get(contador+piloto).getApellido()+" "+lista.get(contador+piloto).getApellido2());
-                else
-                txt_apellido1.setText(lista.get(contador+piloto).getApellido());
+                txt_apellido1.setText(lista.get(contador).getApellido());
                 
-                txt_nacionalidad_conductor1.setText(lista.get(contador+piloto).getNacionalidad());
+                txt_nacionalidad_conductor1.setText(lista.get(contador).getNacionalidad());
         }
         else if ((piloto == 2) || (piloto == -2)){
-             if(lista.get(contador+piloto).getNombre2() != null)
-                txt_nombre_conductor2.setText(lista.get(contador+piloto).getNombre_piloto()+" "+lista.get(contador+piloto).getNombre2());
-                else
-                     txt_nombre_conductor2.setText(lista.get(contador+piloto).getNombre_piloto());
+                txt_nombre_conductor2.setText(lista.get(contador).getNombre_piloto());
 
-                if(lista.get(contador+piloto).getApellido() != null)
-                txt_apellido2.setText(lista.get(contador+piloto).getApellido()+" "+lista.get(contador+piloto).getApellido2());
-                else
-                txt_apellido2.setText(lista.get(contador+piloto).getApellido());
+                txt_apellido2.setText(lista.get(contador).getApellido());
                 
-                txt_nacionalidad_conductor2.setText(lista.get(contador+piloto).getNacionalidad());
+                txt_nacionalidad_conductor2.setText(lista.get(contador).getNacionalidad());
         }
         
        }
@@ -803,7 +749,6 @@ public class Reporte12_vista extends javax.swing.JFrame {
     private javax.swing.JLabel etiquetaTiempo3;
     private javax.swing.JLabel etiquetaTiempo4;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -839,7 +784,6 @@ public class Reporte12_vista extends javax.swing.JFrame {
     private javax.swing.JLabel txt_nacionalidad_conductor;
     private javax.swing.JLabel txt_nacionalidad_conductor1;
     private javax.swing.JLabel txt_nacionalidad_conductor2;
-    private javax.swing.JLabel txt_nacionalidad_equipo;
     private javax.swing.JLabel txt_nombre_automovil;
     private javax.swing.JLabel txt_nombre_conductor;
     private javax.swing.JLabel txt_nombre_conductor1;

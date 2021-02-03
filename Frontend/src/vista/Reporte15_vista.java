@@ -185,7 +185,9 @@ public class Reporte15_vista extends javax.swing.JFrame {
 
         try{
             nohay.setText("");
-     
+      this.contador = 0;
+        btnsiguiente.setVisible(false);
+        btnanterior.setVisible(false);
         
        String marca = combo_marca.getSelectedItem().toString();
         
@@ -194,12 +196,14 @@ public class Reporte15_vista extends javax.swing.JFrame {
        
         this.lista = reporte_conexion.reporte15(marca);
         
+         if(lista.size() !=0)
         mostrar();
-        
-        if(this.lista.size() > 1)
-        {
+      else{
+          nohay.setText("No hay Registros de esta Busqueda");
+      }
+        if(lista.size() > 1){
             btnsiguiente.setVisible(true);
-        }        
+        }    
         }catch(Exception e){
             nohay.setText("No hay Registros de esta Busqueda");
         }
@@ -210,7 +214,11 @@ public class Reporte15_vista extends javax.swing.JFrame {
         this.contador --;
         btnsiguiente.setVisible(true);
         try{
+             if(0 == contador){
             mostrar();
+             btnanterior.setVisible(false);
+             }else
+                 mostrar();
         }catch(Exception e){
             btnanterior.setVisible(false);
         }
@@ -220,7 +228,11 @@ public class Reporte15_vista extends javax.swing.JFrame {
         this.contador ++;
         btnanterior.setVisible(true);
         try{
-            mostrar();
+            if(this.lista.size() - 1 == contador){
+                btnsiguiente.setVisible(false);
+                mostrar();
+            }else
+           mostrar();
         }catch(Exception e){
             btnsiguiente.setVisible(false);
         }

@@ -155,43 +155,6 @@ public class control {
         }
             
         }
-        
-        
-        
-         public void llenarComboFabricantes(String fabricante,JComboBox op){
-        
-        
-        op.addItem("Seleccionar");
-            
-           try{
-        
-        Class.forName("org.postgresql.Driver");
-        Connection conexion = DriverManager.getConnection(url,usuario,contrasenia);
-        java.sql.Statement st = conexion.createStatement();
-        
-        String sql;
-       
-        
-         sql
-                = "SELECT  * from fabricantes('"+fabricante+"');";
-       
-        ResultSet result = st.executeQuery(sql);
-       
-        while(result.next()){
-            op.addItem(result.getString("fabricantes"));
-        }
-           
-            
-            
-        
-        }catch(Exception e){
-               System.out.println("error al traer los fabricantes");
-        }
-            
-        }
-       
-        
-        
        
         public void llenarComboModelos(String fabricante,JComboBox op){
         

@@ -13,8 +13,8 @@ import java.sql.Time;
  */
 public class Reporte7 {
     
-        private String anho;
-     
+    
+     private String anho;
        private   String nombre_piloto;
        private   String nombre2;
         private   String apellido;
@@ -24,8 +24,6 @@ public class Reporte7 {
         
         
         private int numero_participaciones;
-        
-        private String abandonos;
         
     
         
@@ -71,10 +69,12 @@ public class Reporte7 {
         this.apellido = apellido;
         this.nacionalidad = nacionalidad;
     }
-    
-    
-    
 
+    
+    
+    
+    
+    
     public String getAnho() {
         return anho;
     }
@@ -83,16 +83,6 @@ public class Reporte7 {
         this.anho = anho;
     }
 
-    public String getAbandonos() {
-        return abandonos;
-    }
-
-    public void setAbandonos(String abandonos) {
-        this.abandonos = abandonos;
-    }
-
-    
-    
     
     
     
