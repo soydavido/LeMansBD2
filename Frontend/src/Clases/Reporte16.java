@@ -40,11 +40,8 @@ public class Reporte16 {
         private String modelo; 
         private String motor;
          private String categoria;
-         
-         
-          private String fecha;
         
-        
+        private String fecha;
  public Reporte16() {
     }
 
@@ -100,12 +97,13 @@ public class Reporte16 {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-    
-    
-    
-    
-    
 
+    
+    
+    
+    
+    
+    
     public String getNombre_piloto() {
         return nombre_piloto;
     }

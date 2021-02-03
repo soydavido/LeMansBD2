@@ -71,7 +71,7 @@ public class Reporte14_vista extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JLabel();
         txt_apellido = new javax.swing.JLabel();
-        txt_nacionalidad = new javax.swing.JLabel();
+        txt_nacionalidad_conductor = new javax.swing.JLabel();
         etiquetaTiempo2 = new javax.swing.JLabel();
         nohay = new javax.swing.JLabel();
         txt_numero = new javax.swing.JLabel();
@@ -129,8 +129,8 @@ public class Reporte14_vista extends javax.swing.JFrame {
         txt_apellido.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jPanel1.add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 400, 40));
 
-        txt_nacionalidad.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_nacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, 280, 40));
+        txt_nacionalidad_conductor.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txt_nacionalidad_conductor, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, 280, 40));
 
         etiquetaTiempo2.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -139,7 +139,7 @@ public class Reporte14_vista extends javax.swing.JFrame {
 
         nohay.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         nohay.setForeground(new java.awt.Color(255, 0, 51));
-        jPanel1.add(nohay, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 380, 40));
+        jPanel1.add(nohay, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, 380, 40));
 
         txt_numero.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jPanel1.add(txt_numero, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 470, 280, 40));
@@ -181,11 +181,20 @@ public class Reporte14_vista extends javax.swing.JFrame {
 
         try{
             nohay.setText("");
-     
+      this.contador = 0;
+        btnsiguiente.setVisible(false);
+        btnanterior.setVisible(false);
         
-        this.lista = reporte_conexion.reporte9();
+        this.lista = reporte_conexion.reporte14();
         
+         if(lista.size() !=0)
         mostrar();
+      else{
+          nohay.setText("No hay Registros de esta Busqueda");
+      }
+        if(lista.size() > 1){
+            btnsiguiente.setVisible(true);
+        }
         
         }catch(Exception e){
             nohay.setText("No hay Registros de esta Busqueda");
@@ -197,9 +206,11 @@ public class Reporte14_vista extends javax.swing.JFrame {
         this.contador --;
         btnsiguiente.setVisible(true);
         try{
+            if(0 == contador){
             mostrar();
-            if(contador == 0)
-            btnanterior.setVisible(false);
+             btnanterior.setVisible(false);
+             }else
+                 mostrar();
         }catch(Exception e){
             btnanterior.setVisible(false);
         }
@@ -209,10 +220,11 @@ public class Reporte14_vista extends javax.swing.JFrame {
         this.contador ++;
         btnanterior.setVisible(true);
         try{
-            mostrar();
-
-            if(contador == this.lista.size())
-            btnanterior.setVisible(false);
+            if(this.lista.size() - 1 == contador){
+                btnsiguiente.setVisible(false);
+                mostrar();
+            }else
+           mostrar();
 
         }catch(Exception e){
             btnsiguiente.setVisible(false);
@@ -223,16 +235,14 @@ public class Reporte14_vista extends javax.swing.JFrame {
     public void mostrar(){
      
         
-       txt_nombre.setText(lista.get(contador).getNombre_piloto());
+       txt_nombre.setText(lista.get(contador).getAnho());
         
-      
-        txt_apellido.setText(lista.get(contador).getApellido());
+        txt_apellido.setText(lista.get(contador).getNombre_piloto());
        
-        txt_nacionalidad.setText(lista.get(contador).getNacionalidad());
-        txt_numero.setText(Integer.toString(lista.get(contador).getNumero_participaciones()));
+        txt_nacionalidad_conductor.setText(lista.get(contador).getApellido());
+        txt_numero.setText(lista.get(contador).getNacionalidad());
         
         }
- 
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1302,7 +1312,7 @@ public class Reporte14_vista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nohay;
     private javax.swing.JLabel txt_apellido;
-    private javax.swing.JLabel txt_nacionalidad;
+    private javax.swing.JLabel txt_nacionalidad_conductor;
     private javax.swing.JLabel txt_nombre;
     private javax.swing.JLabel txt_numero;
     // End of variables declaration//GEN-END:variables

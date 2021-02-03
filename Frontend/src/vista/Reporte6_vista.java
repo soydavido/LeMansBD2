@@ -82,6 +82,7 @@ public class Reporte6_vista extends javax.swing.JFrame {
         combo_modelo = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        txtnumero_equipo = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -119,8 +120,6 @@ public class Reporte6_vista extends javax.swing.JFrame {
         txt_tipo = new javax.swing.JLabel();
         etiquetaTiempo4 = new javax.swing.JLabel();
         etiquetaTiempo5 = new javax.swing.JLabel();
-        txtnumero_equipo = new javax.swing.JLabel();
-        fabricante_type = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -148,7 +147,7 @@ public class Reporte6_vista extends javax.swing.JFrame {
         etiquetaTiempo.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiquetaTiempo.setText("Datos del Automovil");
-        jPanel1.add(etiquetaTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 280, 390, 90));
+        jPanel1.add(etiquetaTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 310, 390, 90));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("Nombre:");
@@ -177,6 +176,9 @@ public class Reporte6_vista extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setText("Numero de Equipo:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 210, 40));
+
+        txtnumero_equipo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(txtnumero_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 100, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setText("Posición:");
@@ -210,24 +212,24 @@ public class Reporte6_vista extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel10.setText("Fabricante:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 360, 130, 40));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, 130, 40));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel11.setText("Motor:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 360, 90, 40));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 390, 90, 40));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel12.setText("Categoría:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 400, 130, 40));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 430, 130, 40));
 
         txt_fabricante.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_fabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 360, 330, 40));
+        jPanel1.add(txt_fabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, 330, 40));
 
         txt_motor.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_motor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 360, 300, 40));
+        jPanel1.add(txt_motor, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 390, 470, 40));
 
         txt_categoria.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 400, 250, 40));
+        jPanel1.add(txt_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 430, 410, 40));
 
         nohay.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         nohay.setForeground(new java.awt.Color(255, 0, 51));
@@ -312,18 +314,18 @@ public class Reporte6_vista extends javax.swing.JFrame {
         jPanel1.add(combo_fabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 280, 40));
 
         txt_modelo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 400, 360, 40));
+        jPanel1.add(txt_modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 430, 360, 40));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel13.setText("Modelo:");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 400, 90, 40));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 90, 40));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel14.setText("Tipo:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 440, 60, 40));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 470, 60, 40));
 
         txt_tipo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txt_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 440, 330, 40));
+        jPanel1.add(txt_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, 330, 40));
 
         etiquetaTiempo4.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -333,41 +335,9 @@ public class Reporte6_vista extends javax.swing.JFrame {
         etiquetaTiempo5.setFont(new java.awt.Font("Lucida Sans", 0, 36)); // NOI18N
         etiquetaTiempo5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etiquetaTiempo5.setText("Fabricante");
-        jPanel1.add(etiquetaTiempo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 200, 90));
+        jPanel1.add(etiquetaTiempo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 320, 90));
 
-        txtnumero_equipo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(txtnumero_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 100, 40));
-
-        fabricante_type.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        fabricante_type.setForeground(new java.awt.Color(204, 204, 204));
-        fabricante_type.setText("Buscar por Nombre");
-        fabricante_type.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                fabricante_typeMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                fabricante_typeMouseEntered(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                fabricante_typeMousePressed(evt);
-            }
-        });
-        fabricante_type.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fabricante_typeActionPerformed(evt);
-            }
-        });
-        fabricante_type.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                fabricante_typeKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                fabricante_typeKeyTyped(evt);
-            }
-        });
-        jPanel1.add(fabricante_type, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 280, 40));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 0, 1570, 910));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, 0, 1570, 910));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -387,16 +357,10 @@ public class Reporte6_vista extends javax.swing.JFrame {
        String fabricante = combo_fabricante.getSelectedItem().toString();
         String modelo = combo_modelo.getSelectedItem().toString();
        
-            
         this.lista = reporte_conexion.reporte6(fabricante,modelo);
         
         subir();
         
-        if(this.lista.size() == 0)
-        nohay.setText("No hay Registros de esta Busqueda");
-        else if (this.lista.size() > 0){
-            btnsiguiente1.setVisible(true);
-        }
         }catch(Exception e){
             nohay.setText("No hay Registros de esta Busqueda");
         }
@@ -440,37 +404,7 @@ public class Reporte6_vista extends javax.swing.JFrame {
      
     }//GEN-LAST:event_combo_fabricanteMouseClicked
 
-    private void fabricante_typeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fabricante_typeKeyTyped
-        System.out.println("marque una letra");
-        
-        String fabricante = fabricante_type.getText();
-        
-        con.llenarComboFabricantes(fabricante,combo_fabricante);
-        
-    }//GEN-LAST:event_fabricante_typeKeyTyped
-
-    private void fabricante_typeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fabricante_typeKeyPressed
-       
-        
-    }//GEN-LAST:event_fabricante_typeKeyPressed
-
-    private void fabricante_typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fabricante_typeActionPerformed
-       
-    }//GEN-LAST:event_fabricante_typeActionPerformed
-
-    private void fabricante_typeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fabricante_typeMouseClicked
-         
-    }//GEN-LAST:event_fabricante_typeMouseClicked
-
-    private void fabricante_typeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fabricante_typeMouseEntered
-         
-    }//GEN-LAST:event_fabricante_typeMouseEntered
-
-    private void fabricante_typeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fabricante_typeMousePressed
-       fabricante_type.setText("");
-    }//GEN-LAST:event_fabricante_typeMousePressed
-
-    
+      
     public void subir(){
         
         
@@ -524,7 +458,15 @@ public class Reporte6_vista extends javax.swing.JFrame {
                   i= i+3;
                   this.id_donde_termina = i;
               
-            } 
+            } else{
+                  this.id_anterior = i-1;
+                  mostrar(i,0);
+                  mostrar(i+1,1);
+                  mostrar(i+2,2);
+                  
+                  i= i+3;
+                  this.id_donde_termina = i;
+              }
               
        }
           
@@ -565,7 +507,14 @@ public class Reporte6_vista extends javax.swing.JFrame {
                  
                   this.id_donde_termina = i+1;
               
-            } 
+            } else{
+                   mostrar(i-2,0);
+                  mostrar(i-1,1);
+                  mostrar(i,2);
+                  this.id_anterior = i - 3;
+                 
+                  this.id_donde_termina = i+1;
+              }
               
        }
        
@@ -583,7 +532,11 @@ public class Reporte6_vista extends javax.swing.JFrame {
          }
        
        }
- 
+    
+    
+    
+    
+    
     
     public void mostrar(int contador,int piloto){
        // System.out.println("imprimir   contador "+contador+"   piloto  "+piloto );
@@ -592,46 +545,40 @@ public class Reporte6_vista extends javax.swing.JFrame {
         txtnumero_equipo.setText(Integer.toString(lista.get(contador).getNumero_equipo()));
        // txt_nacionalidad_equipo.setText(lista.get(contador).getNacionalidad_equipo());
         
-       /* txt_puesto_carrera.setText(Integer.toString(lista.get(contador).getPosicioncarrera()));
-        txt_numero_vuelta.setText(Integer.toString(lista.get(contador).getVueltascarrera()));
-        txt_km.setText(Double.toString(lista.get(contador).getKmcarrera()));
-        txt_mejor_vuelta.setText(lista.get(contador).getVuelta_rapida_carrera());
-        txt_velocidad_media.setText(Double.toString(lista.get(contador).getVelocidad_media()));
+       
         
         DecimalFormat df = new DecimalFormat("#0.00");
              
-        txt_diferencia.setText(df.format(lista.get(contador).getDiferencia()));*/
-       
+        
         txt_fabricante.setText(lista.get(contador).getFabricante());
-        txt_modelo.setText(lista.get(contador).getModelo());
         txt_motor.setText(lista.get(contador).getCaracteristicas_vehiculo());
         txt_categoria.setText(lista.get(contador).getCategoria_vehiculo());
-        txt_tipo.setText(lista.get(contador).getTipo_vehiculo());
+        txt_modelo.setText(lista.get(contador).getModelo());
+        txt_tipo.setText(lista.get(contador).getTipo_auto());
         
-          txt_nombre_conductor.setText(lista.get(contador).getNombre_piloto());
+            txt_nombre_conductor.setText(lista.get(contador).getNombre_piloto());
         
-       txt_apellido.setText(lista.get(contador).getApellido());
+        txt_apellido.setText(lista.get(contador).getApellido());
         
         
         txt_nacionalidad_conductor.setText(lista.get(contador).getNacionalidad());
         } else if ((piloto == 1) || (piloto == -1)){
              
-                   txt_nombre_conductor1.setText(lista.get(contador).getNombre_piloto());
+                  txt_nombre_conductor1.setText(lista.get(contador+piloto).getNombre_piloto());
 
-                 txt_apellido1.setText(lista.get(contador).getApellido());
+                txt_apellido1.setText(lista.get(contador+piloto).getApellido());
                 
-                txt_nacionalidad_conductor1.setText(lista.get(contador).getNacionalidad());
+                txt_nacionalidad_conductor1.setText(lista.get(contador+piloto).getNacionalidad());
         }
         else if ((piloto == 2) || (piloto == -2)){
-                txt_nombre_conductor2.setText(lista.get(contador).getNombre_piloto());
+                   txt_nombre_conductor2.setText(lista.get(contador+piloto).getNombre_piloto());
 
-               txt_apellido2.setText(lista.get(contador).getApellido());
+               txt_apellido2.setText(lista.get(contador+piloto).getApellido());
                 
-                txt_nacionalidad_conductor2.setText(lista.get(contador).getNacionalidad());
+                txt_nacionalidad_conductor2.setText(lista.get(contador+piloto).getNacionalidad());
         }
         
        }
-    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -804,7 +751,6 @@ public class Reporte6_vista extends javax.swing.JFrame {
     private javax.swing.JLabel etiquetaTiempo3;
     private javax.swing.JLabel etiquetaTiempo4;
     private javax.swing.JLabel etiquetaTiempo5;
-    private javax.swing.JTextField fabricante_type;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

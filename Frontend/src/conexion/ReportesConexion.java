@@ -22,9 +22,8 @@ public class ReportesConexion {
     }
     
     
-    private String url = "jdbc:postgresql://localhost:5432/dw_le_mans";
-    private String usuario = "postgres";
-    private String contrasenia = "030516";
+     private String url = "jdbc:postgresql://localhost:5432/dw_lemans";
+    
     
     
     public ArrayList<Reporte4> reporte4(String ano,String numero_equipo){
@@ -34,7 +33,8 @@ public class ReportesConexion {
         
          
     
-    
+    String usuario = "postgres";
+    String contrasenia = "car123los";
     
     
     try{
@@ -124,6 +124,10 @@ public class ReportesConexion {
        
         
     
+    String usuario = "postgres";
+    String contrasenia = "car123los";
+    
+    
     try{
         
         Class.forName("org.postgresql.Driver");
@@ -131,7 +135,7 @@ public class ReportesConexion {
         java.sql.Statement st = conexion.createStatement();
        
         String sql
-                = "SELECT  * from reporte5('"+primer_nombre+"','"+primer_apellido+"');";
+                = "SELECT  * from reporte5('"+primer_nombre+"','"+primer_apellido+"')";
         ResultSet result = st.executeQuery(sql);
        
         Reporte16 reporte = new Reporte16();
@@ -139,7 +143,8 @@ public class ReportesConexion {
         while(result.next()){
              
            
-           reporte = new Reporte16(  result.getString("nombre_piloto"),
+           
+          reporte = new Reporte16(  result.getString("nombre_piloto"),
                                     result.getString("apellido_piloto"),
                                     result.getString("fecha_nacimiento"),
                                     result.getString("fecha_fallecimiento"),
@@ -168,6 +173,7 @@ public class ReportesConexion {
                                     );
        
        
+      
        
        
       
@@ -197,6 +203,10 @@ public class ReportesConexion {
        
         
     
+    String usuario = "postgres";
+    String contrasenia = "car123los";
+    
+    
     try{
         
         Class.forName("org.postgresql.Driver");
@@ -214,7 +224,6 @@ public class ReportesConexion {
         Reporte4 reporte = new Reporte4();
       
       
-      
         while(result.next()){
          
          
@@ -224,23 +233,21 @@ public class ReportesConexion {
                                     result.getString("fabricante_nombre"),
                                     result.getString("modelo_nombre"),
                                     result.getString("motor"),
-                  
-                                    
                                     result.getString("categoria"),
                                     result.getString("tipo_auto"),
+                  
                                     result.getString("nombre_equipo"),
                                     Integer.parseInt(result.getString("nro_equipo")),
                                     result.getString("pais_equipo"),
-                                   
                                     Double.parseDouble(result.getString("velocidad_media")),
-                  
-                                   result.getString("nombre_piloto"),
-                                   result.getString("apellido_piloto"),
-                                   result.getString("nacionalidad_piloto"),
-                                    
+                                   
+                                    result.getString("nombre_piloto"),
+                                   
+                                    result.getString("apellido_piloto"),
                                   
-                                    Integer.parseInt(result.getString("cantidad_pilotos"))
+                                    result.getString("nacionalidad_piloto"),
                                     
+                                    Integer.parseInt(result.getString("cantidad_pilotos"))
                                     );
        
         
@@ -271,7 +278,11 @@ public class ReportesConexion {
         
         ArrayList<Reporte7> lista = new ArrayList<Reporte7>();
        
-       
+        
+    
+    String usuario = "postgres";
+    String contrasenia = "car123los";
+    
     
     try{
         
@@ -342,6 +353,9 @@ public class ReportesConexion {
         ArrayList<Reporte7> lista = new ArrayList<Reporte7>();
        
         
+    String usuario = "postgres";
+    String contrasenia = "car123los";
+    
     
     try{
         
@@ -413,9 +427,12 @@ public class ReportesConexion {
         ArrayList<Reporte7> lista = new ArrayList<Reporte7>();
        
     
+    String usuario = "postgres";
+    String contrasenia = "car123los";
+    
     
     try{
-        
+        System.out.println("entro");
         Class.forName("org.postgresql.Driver");
         Connection conexion = DriverManager.getConnection(url,usuario,contrasenia);
         java.sql.Statement st = conexion.createStatement();
@@ -430,18 +447,16 @@ public class ReportesConexion {
        
         Reporte7 reporte = new Reporte7();
       
-        String nombre2 = "";
-      String apellido2 = "";
       
         while(result.next()){
-          
          
+            
          
           reporte = new Reporte7(  
                                     result.getString("nombre_piloto"),
                                     
                                     result.getString("apellido_piloto"),
-                                    
+                                   
                                     result.getString("nacionalidad"),
                                     Integer.parseInt(result.getString("participaciones"))
                                     );
@@ -475,7 +490,10 @@ public class ReportesConexion {
         ArrayList<Reporte7> lista = new ArrayList<Reporte7>();
        
         
- 
+    
+    String usuario = "postgres";
+    String contrasenia = "car123los";
+    
     
     try{
         
@@ -490,6 +508,7 @@ public class ReportesConexion {
          sql
                 = "SELECT  * from reporte10(null);";
         }else{
+           
            sql
                 = "SELECT  * from reporte10("+ano+");";
         }
@@ -499,17 +518,16 @@ public class ReportesConexion {
         Reporte7 reporte = new Reporte7();
       
        
-      
         while(result.next()){
        
-           
+         
          
          
           reporte = new Reporte7(  result.getString("anho"),
                                     result.getString("nombre_piloto"),
-                                    
+                                   
                                     result.getString("apellido"),
-                                    
+                                   
                                     result.getString("nacionalidad")
                                     );
        
@@ -517,7 +535,7 @@ public class ReportesConexion {
        
            
            lista.add(reporte);
-            
+          
             }
        
         
@@ -539,6 +557,9 @@ public class ReportesConexion {
         
         ArrayList<Reporte11> lista = new ArrayList<Reporte11>();
        
+    
+    String usuario = "postgres";
+    String contrasenia = "car123los";
     
     
     try{
@@ -608,6 +629,9 @@ public class ReportesConexion {
        
         
     
+    String usuario = "postgres";
+    String contrasenia = "car123los";
+    
     
     try{
         
@@ -625,32 +649,37 @@ public class ReportesConexion {
         ResultSet result = st.executeQuery(sql);
        
         Reporte4 reporte = new Reporte4();
-      
-        String nombre2 = "";
-      String apellido2 = "";
+        double diferencia =0;
       
         while(result.next()){
-           
-          reporte = new Reporte4(   result.getString("nombre_equipo"),
-                                    Integer.parseInt(result.getString("numero_equipo")),
+          if(result.getString("diferencia") != null){
+              diferencia = Double.parseDouble(result.getString("diferencia"));
+          }
+          
+          reporte = new Reporte4(   Integer.parseInt(result.getString("numero_equipo")),
+                                    result.getString("nombre_equipo"),
+                                    
                                     result.getString("pais_equipo"),
-                                    result.getString("nombre_piloto"),
-                                    result.getString("apellido_piloto"),
-                                    result.getString("nacionalidad"),
                                     result.getString("fabricante"),
                                     result.getString("modelo"),
                                     result.getString("motor"),
                                     result.getString("categoria"),
+                  
+                                    result.getString("nombre_piloto"),
+                                    result.getString("apellido_piloto"),
+                                    result.getString("nacionalidad"),
+                                    
                                     Integer.parseInt(result.getString("posicion")),
                                     Double.parseDouble(result.getString("kilometraje")),
                                     Integer.parseInt(result.getString("vueltas")),
-                                    Double.parseDouble(result.getString("velocidad_media")),
                                     result.getString("vuelta_rapida"),
-                                    Double.parseDouble(result.getString("diferencia")),
+                                    Double.parseDouble(result.getString("velocidad_media")),
+                                    
+                                    diferencia,
                                     Integer.parseInt(result.getString("cantidad_pilotos"))
                                     );
        
-        
+       
        
            
            lista.add(reporte);
@@ -678,6 +707,9 @@ public class ReportesConexion {
        
         
     
+    String usuario = "postgres";
+    String contrasenia = "car123los";
+    
     
     try{
         
@@ -696,26 +728,26 @@ public class ReportesConexion {
        
         Reporte7 reporte = new Reporte7();
       
-        String nombre2 = "";
-      String apellido2 = "";
-      
+     
         while(result.next()){
       
+         
+         
          
           reporte = new Reporte7(  
                                     result.getString("nombre"),
                                    
                                     result.getString("apellido"),
-                                   
+                                    
                                     result.getString("nacionalidad"),
-                                    Integer.parseInt(result.getString("podiums"))
+                                    result.getString("podiums")
                                     );
        
         
        
            
            lista.add(reporte);
-          
+            
             }
        
         
@@ -738,6 +770,11 @@ public class ReportesConexion {
         ArrayList<Reporte7> lista = new ArrayList<Reporte7>();
        
         
+         
+    
+    String usuario = "postgres";
+    String contrasenia = "car123los";
+    
     
     try{
         
@@ -756,15 +793,16 @@ public class ReportesConexion {
        
         Reporte7 reporte = new Reporte7();
       
-      
+        String nombre2 = "";
+      String apellido2 = "";
       
         while(result.next()){
           
          
          
           reporte = new Reporte7(  
-                                    result.getString("nombre_piloto"),
-                                  
+                                    result.getString("nombre"),
+                                    
                                     result.getString("apellido"),
                                    
                                     result.getString("nacionalidad"),
@@ -796,7 +834,11 @@ public class ReportesConexion {
      public ArrayList<Reporte15> reporte15(String marca){
         
         ArrayList<Reporte15> lista = new ArrayList<Reporte15>();
-     
+       
+    
+    String usuario = "postgres";
+    String contrasenia = "car123los";
+    
     
     try{
         
@@ -809,16 +851,18 @@ public class ReportesConexion {
         if(marca.equals("Seleccionar")){
           
          sql
-                = "SELECT  * from reporte15(null);";
+                = "SELECT  * from reporte7(null);";
         }else{
            sql
-                = "SELECT  * from reporte15('"+marca+"');";
+                = "SELECT  * from reporte7('"+marca+"');";
         }
         
         ResultSet result = st.executeQuery(sql);
        
         Reporte15 reporte = new Reporte15();
       
+        String nombre2 = "";
+      String apellido2 = "";
       
         while(result.next()){
            
@@ -857,6 +901,11 @@ public class ReportesConexion {
         
         ArrayList<Reporte16> lista = new ArrayList<Reporte16>();
        
+        
+    
+    String usuario = "postgres";
+    String contrasenia = "car123los";
+    
     
     try{
         

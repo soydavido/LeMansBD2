@@ -164,6 +164,7 @@ public class Reporte16_vista extends javax.swing.JFrame {
         jPanel1.add(txt_nombre_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 450, 40));
 
         combo_ano.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        combo_ano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
         combo_ano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 combo_anoActionPerformed(evt);
@@ -243,7 +244,7 @@ public class Reporte16_vista extends javax.swing.JFrame {
 
         nohay.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         nohay.setForeground(new java.awt.Color(255, 0, 51));
-        jPanel1.add(nohay, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 380, 40));
+        jPanel1.add(nohay, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 380, 40));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel15.setText("Nombres:");
@@ -351,18 +352,22 @@ public class Reporte16_vista extends javax.swing.JFrame {
 
         try{
             nohay.setText("");
-     
+      this.contador = 0;
+        btnsiguiente1.setVisible(false);
+        btnanterior.setVisible(false);
         
        String ano = combo_ano.getSelectedItem().toString();
         
       
         this.lista = reporte_conexion.reporte16(ano);
-        
+     if(lista.size() !=0)
         mostrar();
-        
-        if(lista.size() > 1)
-             btnsiguiente1.setVisible(true);
-        
+      else{
+          nohay.setText("No hay Registros de esta Busqueda");
+      }
+        if(lista.size() > 1){
+            btnsiguiente1.setVisible(true);
+        }    
         }catch(Exception e){
             nohay.setText("No hay Registros de esta Busqueda");
         }
@@ -377,7 +382,11 @@ public class Reporte16_vista extends javax.swing.JFrame {
         this.contador --;
         btnsiguiente1.setVisible(true);
         try{
+             if(0 == contador){
             mostrar();
+             btnanterior.setVisible(false);
+             }else
+                 mostrar();
         }catch(Exception e){
             btnanterior.setVisible(false);
         }
@@ -387,6 +396,10 @@ public class Reporte16_vista extends javax.swing.JFrame {
         this.contador ++;
         btnanterior.setVisible(true);
         try{
+            if(this.lista.size() - 1 == contador){
+                btnsiguiente1.setVisible(false);
+                mostrar();
+            }else
            mostrar();
         }catch(Exception e){
             btnsiguiente1.setVisible(false);
